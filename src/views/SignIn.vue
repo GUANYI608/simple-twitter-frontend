@@ -5,13 +5,8 @@
 
     <form class="signin-form">
       <div class="form-group">
-        <label class="form-input" for="InputEmail">帳號</label>
-        <input
-          type="email"
-          class="form-control"
-          id="InputEmail"
-          aria-describedby="emailHelp"
-        />
+        <label class="form-input" for="InputAccount">帳號</label>
+        <input type="text" class="form-control" id="InputAccount" />
       </div>
       <div class="form-group">
         <label class="form-input" for="InputPassword">密碼</label>
@@ -21,13 +16,12 @@
     </form>
 
     <p class="route-link">
-      <router-link to="/1" class="route-signup">註冊 Alphitter</router-link>
+      <router-link to="" class="route-signup">註冊 Alphitter</router-link>
       ・
-      <router-link to="/2" class="route-admin">後台登入</router-link>
+      <router-link to="" class="route-admin">後台登入</router-link>
     </p>
   </div>
 </template>
-
 
 <style scoped>
 .container {
@@ -84,9 +78,6 @@
 
 .route-link {
   margin-top: 41px;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 26px;
   text-align: right;
   color: #0099ff;
 }
@@ -95,5 +86,8 @@
 .route-admin {
   text-decoration: underline;
   color: #0099ff;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
 }
 </style>
