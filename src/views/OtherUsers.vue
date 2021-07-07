@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="otherusers">
     <h6 class="sub-title">跟隨誰</h6>
     <section class="user-list">
       <!-- 之後用 v-for 跑資料 -->
@@ -61,7 +61,7 @@
 </template>
 
 <style scoped>
-.container {
+.otherusers {
   width: 350px;
   margin: 15px 82px 0px 30px;
   background: #f5f8fa;
@@ -117,7 +117,7 @@
 
 .tofollow-button {
   position: absolute;
-  top: 19px;
+  top: 20px;
   right: 15px;
   height: 30px;
   width: 62px;
@@ -126,7 +126,7 @@
   font-weight: bold;
   font-size: 15px;
   line-height: 30px;
-  border: 1px solid #ff6600;
+  outline: 1px solid #ff6600;
   border-radius: 100px;
 }
 

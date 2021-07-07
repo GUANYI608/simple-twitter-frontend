@@ -18,15 +18,17 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/sidebar',
-    name: 'sidebar',
-    component: () => import('../views/SideBar.vue')
+    path: '/accountsetting',
+    name: 'account-setting',
+    component: () => import('../views/AccountSetting.vue')
   },
+  // 以下共同元件先放在views
   {
     path: '/otherusers',
     name: 'other-users',
     component: () => import('../views/OtherUsers.vue')
   },
+  // ------結束------
   {
     path: '*',
     name: 'not-found',

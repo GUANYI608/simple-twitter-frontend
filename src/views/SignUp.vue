@@ -66,6 +66,8 @@
   top: 5px;
   left: 10px;
   color: #657786;
+  font-size: 15px;
+  line-height: 15px;
   font-weight: 500;
 }
 
@@ -74,6 +76,9 @@
   height: 48px;
   background: #f5f8fa;
   border-radius: 4px;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
 }
 
 .form-submit {

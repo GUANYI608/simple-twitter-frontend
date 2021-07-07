@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="sidebar">
     <img class="logo-img" src="../assets/AClogo.jpg" alt="LOGO" />
 
     <div class="nav-list">
@@ -28,7 +28,6 @@
       >
         推文
       </button>
-
       <div class="nav-item signout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
         <span class="nav-name">登出</span>
@@ -38,13 +37,13 @@
 </template>
 
 <style scoped>
-.container {
-  width: 235px;
+.sidebar {
+  min-width: 235px;
   text-align: left;
-  margin: 4px 40px 0px 103px;
+  margin: 4px 40px 0px auto;
 
-  /* 放外框線方便辨別 */
-  border: 5px solid #0099ff;
+  /* 新增 */
+  position: relative;
 }
 
 .logo-img {
@@ -86,6 +85,7 @@
 }
 
 .signout {
-  margin-top: 882px;
+  position: fixed;
+  bottom: 0;
 }
 </style>
