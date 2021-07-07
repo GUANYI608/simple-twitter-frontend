@@ -41,14 +41,14 @@
 .container {
   width: 235px;
   text-align: left;
-  margin-left: 103px;
+  margin: 4px 40px 0px 103px;
 
   /* 放外框線方便辨別 */
   border: 5px solid #0099ff;
 }
 
 .logo-img {
-  margin: 14px 10px 10px 10px;
+  margin: 10px;
   width: 30px;
   height: 30px;
 }

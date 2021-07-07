@@ -23,6 +23,11 @@ const routes = [
     component: () => import('../views/SideBar.vue')
   },
   {
+    path: '/otherusers',
+    name: 'other-users',
+    component: () => import('../views/OtherUsers.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
