@@ -1,0 +1,91 @@
+<template>
+  <div class="container">
+    <img class="logo-img" src="../assets/AClogo.jpg" alt="LOGO" />
+
+    <div class="nav-list">
+      <div class="nav-item">
+        <img class="nav-img" src="../assets/index.jpg" alt="index" />
+        <span class="nav-name">首頁</span>
+      </div>
+      <div class="nav-item">
+        <img class="nav-img" src="../assets/user.jpg" alt="user" />
+        <span class="nav-name">個人資料</span>
+      </div>
+      <div class="nav-item">
+        <img
+          class="nav-img current-page"
+          src="../assets/setting.jpg"
+          alt="setting"
+        />
+        <span class="nav-name current-page">設定</span>
+      </div>
+
+      <button
+        type="button"
+        class="new-tweet"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        推文
+      </button>
+
+      <div class="nav-item signout">
+        <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
+        <span class="nav-name">登出</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.container {
+  width: 235px;
+  text-align: left;
+  margin-left: 103px;
+
+  /* 放外框線方便辨別 */
+  border: 5px solid #0099ff;
+}
+
+.logo-img {
+  margin: 14px 10px 10px 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.nav-list {
+  margin-top: 24px;
+}
+
+.nav-item {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.nav-img {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 18px;
+}
+
+.new-tweet {
+  margin: 10px 0px 5px 0px;
+  height: 45px;
+  width: 210px;
+  border-radius: 50px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.signout {
+  margin-top: 882px;
+}
+</style>

@@ -18,6 +18,11 @@ const routes = [
     component: SignUp
   },
   {
+    path: '/sidebar',
+    name: 'sidebar',
+    component: () => import('../views/SideBar.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
