@@ -62,10 +62,8 @@
 
 <style scoped>
 .otherusers {
-  width: 350px;
+  min-width: 350px;
   margin: 15px 82px 0px 30px;
-  background: #f5f8fa;
-  border-radius: 14px;
 
   /* 放外框線方便辨別 */
   /* border: 5px solid #0099ff; */
@@ -78,12 +76,15 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 26px;
+  background: #f5f8fa;
   border-bottom: 1px solid #e6ecf0;
+  border-radius: 14px 14px 0 0;
 }
 
 .user {
   height: 70px;
   padding: 10px 15px 10px 15px;
+  background: #f5f8fa;
   border-bottom: 1px solid #e6ecf0;
   display: flex;
   flex-direction: column;
@@ -125,9 +126,9 @@
   color: #ff6600;
   font-weight: bold;
   font-size: 15px;
-  line-height: 30px;
-  outline: 1px solid #ff6600;
+  line-height: 28px;
   border-radius: 100px;
+  border: 1px solid #ff6600;
 }
 
 .following-button {
@@ -144,8 +145,10 @@
 }
 
 .list-footer {
+  background: #f5f8fa;
   height: 45px;
   color: #ff6600;
+  border-radius: 0 0 14px 14px;
 }
 
 .more-user {

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
+import Main from '../views/Main.vue'
 
 
 Vue.use(VueRouter)
@@ -18,17 +19,15 @@ const routes = [
     component: SignUp
   },
   {
+    path: '/main',
+    name: 'main',
+    component: Main
+  },
+  {
     path: '/accountsetting',
     name: 'account-setting',
     component: () => import('../views/AccountSetting.vue')
   },
-  // 以下共同元件先放在views
-  {
-    path: '/otherusers',
-    name: 'other-users',
-    component: () => import('../views/OtherUsers.vue')
-  },
-  // ------結束------
   {
     path: '*',
     name: 'not-found',
