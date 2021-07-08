@@ -5,19 +5,15 @@
     <div class="nav-list">
       <div class="nav-item">
         <img class="nav-img" src="../assets/index.jpg" alt="index" />
-        <span class="nav-name">首頁</span>
+        <router-link class="nav-name" to="/main"> 首頁 </router-link>
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
-        <span class="nav-name">個人資料</span>
+        <router-link class="nav-name" to="#"> 個人資料 </router-link>
       </div>
       <div class="nav-item">
-        <img
-          class="nav-img current-page"
-          src="../assets/setting.jpg"
-          alt="setting"
-        />
-        <span class="nav-name current-page">設定</span>
+        <img class="nav-img" src="../assets/setting.jpg" alt="setting" />
+        <router-link class="nav-name" to="/accountsetting"> 設定 </router-link>
       </div>
 
       <button
