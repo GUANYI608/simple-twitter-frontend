@@ -20,7 +20,7 @@
 </template>
 
 <style scoped>
-.user-post {
+.userpost {
   outline: 1px solid #e6ecf0;
   width: 600px;
 }

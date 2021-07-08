@@ -36,9 +36,7 @@
 .sidebar {
   min-width: 235px;
   text-align: left;
-  margin: 4px 40px 0px 103px;
-
-  /* 新增 */
+  margin: 4px 40px 0px 35px;
   position: relative;
 }
 

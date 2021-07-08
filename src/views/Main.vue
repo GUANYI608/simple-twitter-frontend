@@ -8,6 +8,7 @@
       <UserPost />
 
       <!-- 使用 Tweets 元件 -->
+      <Tweets />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -19,12 +20,14 @@
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
 import UserPost from "../components/UserPost";
+import Tweets from "../components/Tweets";
 
 export default {
   components: {
     SideBar,
     OtherUsers,
     UserPost,
+    Tweets,
   },
 };
 </script>
