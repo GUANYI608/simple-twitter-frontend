@@ -25,7 +25,7 @@
       <p class="tweet-content">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
         ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
+        sapiente cupiditate.
       </p>
 
       <!-- 推文時間 -->
@@ -112,7 +112,7 @@
 }
 
 .tweet-content {
-  padding-top: 18px;
+  padding: 18px 60px 0 0;
   font-weight: 500;
   font-size: 15px;
   font-weight: 500;

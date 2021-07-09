@@ -8,6 +8,7 @@
       <Posting />
 
       <!-- 使用 PostingComments 元件 -->
+      <PostingComments />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -19,12 +20,14 @@
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
 import Posting from "../components/Posting";
+import PostingComments from "../components/PostingComments";
 
 export default {
   components: {
     SideBar,
     OtherUsers,
     Posting,
+    PostingComments,
   },
 };
 </script>
