@@ -1,28 +1,30 @@
 <template>
   <section class="tweets">
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <router-link to="/replylist">
+        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
 
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
+        <!-- 使用者名稱與帳號 -->
+        <div class="user-info">
+          <span class="user-name"> Apple </span>
+          <span class="detail-info"> @apple・3 小時 </span>
+        </div>
 
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
+        <!-- 推文內容 -->
+        <p class="tweet-content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
+          ullam alias explicabo placeat quis officiis adipisci nulla minus
+          beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
+        </p>
 
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
+        <!-- 留言與按讚 -->
+        <div class="icons">
+          <img class="icon" src="../assets/reply.jpg" alt="" />
+          <span class="count">13</span>
+          <img class="icon" src="../assets/like.jpg" alt="" />
+          <span class="count">76</span>
+        </div>
+      </router-link>
     </div>
     <!-- 以下之後用 v-for 跑 -->
     <div class="tweet">
@@ -176,13 +178,18 @@
 <style scoped>
 .tweets {
   width: 600px;
+  outline: 1px solid #e6ecf0;
 }
 
 .tweet {
   padding: 10px 15px 0 75px;
   height: 146px;
-  outline: 1px solid #e6ecf0;
   position: relative;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.tweet:last-child {
+  border-bottom: none;
 }
 
 .user-avater {

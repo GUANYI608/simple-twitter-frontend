@@ -9,6 +9,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'root',
+    redirect: '/main'  // 根目錄設定直接轉址到首頁
+  },
+  {
     path: '/signin',
     name: 'sign-in',
     component: SignIn
@@ -27,6 +32,11 @@ const routes = [
     path: '/accountsetting',
     name: 'account-setting',
     component: () => import('../views/AccountSetting.vue')
+  },
+  {
+    path: '/replylist',
+    name: 'reply-list',
+    component: () => import('../views/ReplyList.vue')
   },
   {
     path: '*',
