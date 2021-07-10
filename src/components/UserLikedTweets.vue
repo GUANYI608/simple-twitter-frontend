@@ -3,13 +3,13 @@
     <!-- 項目區塊 -->
     <div class="item-list">
       <router-link to="/user/self" class="item-link">
-        <button class="item item-current">推文</button>
+        <button class="item">推文</button>
       </router-link>
       <router-link to="#" class="item-link">
         <button class="item">推文與回覆</button>
       </router-link>
       <router-link to="/user/self/like" class="item-link">
-        <button class="item">喜歡的內容</button>
+        <button class="item item-current">喜歡的內容</button>
       </router-link>
     </div>
 
@@ -30,12 +30,11 @@
           beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
         </p>
       </router-link>
-
       <!-- 留言與按讚 -->
       <div class="icons">
         <img class="icon" src="../assets/reply.jpg" alt="" />
         <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
+        <img class="icon-liked" src="../assets/liked.jpg" alt="" />
         <span class="count">76</span>
       </div>
     </div>
@@ -62,7 +61,7 @@
       <div class="icons">
         <img class="icon" src="../assets/reply.jpg" alt="" />
         <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
+        <img class="icon-liked" src="../assets/liked.jpg" alt="" />
         <span class="count">76</span>
       </div>
     </div>
@@ -87,32 +86,7 @@
       <div class="icons">
         <img class="icon" src="../assets/reply.jpg" alt="" />
         <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <!-- 推文 -->
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-      <router-link to="/replylist">
-        <!-- 推文內容 -->
-        <p class="tweet-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-          ullam alias explicabo placeat quis officiis adipisci nulla minus
-          beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
-        </p>
-      </router-link>
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
+        <img class="icon-liked" src="../assets/liked.jpg" alt="" />
         <span class="count">76</span>
       </div>
     </div>
@@ -220,5 +194,11 @@
   font-size: 13px;
   line-height: 21px;
   color: #657786;
+}
+
+.icon-liked {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
 }
 </style>

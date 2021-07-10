@@ -39,6 +39,12 @@ const routes = [
     component: () => import('../views/UserSelf.vue')
   },
   {
+    path: '/user/self/like',
+    name: 'user-self-like',
+    component: () => import('../views/UserSelfLike.vue')
+  },
+
+  {
     path: '/replylist',
     name: 'reply-list',
     component: () => import('../views/ReplyList.vue')

@@ -39,6 +39,6 @@ export default {
 }
 
 .main-wrapper {
-  height: 100vh;
+  height: auto;
 }
 </style>

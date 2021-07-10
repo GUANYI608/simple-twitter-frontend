@@ -35,12 +35,6 @@
           <span class="role">跟隨者</span>
         </div>
       </div>
-      <!-- 項目 -->
-      <div class="item-list">
-        <button class="item">推文</button>
-        <button class="item">推文與回覆</button>
-        <button class="item">喜歡的內容</button>
-      </div>
     </div>
   </div>
 </template>
@@ -48,7 +42,6 @@
 <style scoped>
 /* ------ 外框 ------ */
 .userprofile {
-  outline: 1px solid #e6ecf0;
   width: 600px;
 }
 
@@ -84,7 +77,7 @@
 
 /* ------ 個人資料 ------ */
 .cover {
-  width: 598px;
+  width: 600px;
   height: 200px;
   object-fit: cover;
 }
@@ -142,7 +135,7 @@
 }
 
 .count {
-  margin-top: 10px;
+  margin: 10px 0 20px 0;
   font-size: 14px;
 }
 
@@ -154,37 +147,5 @@
 .role {
   color: #657786;
   margin-right: 20px;
-}
-
-.item-list {
-  margin-top: 20px;
-}
-
-.item {
-  width: 130px;
-  height: 54px;
-
-  background: unset;
-  color: #657786;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 0;
-}
-
-/* 當前頁面樣式：橘字加底線 */
-.item:first-child {
-  position: relative;
-  color: #ff6600;
-}
-
-.item:first-child::after {
-  content: "";
-  background: #ff6600;
-  position: absolute;
-  top: 53px;
-  left: 0;
-  height: 2px;
-  width: 130px;
-  z-index: 1;
 }
 </style>
