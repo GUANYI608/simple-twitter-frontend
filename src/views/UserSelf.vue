@@ -8,6 +8,7 @@
       <UserProfile />
 
       <!-- 使用 UserTweets 元件 -->
+      <UserTweets />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -19,12 +20,14 @@
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
 import UserProfile from "../components/UserProfile";
+import UserTweets from "../components/UserTweets";
 
 export default {
   components: {
     SideBar,
     OtherUsers,
     UserProfile,
+    UserTweets,
   },
 };
 </script>

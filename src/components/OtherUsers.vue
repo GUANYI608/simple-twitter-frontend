@@ -94,6 +94,8 @@
 .user-avater {
   height: 50px;
   width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-info {

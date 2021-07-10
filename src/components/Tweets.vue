@@ -1,5 +1,6 @@
 <template>
   <section class="tweets">
+    <!-- 推文 -->
     <div class="tweet">
       <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
 
@@ -231,6 +232,8 @@ export default {
   /* 以 tweet 為定位 */
   position: absolute;
   left: 15px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-name {

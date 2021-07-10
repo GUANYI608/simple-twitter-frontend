@@ -105,6 +105,7 @@
   background: #c4c4c4;
   border: 4px solid #ffffff;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .edit-profile {
@@ -170,9 +171,20 @@
   border-radius: 0;
 }
 
-/* 當前頁面樣式先用 hover 做 */
-.item:hover {
-  border-bottom: 2px solid #ff6600;
+/* 當前頁面樣式：橘字加底線 */
+.item:first-child {
+  position: relative;
   color: #ff6600;
+}
+
+.item:first-child::after {
+  content: "";
+  background: #ff6600;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  height: 2px;
+  width: 130px;
+  z-index: 1;
 }
 </style>
