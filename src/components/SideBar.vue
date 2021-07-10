@@ -9,7 +9,7 @@
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
-        <router-link class="nav-name" to="#"> 個人資料 </router-link>
+        <router-link class="nav-name" to="/user/self"> 個人資料 </router-link>
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/setting.jpg" alt="setting" />

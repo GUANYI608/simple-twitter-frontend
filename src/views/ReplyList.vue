@@ -39,6 +39,6 @@ export default {
 }
 
 .main-wrapper {
-  min-height: 1063px;
+  height: 100vh;
 }
 </style>

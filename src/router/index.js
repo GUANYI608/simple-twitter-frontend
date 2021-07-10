@@ -34,6 +34,11 @@ const routes = [
     component: () => import('../views/AccountSetting.vue')
   },
   {
+    path: '/user/self',
+    name: 'user-self',
+    component: () => import('../views/UserSelf.vue')
+  },
+  {
     path: '/replylist',
     name: 'reply-list',
     component: () => import('../views/ReplyList.vue')

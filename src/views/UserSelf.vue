@@ -4,11 +4,10 @@
     <SideBar />
 
     <div class="main-wrapper">
-      <!-- 使用 UserPost 元件 -->
-      <UserPost />
+      <!-- 使用 UserProfile 元件 -->
+      <UserProfile />
 
-      <!-- 使用 Tweets 元件 -->
-      <Tweets />
+      <!-- 使用 UserTweets 元件 -->
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -19,15 +18,13 @@
 <script>
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
-import UserPost from "../components/UserPost";
-import Tweets from "../components/Tweets";
+import UserProfile from "../components/UserProfile";
 
 export default {
   components: {
     SideBar,
     OtherUsers,
-    UserPost,
-    Tweets,
+    UserProfile,
   },
 };
 </script>

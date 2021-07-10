@@ -23,6 +23,6 @@ export default {
 <style scoped>
 .container {
   display: flex;
-  min-height: 1063px;
+  height: 100vh;
 }
 </style>
