@@ -41,12 +41,46 @@
 
       <!-- icon: 留言與按讚 -->
       <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
+        <img
+          class="icon"
+          src="../assets/reply.jpg"
+          alt=""
+          @click.stop.prevent="toggleReplyModal()"
+        />
         <img class="icon" src="../assets/like.jpg" alt="" />
       </div>
     </div>
+
+    <!-- 彈出視窗：回覆推文 -->
+    <RepliedModal
+      :initial-is-reply-modal-toggle="isReplyModalToggle"
+      @after-close-modal="closeReplyModal"
+    />
   </div>
 </template>
+
+<script>
+import RepliedModal from "./RepliedModal";
+
+export default {
+  components: {
+    RepliedModal,
+  },
+  data() {
+    return {
+      isReplyModalToggle: false,
+    };
+  },
+  methods: {
+    toggleReplyModal() {
+      this.isReplyModalToggle = true;
+    },
+    closeReplyModal(isReplyModalToggle) {
+      this.isReplyModalToggle = isReplyModalToggle;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .posting {

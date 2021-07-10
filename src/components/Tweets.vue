@@ -1,30 +1,33 @@
 <template>
   <section class="tweets">
     <div class="tweet">
+      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+
+      <!-- 使用者名稱與帳號 -->
+      <div class="user-info">
+        <span class="user-name"> Apple </span>
+        <span class="detail-info"> @apple・3 小時 </span>
+      </div>
       <router-link to="/replylist">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-        <!-- 使用者名稱與帳號 -->
-        <div class="user-info">
-          <span class="user-name"> Apple </span>
-          <span class="detail-info"> @apple・3 小時 </span>
-        </div>
-
         <!-- 推文內容 -->
         <p class="tweet-content">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
           ullam alias explicabo placeat quis officiis adipisci nulla minus
           beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
         </p>
-
-        <!-- 留言與按讚 -->
-        <div class="icons">
-          <img class="icon" src="../assets/reply.jpg" alt="" />
-          <span class="count">13</span>
-          <img class="icon" src="../assets/like.jpg" alt="" />
-          <span class="count">76</span>
-        </div>
       </router-link>
+      <!-- 留言與按讚 -->
+      <div class="icons">
+        <img
+          class="icon"
+          src="../assets/reply.jpg"
+          alt=""
+          @click.stop.prevent="toggleReplyModal()"
+        />
+        <span class="count">13</span>
+        <img class="icon" src="../assets/like.jpg" alt="" />
+        <span class="count">76</span>
+      </div>
     </div>
     <!-- 以下之後用 v-for 跑 -->
     <div class="tweet">
@@ -172,8 +175,38 @@
       </div>
     </div>
     <!-- 結束 -->
+
+    <!-- 彈出視窗：回覆推文 -->
+    <RepliedModal
+      :initial-is-reply-modal-toggle="isReplyModalToggle"
+      @after-close-modal="closeReplyModal"
+    />
   </section>
 </template>
+
+<script>
+import RepliedModal from "./RepliedModal";
+
+export default {
+  components: {
+    RepliedModal,
+  },
+  data() {
+    return {
+      isReplyModalToggle: false,
+    };
+  },
+  methods: {
+    toggleReplyModal() {
+      this.isReplyModalToggle = true;
+    },
+    closeReplyModal(isReplyModalToggle) {
+      this.isReplyModalToggle = isReplyModalToggle;
+    },
+  },
+};
+</script>
+
 
 <style scoped>
 .tweets {
@@ -226,6 +259,13 @@
 .icon {
   width: 15px;
   height: 15px;
+  margin-right: 10px;
+}
+
+/* 增加效果：放大圖示 */
+.icon:hover {
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
 }
 
