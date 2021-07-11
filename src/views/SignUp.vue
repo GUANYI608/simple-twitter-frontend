@@ -28,7 +28,7 @@
     </form>
 
     <p class="route-link">
-      <router-link to="/1" class="route-signin">取消</router-link>
+      <router-link to="/signin" class="route-signin">取消</router-link>
     </p>
   </div>
 </template>
@@ -42,12 +42,12 @@
 
 .logo-img {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .form-title {
-  margin-top: 30px;
+  margin-top: 35px;
   font-weight: bold;
   font-size: 23px;
   line-height: 33px;

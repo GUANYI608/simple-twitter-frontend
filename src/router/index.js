@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
 import Main from '../views/Main.vue'
+import AdminLogIn from '../views/AdminLogIn.vue'
 
 
 Vue.use(VueRouter)
@@ -58,11 +59,15 @@ const routes = [
     name: 'user-other',
     component: () => import('../views/UserOther.vue')
   },
-
   {
     path: '/replylist',
     name: 'reply-list',
     component: () => import('../views/ReplyList.vue')
+  },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: AdminLogIn
   },
   {
     path: '*',

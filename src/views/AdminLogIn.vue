@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <img class="logo-img" src="../assets/AClogo.jpg" alt="LOGO" />
-    <h6 class="form-title">登入 Alphitter</h6>
+    <h6 class="form-title">後台登入</h6>
 
     <!-- 填寫區塊 -->
     <form class="signin-form">
@@ -18,13 +18,7 @@
 
     <!-- 前往連結：註冊與後台 -->
     <p class="route-link">
-      <router-link to="/signup" class="route-signup">
-        註冊 Alphitter
-      </router-link>
-      ・
-      <router-link to="/admin/login" class="route-admin">
-        後台登入
-      </router-link>
+      <router-link to="/signin" class="route-signin">前台登入</router-link>
     </p>
   </div>
 </template>
@@ -93,8 +87,7 @@
   color: #0099ff;
 }
 
-.route-signup,
-.route-admin {
+.route-signin {
   text-decoration: underline;
   color: #0099ff;
   font-weight: bold;
