@@ -1,0 +1,131 @@
+<template>
+  <section class="admintweets">
+    <h6 class="page-title">推文清單</h6>
+
+    <!-- ----- 後台推文清單 ----- -->
+    <!-- 推文（第一則） -->
+    <div class="tweet">
+      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+
+      <!-- 使用者名稱與帳號、推文時間 -->
+      <div class="user-info">
+        <span class="user-name"> Mary Jane </span>
+        <span class="detail-info"> @mjjane・3 小時 </span>
+      </div>
+      <!-- 推文內容 -->
+      <p class="tweet-content">
+        Lorem ipsum dolor sit amet consectetur adipi elit.
+      </p>
+
+      <!-- 刪除按鈕 -->
+      <button class="delete-button">
+        <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
+      </button>
+    </div>
+    <!-- 以下之後用 v-for 跑 -->
+    <div class="tweet">
+      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+
+      <!-- 使用者名稱與帳號、推文時間 -->
+      <div class="user-info">
+        <span class="user-name"> Mary Jane </span>
+        <span class="detail-info"> @mjjane・3 小時 </span>
+      </div>
+      <!-- 推文內容 -->
+      <p class="tweet-content">
+        Lorem ipsum dolor sit amet consectetur adipi elit.
+      </p>
+
+      <!-- 刪除按鈕 -->
+      <button class="delete-button">
+        <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
+      </button>
+    </div>
+    <div class="tweet">
+      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+
+      <!-- 使用者名稱與帳號、推文時間 -->
+      <div class="user-info">
+        <span class="user-name"> Mary Jane </span>
+        <span class="detail-info"> @mjjane・3 小時 </span>
+      </div>
+      <!-- 推文內容 -->
+      <p class="tweet-content">
+        Lorem ipsum dolor sit amet consectetur adipi elit.
+      </p>
+
+      <!-- 刪除按鈕 -->
+      <button class="delete-button">
+        <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
+      </button>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+/* 頁首 */
+.page-title {
+  height: 55px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 55px;
+  padding-left: 26px;
+  outline: 1px solid #e6ecf0;
+  margin-bottom: 5px;
+}
+
+/* 推文 */
+.tweet {
+  margin-top: 10px;
+  padding: 0 80px 0 80px;
+  height: 110px;
+  position: relative;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.tweet:last-child {
+  border-bottom: none;
+}
+
+.user-avater {
+  width: 50px;
+  height: 50px;
+
+  /* 以 tweet 為定位 */
+  position: absolute;
+  top: 3px;
+  left: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 15px;
+  padding-right: 5px;
+}
+
+.detail-info {
+  font-weight: 500;
+  font-size: 15px;
+  color: #657786;
+}
+
+.tweet-content {
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* 刪除按鈕 */
+.delete-icon {
+  width: 24px;
+  height: 24px;
+
+  /* 以 tweet 為定位 */
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+</style>
