@@ -43,7 +43,11 @@ const routes = [
     name: 'user-self-like',
     component: () => import('../views/UserSelfLike.vue')
   },
-
+  {
+    path: '/user/self/followers',
+    name: 'user-self-followers',
+    component: () => import('../views/UserSelfFollowers.vue')
+  },
   {
     path: '/replylist',
     name: 'reply-list',

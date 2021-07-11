@@ -123,7 +123,6 @@
 <style scoped>
 .usertweets {
   width: 600px;
-  outline: 1px solid #e6ecf0;
 }
 
 /* ----- 項目區塊 ----- */

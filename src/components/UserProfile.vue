@@ -29,10 +29,15 @@
         </p>
         <!-- 累積數量： 留言與按讚 -->
         <div class="count">
-          <span class="number">34個</span>
-          <span class="role">跟隨中</span>
-          <span class="number">808位</span>
-          <span class="role">跟隨者</span>
+          <router-link class="number" to="">
+            34個
+            <span class="role"> 跟隨中 </span>
+          </router-link>
+
+          <router-link class="number" to="/user/self/followers">
+            808位
+            <span class="role"> 跟隨者 </span>
+          </router-link>
         </div>
       </div>
     </div>
@@ -65,7 +70,6 @@
 .user-title {
   font-weight: 900;
   font-size: 19px;
-  line-height: 28px;
 }
 
 .tweet-count {
@@ -84,7 +88,6 @@
 
 .profile-detail {
   position: relative;
-  /* border: 1px solid orange; */
   padding-left: 15px;
 }
 
@@ -101,6 +104,7 @@
   object-fit: cover;
 }
 
+/* 按鈕：編輯個人資料 */
 .edit-profile {
   position: absolute;
   top: -59px;
@@ -134,6 +138,7 @@
   margin-top: 10px;
 }
 
+/* 數量區塊：人數統計 */
 .count {
   margin: 10px 0 20px 0;
   font-size: 14px;
