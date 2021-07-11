@@ -2,12 +2,14 @@
   <section class="tweets">
     <!-- 推文 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <router-link to="/user/other">
+        <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+      </router-link>
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
+        <span class="user-name"> Mary Jane </span>
+        <span class="detail-info"> @mjjane・3 小時 </span>
       </div>
       <router-link to="/replylist">
         <!-- 推文內容 -->

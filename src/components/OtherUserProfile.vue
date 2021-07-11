@@ -8,34 +8,57 @@
           src="../assets/back.jpg"
           alt="back to main page"
         />
-        <h6 class="user-title">John Doe</h6>
-        <span class="tweet-count">25 推文</span>
+        <h6 class="user-title">Mary Jane</h6>
+        <span class="tweet-count">1.4萬 推文</span>
       </router-link>
     </div>
 
     <!-- ------ 個人資料 ------ -->
     <div class="profile">
       <!-- 封面 -->
-      <img src="../assets/cover.jpg" alt="cover" class="cover" />
+      <img src="../assets/cover2.jpg" alt="cover" class="cover" />
       <!-- 詳細資料資料 -->
       <div class="profile-detail">
-        <img src="../assets/avater.jpg" alt="" class="avater" />
-        <button type="button" class="edit-profile">編輯個人資料</button>
-        <h6 class="user-name">John Doe</h6>
-        <span class="user-account">@heyjohn</span>
+        <img src="../assets/avater2.jpg" alt="" class="avater" />
+
+        <!-- 按鈕區塊 -->
+        <div class="button-area">
+          <!-- 訊息圖示 -->
+          <button class="icon-button">
+            <img
+              src="../assets/message.jpg"
+              alt="message"
+              class="message-icon"
+            />
+          </button>
+          <!-- 開啟通知 -->
+          <button class="icon-button">
+            <img src="../assets/noti.jpg" alt="notify" class="noti-icon" />
+          </button>
+          <!-- 關閉通知 -->
+          <!-- <button class="icon-button">
+            <img src="../assets/notied.jpg" alt="notied" class="noti-icon" />
+          </button> -->
+          <!-- 跟隨狀態 -->
+          <!-- <button type="button" class="tofollow-button">跟隨</button> -->
+          <button type="button" class="following-button">正在跟隨</button>
+        </div>
+
+        <h6 class="user-name">Mary Jane</h6>
+        <span class="user-account">@mjjane</span>
         <p class="person-intro">
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
           sint.
         </p>
         <!-- 累積數量： 留言與按讚 -->
         <div class="count">
-          <router-link class="number" to="/user/self/followings">
-            34個
+          <router-link class="number" to="#">
+            1,174 個
             <span class="role"> 跟隨中 </span>
           </router-link>
 
-          <router-link class="number" to="/user/self/followers">
-            808位
+          <router-link class="number" to="#">
+            6.3萬
             <span class="role"> 跟隨者 </span>
           </router-link>
         </div>
@@ -88,10 +111,12 @@
 
 .profile-detail {
   position: relative;
+  margin-top: 69px;
   padding-left: 15px;
 }
 
 .avater {
+  /* 以 profile-detail 作為定位 */
   position: absolute;
   width: 140px;
   height: 140px;
@@ -104,27 +129,60 @@
   object-fit: cover;
 }
 
-/* 按鈕：編輯個人資料 */
-.edit-profile {
+/* ----- 按鈕區塊 ----- */
+.button-area {
+  /* 以 profile-detail 作為定位 */
   position: absolute;
-  top: -59px;
   right: 15px;
-  width: 122px;
+  top: -59px;
+  /* 按鈕水平排列 */
+  display: flex;
+}
+
+/* 按鈕：傳訊息 */
+.icon-button {
+  margin-right: 10px;
+}
+
+.message-icon,
+.noti-icon,
+.notied-icon {
+  width: 40px;
   height: 40px;
-  background: none;
-  color: #ff6600;
+}
+
+/* 按鈕：跟隨中 */
+.following-button {
+  width: 92px;
+  height: 40px;
+
   font-weight: bold;
   font-size: 15px;
-  line-height: 28px;
+  line-height: 15px;
+
+  border-radius: 100px;
+}
+
+/* 按鈕：想要跟隨 */
+.tofollow-button {
+  width: 62px;
+  height: 40px;
+
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 15px;
+
+  color: #ff6600;
+  background: unset;
   border: 1px solid #ff6600;
   border-radius: 100px;
 }
 
+/* 名稱、帳號與自我介紹 */
 .user-name {
   font-weight: 900;
   font-size: 19px;
   line-height: 28px;
-  margin-top: 69px;
 }
 
 .user-account {
