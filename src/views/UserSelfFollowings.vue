@@ -3,9 +3,9 @@
     <!-- 使用 SideBar 元件 -->
     <SideBar />
 
-    <!-- 使用 UserFollowers 元件 -->
+    <!-- 使用 UserFollowings 元件 -->
     <div>
-      <UserFollowers class="main-wrapper" />
+      <UserFollowings class="main-wrapper" />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -16,13 +16,13 @@
 <script>
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
-import UserFollowers from "../components/UserFollowers";
+import UserFollowings from "../components/UserFollowings";
 
 export default {
   components: {
     SideBar,
     OtherUsers,
-    UserFollowers,
+    UserFollowings,
   },
 };
 </script>

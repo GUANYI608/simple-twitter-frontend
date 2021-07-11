@@ -29,7 +29,7 @@
         </p>
         <!-- 累積數量： 留言與按讚 -->
         <div class="count">
-          <router-link class="number" to="">
+          <router-link class="number" to="/user/self/followings">
             34個
             <span class="role"> 跟隨中 </span>
           </router-link>

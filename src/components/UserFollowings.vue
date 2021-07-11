@@ -15,11 +15,11 @@
 
     <!-- ---- 項目區塊 ---- -->
     <div class="item-list">
-      <router-link to="#" class="item-link">
-        <button class="item item-current">跟隨者</button>
+      <router-link to="/user/self/followers" class="item-link">
+        <button class="item">跟隨者</button>
       </router-link>
-      <router-link to="/user/self/followings" class="item-link">
-        <button class="item">正在跟隨</button>
+      <router-link to="#" class="item-link">
+        <button class="item item-current">正在跟隨</button>
       </router-link>
     </div>
 
@@ -30,8 +30,8 @@
         <!-- 推文者資料 -->
         <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
         <div class="user-info">
-          <p class="user-name">Laure</p>
-          <p class="user-account">@LaureBill</p>
+          <p class="user-name">Marvin McKinney</p>
+          <p class="user-account">@MariaReyes</p>
         </div>
         <!-- 按鈕 -->
         <!-- <button type="button" class="tofollow-button">跟隨</button> -->
@@ -52,7 +52,7 @@
           <p class="user-account">@LaureBill</p>
         </div>
         <!-- 按鈕 -->
-        <button type="button" class="tofollow-button">跟隨</button>
+        <button type="button" class="following-button">正在跟隨</button>
         <!-- 推文內容 -->
         <p class="tweet-content">
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
@@ -68,7 +68,7 @@
           <p class="user-account">@LaureBill</p>
         </div>
         <!-- 按鈕 -->
-        <button type="button" class="tofollow-button">跟隨</button>
+        <button type="button" class="following-button">正在跟隨</button>
         <!-- 推文內容 -->
         <p class="tweet-content">
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
