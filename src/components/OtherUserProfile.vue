@@ -17,7 +17,7 @@
     <div class="profile">
       <!-- 封面 -->
       <img src="../assets/cover2.jpg" alt="cover" class="cover" />
-      <!-- 詳細資料資料 -->
+      <!-- 詳細資料 -->
       <div class="profile-detail">
         <img src="../assets/avater2.jpg" alt="" class="avater" />
 
@@ -50,7 +50,7 @@
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
           sint.
         </p>
-        <!-- 累積數量： 留言與按讚 -->
+        <!-- 統計數量：跟隨人數 -->
         <div class="count">
           <router-link class="number" to="#">
             1,174 個

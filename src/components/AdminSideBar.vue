@@ -9,7 +9,9 @@
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
-        <router-link class="nav-name" to="#"> 使用者列表 </router-link>
+        <router-link class="nav-name" to="/admin/users">
+          使用者列表
+        </router-link>
       </div>
       <div class="nav-item signout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
@@ -18,13 +20,6 @@
     </section>
   </div>
 </template>
-
-<script>
-export default {
-  data() {},
-};
-</script>
-
 
 <style scoped>
 .sidebar {
