@@ -5,24 +5,39 @@
 
     <form class="signin-form">
       <div class="form-group">
-        <label class="form-input" for="InputAccount">帳號</label>
-        <input type="text" class="form-control" id="InputAccount" />
+        <label class="form-input" for="account">帳號</label>
+        <input
+          id="account"
+          v-model="account"
+          type="text"
+          class="form-control"
+        />
       </div>
       <div class="form-group">
-        <label class="form-input" for="InputName">名稱</label>
-        <input type="text" class="form-control" id="InputName" />
+        <label class="form-input" for="name">名稱</label>
+        <input id="name" v-model="name" type="text" class="form-control" />
       </div>
       <div class="form-group">
-        <label class="form-input" for="InputEmail">Email</label>
-        <input type="email" class="form-control" id="InputEmail" />
+        <label class="form-input" for="email">Email</label>
+        <input id="email" v-model="email" type="email" class="form-control" />
       </div>
       <div class="form-group">
-        <label class="form-input" for="InputPassword">密碼</label>
-        <input type="password" class="form-control" id="InputPassword" />
+        <label class="form-input" for="password">密碼</label>
+        <input
+          id="password"
+          v-model="password"
+          type="password"
+          class="form-control"
+        />
       </div>
       <div class="form-group">
-        <label class="form-input" for="InputPasswordConfirm">密碼確認</label>
-        <input type="password" class="form-control" id="InputPasswordConfirm" />
+        <label class="form-input" for="check-password">密碼確認</label>
+        <input
+          id="check-password"
+          v-model="checkPassword"
+          type="password"
+          class="form-control"
+        />
       </div>
       <button type="submit" class="form-submit">註冊</button>
     </form>
@@ -32,6 +47,35 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  name: "SignIn",
+  data() {
+    return {
+      account: "",
+      name: "",
+      email: "",
+      password: "",
+      checkPassword: "",
+    };
+  },
+  methods: {
+    handleSubmit() {
+      const data = JSON.stringify({
+        account: this.account,
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        checkPassword: this.checkPassword,
+      });
+
+      // TODO: 向後端驗證使用者登入資訊是否合法
+      console.log("data", data);
+    },
+  },
+};
+</script>
 
 <style scoped>
 .container {

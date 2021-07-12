@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'root',
-    redirect: '/main'  // 根目錄設定直接轉址到首頁
+    redirect: '/main'  // 根目錄設定：直接轉址到首頁
   },
   {
     path: '/signin',

@@ -4,14 +4,26 @@
     <h6 class="form-title">登入 Alphitter</h6>
 
     <!-- 填寫區塊 -->
-    <form class="signin-form">
+    <form class="signin-form" @submit.prevent.stop="handleSubmit">
       <div class="form-group">
-        <label class="form-input" for="InputAccount">帳號</label>
-        <input type="text" class="form-control" id="InputAccount" />
+        <label class="form-input" for="account">帳號</label>
+        <input
+          id="account"
+          v-model="account"
+          type="text"
+          class="form-control"
+          required
+          autofocus
+        />
       </div>
       <div class="form-group">
-        <label class="form-input" for="InputPassword">密碼</label>
-        <input type="password" class="form-control" id="InputPassword" />
+        <label class="form-input" for="password">密碼</label>
+        <input
+          id="password"
+          v-model="password"
+          type="password"
+          class="form-control"
+        />
       </div>
       <button type="submit" class="form-submit">登入</button>
     </form>
@@ -28,6 +40,41 @@
     </p>
   </div>
 </template>
+
+<script>
+import authorizationAPI from "../apis/authorization";
+
+export default {
+  name: "SignIn",
+  data() {
+    return {
+      account: "",
+      password: "",
+    };
+  },
+  methods: {
+    handleSubmit() {
+      authorizationAPI
+        .signIn({
+          account: this.account,
+          password: this.password,
+        })
+        .then((response) => {
+          // ===== TODO: 取得 API 請求後的資料 ======
+          console.log("response", response);
+
+          // 取得 API 請求後的資料
+          const { data } = response;
+          // 將 token 存放在 localStorage 內
+          localStorage.setItem("token", data.token);
+
+          // 成功登入後轉址到首頁
+          // this.$router.push("/main");
+        });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .container {
@@ -75,6 +122,7 @@
   font-weight: 500;
   font-size: 19px;
   line-height: 28px;
+  color: #657786;
 }
 
 .form-submit {

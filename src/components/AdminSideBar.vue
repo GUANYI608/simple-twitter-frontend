@@ -15,7 +15,9 @@
       </div>
       <div class="nav-item signout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
-        <span class="nav-name">登出</span>
+        <router-link to="/admin/login"
+          ><span class="nav-name">登出</span></router-link
+        >
       </div>
     </section>
   </div>

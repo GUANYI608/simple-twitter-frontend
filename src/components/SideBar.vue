@@ -26,7 +26,9 @@
       </button>
       <div class="nav-item signout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
-        <span class="nav-name">登出</span>
+        <router-link to="/signin"
+          ><span class="nav-name">登出</span></router-link
+        >
       </div>
 
       <!-- --- 彈出視窗：新增推文 --- -->
