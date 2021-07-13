@@ -5,7 +5,7 @@
     <!-- ----- 後台推文清單 ----- -->
     <!-- 推文（第一則） -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號、推文時間 -->
       <div class="user-info">
@@ -24,7 +24,7 @@
     </div>
     <!-- 以下之後用 v-for 跑 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號、推文時間 -->
       <div class="user-info">
@@ -42,7 +42,7 @@
       </button>
     </div>
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號、推文時間 -->
       <div class="user-info">
@@ -87,7 +87,7 @@
   border-bottom: none;
 }
 
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
 

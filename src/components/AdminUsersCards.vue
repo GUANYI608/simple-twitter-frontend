@@ -9,7 +9,7 @@
         <img src="../assets/cover.jpg" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avater.jpg" alt="" class="avater" />
+          <img src="../assets/avatar.jpg" alt="" class="avatar" />
           <h6 class="user-name">John Doe</h6>
           <span class="user-account">@heyjohn</span>
         </div>
@@ -35,7 +35,7 @@
         <img src="../assets/cover.jpg" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avater.jpg" alt="" class="avater" />
+          <img src="../assets/avatar.jpg" alt="" class="avatar" />
           <h6 class="user-name">John Doe</h6>
           <span class="user-account">@heyjohn</span>
         </div>
@@ -59,7 +59,7 @@
         <img src="../assets/cover.jpg" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avater.jpg" alt="" class="avater" />
+          <img src="../assets/avatar.jpg" alt="" class="avatar" />
           <h6 class="user-name">John Doe</h6>
           <span class="user-account">@heyjohn</span>
         </div>
@@ -83,7 +83,7 @@
         <img src="../assets/cover.jpg" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avater.jpg" alt="" class="avater" />
+          <img src="../assets/avatar.jpg" alt="" class="avatar" />
           <h6 class="user-name">John Doe</h6>
           <span class="user-account">@heyjohn</span>
         </div>
@@ -107,7 +107,7 @@
         <img src="../assets/cover.jpg" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avater.jpg" alt="" class="avater" />
+          <img src="../assets/avatar.jpg" alt="" class="avatar" />
           <h6 class="user-name">John Doe</h6>
           <span class="user-account">@heyjohn</span>
         </div>
@@ -174,7 +174,7 @@
   position: relative;
 }
 
-.avater {
+.avatar {
   /* 以 .profile-detai 作為定位 */
   position: absolute;
   width: 100px;

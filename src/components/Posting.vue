@@ -2,18 +2,18 @@
   <div class="posting">
     <!-- ------ 頁首 ------ -->
     <div class="page-head">
-      <router-link to="/main">
+      <router-link to="/homepage">
         <img
           class="back-icon"
           src="../assets/back.jpg"
-          alt="back to main page"
+          alt="back to homepage page"
         />
         <h6 class="page-name">推文</h6>
       </router-link>
     </div>
     <!-- ------ 推文 ------ -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -119,7 +119,7 @@ export default {
   position: relative;
 }
 
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
   /* 以 tweet 為定位 */

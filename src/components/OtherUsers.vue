@@ -5,7 +5,7 @@
       <!-- 之後用 v-for 跑資料 -->
       <div class="user">
         <!-- 圖片用灰圖先製作 -->
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -14,7 +14,7 @@
         <button type="button" class="following-button">正在跟隨</button>
       </div>
       <div class="user">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -22,7 +22,7 @@
         <button type="button" class="tofollow-button">跟隨</button>
       </div>
       <div class="user">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -30,7 +30,7 @@
         <button type="button" class="tofollow-button">跟隨</button>
       </div>
       <div class="user">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -38,7 +38,7 @@
         <button type="button" class="tofollow-button">跟隨</button>
       </div>
       <div class="user">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -46,7 +46,7 @@
         <button type="button" class="tofollow-button">跟隨</button>
       </div>
       <div class="user">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Pizza Hut</p>
           <p class="user-account">@pizzahut</p>
@@ -91,7 +91,7 @@
   position: relative;
 }
 
-.user-avater {
+.user-avatar {
   height: 50px;
   width: 50px;
   border-radius: 50%;

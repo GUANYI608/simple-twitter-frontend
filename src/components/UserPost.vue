@@ -2,7 +2,7 @@
   <div class="userpost">
     <h6 class="page-title">首頁</h6>
     <div class="post-tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
       <div class="form-group">
         <label class="form-input" for="NewTweet"></label>
         <textarea
@@ -42,7 +42,7 @@
   border-bottom: 10px solid #e6ecf0;
 }
 
-.user-avater {
+.user-avatar {
   position: absolute;
   top: 10px;
   left: 15px;

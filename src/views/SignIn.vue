@@ -50,7 +50,7 @@
 
 <script>
 import authorizationAPI from "../apis/authorization";
-import { Toast } from "./../utils/helpers";
+import { Toast } from "../utils/helpers";
 
 export default {
   name: "SignIn",
@@ -93,7 +93,7 @@ export default {
           localStorage.setItem("token", data.token);
 
           // 成功登入後轉址到餐廳首頁
-          this.$router.push("/main");
+          this.$router.push("/homepage");
         })
         .catch((error) => {
           // 將密碼欄位清空

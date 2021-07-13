@@ -1,7 +1,7 @@
 <template>
   <section class="postingcomments">
     <div class="comment">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱、帳號與留言時間 -->
       <div class="user-info">
@@ -17,7 +17,7 @@
     </div>
     <!-- 以下 comment 先複製兩個看樣式，之後用 v-for 迴圈顯示內容 -->
     <div class="comment">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱、帳號與留言時間 -->
       <div class="user-info">
@@ -32,7 +32,7 @@
       <p class="comment-content">Gooood job!</p>
     </div>
     <div class="comment">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱、帳號與留言時間 -->
       <div class="user-info">
@@ -66,7 +66,7 @@
   border-bottom: none;
 }
 
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
   /* 以 comment 為定位 */

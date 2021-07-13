@@ -15,7 +15,7 @@
 
     <!-- 推文區塊 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -43,7 +43,7 @@
     <!-- 以下推文之後用 v-for 跑資料帶入 -->
     <!-- 推文 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -68,7 +68,7 @@
     </div>
     <!-- 推文 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -93,7 +93,7 @@
     </div>
     <!-- 推文 -->
     <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -173,7 +173,7 @@
   border-bottom: none;
 }
 
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
   /* 以 tweet 為定位 */

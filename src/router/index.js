@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
-import Main from '../views/Main.vue'
+import HomePage from '../views/HomePage.vue'
 import AdminLogIn from '../views/AdminLogIn.vue'
 
 
@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'root',
-    redirect: '/main'  // 根目錄設定：直接轉址到首頁
+    redirect: '/homapage'  // 根目錄設定：直接轉址到首頁
   },
   {
     path: '/signin',
@@ -25,9 +25,9 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/main',
-    name: 'main',
-    component: Main
+    path: '/homepage',
+    name: 'home-page',
+    component: HomePage
   },
   {
     path: '/accountsetting',

@@ -2,11 +2,11 @@
   <div class="userprofile">
     <!-- ------ 頁首 ------ -->
     <div class="page-head">
-      <router-link to="/main">
+      <router-link to="/homepage">
         <img
           class="back-icon"
           src="../assets/back.jpg"
-          alt="back to main page"
+          alt="back to home page"
         />
         <h6 class="user-title">Mary Jane</h6>
         <span class="tweet-count">1.4萬 推文</span>
@@ -19,7 +19,7 @@
       <img src="../assets/cover2.jpg" alt="cover" class="cover" />
       <!-- 詳細資料 -->
       <div class="profile-detail">
-        <img src="../assets/avater2.jpg" alt="" class="avater" />
+        <img src="../assets/avatar2.jpg" alt="" class="avatar" />
 
         <!-- 按鈕區塊 -->
         <div class="button-area">
@@ -115,7 +115,7 @@
   padding-left: 15px;
 }
 
-.avater {
+.avatar {
   /* 以 profile-detail 作為定位 */
   position: absolute;
   width: 140px;

@@ -5,7 +5,7 @@
     <section class="nav-list">
       <div class="nav-item">
         <img class="nav-img" src="../assets/index.jpg" alt="index" />
-        <router-link class="nav-name" to="/main"> 首頁 </router-link>
+        <router-link class="nav-name" to="/homepage"> 首頁 </router-link>
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
@@ -45,7 +45,7 @@
           />
         </div>
         <div class="modal-text">
-          <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+          <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
           <div class="form-group">
             <label class="form-input" for="NewTweet"></label>
             <textarea
@@ -178,7 +178,7 @@ export default {
   height: 245px;
 }
 
-.user-avater {
+.user-avatar {
   position: absolute;
   top: 15px;
   left: 15px;

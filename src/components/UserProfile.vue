@@ -2,11 +2,11 @@
   <div class="userprofile">
     <!-- ------ 頁首 ------ -->
     <div class="page-head">
-      <router-link to="/main">
+      <router-link to="/homepage">
         <img
           class="back-icon"
           src="../assets/back.jpg"
-          alt="back to main page"
+          alt="back to home page"
         />
         <h6 class="user-title">John Doe</h6>
         <span class="tweet-count">25 推文</span>
@@ -19,7 +19,7 @@
       <img src="../assets/cover.jpg" alt="cover" class="cover" />
       <!-- 詳細資料 -->
       <div class="profile-detail">
-        <img src="../assets/avater.jpg" alt="" class="avater" />
+        <img src="../assets/avatar.jpg" alt="" class="avatar" />
         <button type="button" class="edit-profile">編輯個人資料</button>
         <h6 class="user-name">John Doe</h6>
         <span class="user-account">@heyjohn</span>
@@ -91,7 +91,7 @@
   padding-left: 15px;
 }
 
-.avater {
+.avatar {
   position: absolute;
   width: 140px;
   height: 140px;

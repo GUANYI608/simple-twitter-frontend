@@ -3,20 +3,20 @@
     <!-- 推文 -->
     <div class="tweet">
       <router-link to="/user/other">
-        <img class="user-avater" src="../assets/avater2.jpg" alt="avater" />
+        <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
       </router-link>
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
-        <span class="user-name"> Mary Jane </span>
-        <span class="detail-info"> @mjjane・3 小時 </span>
+        <span class="user-name"> {{ tweet.name }} </span>
+        <span class="detail-info">
+          @{{ tweet.account }}・{{ tweet.createdAt | fromNow }}
+        </span>
       </div>
       <router-link to="/replylist">
         <!-- 推文內容 -->
         <p class="tweet-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-          ullam alias explicabo placeat quis officiis adipisci nulla minus
-          beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
+          {{ tweet.description }}
         </p>
       </router-link>
       <!-- 留言與按讚 -->
@@ -32,152 +32,6 @@
         <span class="count">76</span>
       </div>
     </div>
-    <!-- 以下之後用 v-for 跑 -->
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <div class="tweet">
-      <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
-
-      <!-- 使用者名稱與帳號 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate, voluptate ipsa quo id possimus et.
-      </p>
-
-      <!-- 留言與按讚 -->
-      <div class="icons">
-        <img class="icon" src="../assets/reply.jpg" alt="" />
-        <span class="count">13</span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
-      </div>
-    </div>
-    <!-- 結束 -->
 
     <!-- 彈出視窗：回覆推文 -->
     <RepliedModal
@@ -189,15 +43,32 @@
 
 <script>
 import RepliedModal from "./RepliedModal";
+import { fromNowFilter } from "../utils/mixins";
 
 export default {
   components: {
     RepliedModal,
   },
+  mixins: [fromNowFilter],
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
+      tweet: this.initialTweet,
       isReplyModalToggle: false,
     };
+  },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
   },
   methods: {
     toggleReplyModal() {
@@ -228,7 +99,7 @@ export default {
   border-bottom: none;
 }
 
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
   /* 以 tweet 為定位 */

@@ -3,7 +3,7 @@
     <img class="logo-img" src="../assets/AClogo.jpg" alt="LOGO" />
     <h6 class="form-title">建立你的帳號</h6>
 
-    <form class="signin-form">
+    <form class="signin-form" @submit.prevent.stop="handleSubmit">
       <div class="form-group">
         <label class="form-input" for="account">帳號</label>
         <input
@@ -11,15 +11,29 @@
           v-model="account"
           type="text"
           class="form-control"
+          required
+          autofocus
         />
       </div>
       <div class="form-group">
         <label class="form-input" for="name">名稱</label>
-        <input id="name" v-model="name" type="text" class="form-control" />
+        <input
+          id="name"
+          v-model="name"
+          type="text"
+          class="form-control"
+          required
+        />
       </div>
       <div class="form-group">
         <label class="form-input" for="email">Email</label>
-        <input id="email" v-model="email" type="email" class="form-control" />
+        <input
+          id="email"
+          v-model="email"
+          type="email"
+          class="form-control"
+          required
+        />
       </div>
       <div class="form-group">
         <label class="form-input" for="password">密碼</label>
@@ -28,6 +42,7 @@
           v-model="password"
           type="password"
           class="form-control"
+          required
         />
       </div>
       <div class="form-group">
@@ -37,9 +52,12 @@
           v-model="checkPassword"
           type="password"
           class="form-control"
+          required
         />
       </div>
-      <button type="submit" class="form-submit">註冊</button>
+      <button type="submit" class="form-submit" :disabled="isProcessing">
+        註冊
+      </button>
     </form>
 
     <p class="route-link">
@@ -49,8 +67,11 @@
 </template>
 
 <script>
+import authorizationAPI from "../apis/authorization";
+import { Toast } from "../utils/helpers";
+
 export default {
-  name: "SignIn",
+  name: "SignUp",
   data() {
     return {
       account: "",
@@ -58,20 +79,59 @@ export default {
       email: "",
       password: "",
       checkPassword: "",
+      isProcessing: false, // 避免使用者重複點擊
     };
   },
   methods: {
     handleSubmit() {
-      const data = JSON.stringify({
-        account: this.account,
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        checkPassword: this.checkPassword,
-      });
+      // 如果有欄位為空，則使用 Toast 提示
+      // 然後 return 不繼續往後執行
+      if (
+        !this.account ||
+        !this.name ||
+        !this.email ||
+        !this.password ||
+        !this.checkPassword
+      ) {
+        Toast.fire({
+          icon: "warning",
+          title: "請填入所有欄位",
+        });
+        return;
+      }
 
-      // TODO: 向後端驗證使用者登入資訊是否合法
-      console.log("data", data);
+      this.isProcessing = true;
+
+      authorizationAPI
+        .signUp({
+          account: this.account,
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          checkPassword: this.checkPassword,
+        })
+        .then((response) => {
+          // 取得 API 請求後的資料
+          const { data } = response;
+
+          // 判斷 data.status
+          if (data.status !== "success") {
+            throw new Error(data.message);
+          }
+
+          // 成功登入後轉址到餐廳首頁
+          this.$router.push("/signin");
+        })
+        .catch((error) => {
+          this.isProcessing = false;
+          console.log("error", error);
+
+          // 顯示錯誤提示
+          // Toast.fire({
+          //   icon: "warning",
+          //   title: `${data.message}`,
+          // });
+        });
     },
   },
 };

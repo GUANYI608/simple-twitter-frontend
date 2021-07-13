@@ -6,7 +6,7 @@
         <img
           class="back-icon"
           src="../assets/back.jpg"
-          alt="back to main page"
+          alt="back to user page"
         />
         <h6 class="user-title">John Doe</h6>
         <span class="tweet-count">25 推文</span>
@@ -28,7 +28,7 @@
       <!-- 推文（第一則） -->
       <div class="tweet">
         <!-- 推文者資料 -->
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Laure</p>
           <p class="user-account">@LaureBill</p>
@@ -46,7 +46,7 @@
       <!-- 推文（以下需要用 v-for 跑資料） -->
       <div class="tweet">
         <!-- 推文者資料 -->
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Laure</p>
           <p class="user-account">@LaureBill</p>
@@ -62,7 +62,7 @@
       </div>
       <div class="tweet">
         <!-- 推文者資料 -->
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="user-info">
           <p class="user-name">Laure</p>
           <p class="user-account">@LaureBill</p>
@@ -166,7 +166,7 @@
 }
 
 /* 推文者資料 */
-.user-avater {
+.user-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;

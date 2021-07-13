@@ -17,7 +17,7 @@
       <!-- 顯示區塊：推文內容 -->
       <div class="tweet-area">
         <!-- 推文作者 -->
-        <img class="tweet-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="tweet-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <span class="tweet-line"></span>
         <!-- 使用者名稱與帳號 -->
         <div class="user-info">
@@ -36,7 +36,7 @@
 
       <!-- 輸入區塊：回覆推文 -->
       <div class="modal-text">
-        <img class="user-avater" src="../assets/avater.jpg" alt="avater" />
+        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
         <div class="form-group">
           <label class="form-input" for="NewTweet"></label>
           <textarea
@@ -135,7 +135,7 @@ export default {
   padding: 15px 15px 0 75px;
 }
 
-.tweet-avater {
+.tweet-avatar {
   position: absolute;
   top: 18px;
   left: 15px;
@@ -189,7 +189,7 @@ export default {
   height: 242px;
 }
 
-.user-avater {
+.user-avatar {
   position: absolute;
   top: 10px;
   left: 15px;
