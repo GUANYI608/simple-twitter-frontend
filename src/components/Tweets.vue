@@ -27,9 +27,9 @@
           alt=""
           @click.stop.prevent="toggleReplyModal()"
         />
-        <span class="count">13</span>
+        <span class="count"> {{ tweet.replyCount }} </span>
         <img class="icon" src="../assets/like.jpg" alt="" />
-        <span class="count">76</span>
+        <span class="count"> {{ tweet.likeCount }} </span>
       </div>
     </div>
 

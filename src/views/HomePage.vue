@@ -50,10 +50,12 @@ export default {
           id: tweet.id,
           userId: tweet.UserId,
           description: tweet.description,
-          updatedAt: tweet.updatedAt,
+          createdAt: tweet.createdAt,
           name: tweet.User.name,
           avatar: tweet.User.avatar,
           account: tweet.User.account,
+          replyCount: tweet.replyCount,
+          likeCount: tweet.likeCount,
         }));
       } catch (error) {
         console.log(error);

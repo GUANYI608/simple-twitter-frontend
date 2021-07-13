@@ -119,6 +119,10 @@ export default {
   margin-left: 18px;
 }
 
+.nav-name:hover {
+  color: unset;
+}
+
 .new-tweet {
   margin: 10px 0px 5px 0px;
   height: 45px;
