@@ -126,11 +126,11 @@ export default {
           this.isProcessing = false;
           console.log("error", error);
 
-          // 顯示錯誤提示
-          // Toast.fire({
-          //   icon: "warning",
-          //   title: `${data.message}`,
-          // });
+          // 顯示錯誤提示;
+          Toast.fire({
+            icon: "warning",
+            title: error,
+          });
         });
     },
   },

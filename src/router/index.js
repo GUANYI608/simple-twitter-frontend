@@ -4,7 +4,7 @@ import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
 import HomePage from '../views/HomePage.vue'
 import AdminLogIn from '../views/AdminLogIn.vue'
-
+import store from './../store'
 
 Vue.use(VueRouter)
 
@@ -30,7 +30,7 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/accountsetting',
+    path: '/account/setting/:id',
     name: 'account-setting',
     component: () => import('../views/AccountSetting.vue')
   },
@@ -89,5 +89,11 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  store.dispatch('fetchCurrentUser')
+  next()
+})
+
 
 export default router

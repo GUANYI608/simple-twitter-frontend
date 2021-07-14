@@ -13,7 +13,12 @@
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/setting.jpg" alt="setting" />
-        <router-link class="nav-name" to="/accountsetting"> 設定 </router-link>
+        <router-link
+          class="nav-name"
+          :to="{ name: 'account-setting', params: { id: currentUser.id } }"
+        >
+          設定
+        </router-link>
       </div>
       <button
         type="button"
@@ -65,11 +70,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
       isShowTweetModal: false,
+      userId: -1,
     };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  watch: {
+    $route(to) {
+      this.userId = to.params.id;
+    },
   },
   methods: {
     showModal() {

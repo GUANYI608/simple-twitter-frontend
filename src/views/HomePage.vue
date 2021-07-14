@@ -44,7 +44,6 @@ export default {
     async fetchTweets() {
       try {
         const { data } = await tweetsAPI.getTweets();
-        console.log(data);
 
         this.tweets = data.map((tweet) => ({
           id: tweet.id,
