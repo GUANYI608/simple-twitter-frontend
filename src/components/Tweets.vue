@@ -28,7 +28,20 @@
           @click.stop.prevent="toggleReplyModal()"
         />
         <span class="count"> {{ tweet.replyCount }} </span>
-        <img class="icon" src="../assets/like.jpg" alt="" />
+        <img
+          v-if="tweet.isLiked"
+          class="icon"
+          src="../assets/liked.jpg"
+          alt=""
+          @click.stop.prevent="deleteLike(tweet.id)"
+        />
+        <img
+          v-else
+          class="icon"
+          src="../assets/like.jpg"
+          alt=""
+          @click.stop.prevent="addLike(tweet.id)"
+        />
         <span class="count"> {{ tweet.likeCount }} </span>
       </div>
     </div>
@@ -44,6 +57,8 @@
 <script>
 import RepliedModal from "./RepliedModal";
 import { fromNowFilter } from "../utils/mixins";
+import userAPI from "./../apis/user";
+import { Toast } from "./../utils/helpers";
 
 export default {
   components: {
@@ -76,6 +91,43 @@ export default {
     },
     closeReplyModal(isReplyModalToggle) {
       this.isReplyModalToggle = isReplyModalToggle;
+    },
+    async addLike(tweetId) {
+      try {
+        const { data } = await userAPI.addLike({ tweetId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.tweet = {
+          ...this.tweet,
+          isLiked: true,
+        };
+        console.log(this.tweet.id);
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法新增Like，請稍後再試",
+        });
+      }
+    },
+    async deleteLike(tweetId) {
+      try {
+        const { data } = await userAPI.deleteLike({ tweetId });
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+        this.tweet = {
+          ...this.tweet,
+          isLiked: false,
+        };
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法移除Like，請稍後再試",
+        });
+      }
     },
   },
 };

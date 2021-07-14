@@ -60,7 +60,7 @@ export default {
     async handleAfterSubmit({ account, name, email, password, checkPassword }) {
       try {
         const { data } = await userAPI.editUser({
-          id: this.$route.params.id,
+          userId: this.$route.params.id,
           account,
           name,
           email,

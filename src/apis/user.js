@@ -13,9 +13,19 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  editUser({ userId, formData }) {
-    return apiHelper.put(`users/${userId}`, formData, {
+  editUser({ userId, name, account, email, password, checkPassword }) {
+    return apiHelper.put(`/users/${userId}`, { name, account, email, password, checkPassword }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
-  }
+  },
+  addLike({ tweetId }) {
+    return apiHelper.post(`/tweets/${tweetId}/like`, null, {
+      Authorization: `Bearer ${getToken()}`,
+    })
+  },
+  deleteLike({ tweetId }) {
+    return apiHelper.delete(`/tweets/${tweetId}/unlike`, {
+      Authorization: `Bearer ${getToken()}`,
+    })
+  },
 }

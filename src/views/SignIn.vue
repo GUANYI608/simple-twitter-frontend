@@ -93,7 +93,7 @@ export default {
         this.$store.commit("setCurrentUser", data.user);
 
         // 輸出使用者資訊
-        // console.log(data);
+        console.log(data);
 
         // 成功登入後轉址到餐廳首頁
         this.$router.push("/homepage");
