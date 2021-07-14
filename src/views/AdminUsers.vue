@@ -5,7 +5,7 @@
 
     <!-- 使用 AdminUsersCards 元件 -->
     <div>
-      <AdminUsersCards class="main-wrapper" />
+      <AdminUsersCards class="users-wrapper" />
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   grid-template-columns: 1fr 1062px;
 }
 
-.main-wrapper {
+.users-wrapper {
   height: auto;
   outline: 1px solid #e6ecf0;
 }

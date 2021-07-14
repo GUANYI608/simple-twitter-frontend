@@ -3,7 +3,7 @@
     <!-- 使用 SideBar 元件 -->
     <SideBar />
 
-    <div class="main-wrapper">
+    <div class="tweets-wrapper">
       <!-- 使用 UserPost 元件 -->
       <UserPost />
 
@@ -25,7 +25,7 @@ import tweetsAPI from "../apis/tweets";
 import { Toast } from "../utils/helpers";
 
 export default {
-  name: "main",
+  name: "HomePage",
   components: {
     SideBar,
     OtherUsers,
@@ -55,6 +55,7 @@ export default {
           account: tweet.User.account,
           replyCount: tweet.replyCount,
           likeCount: tweet.likeCount,
+          isLiked: tweet.isLiked,
         }));
       } catch (error) {
         console.log(error);
@@ -74,7 +75,7 @@ export default {
   grid-template-columns: 1fr 600px 1fr;
 }
 
-.main-wrapper {
+.tweets-wrapper {
   height: auto;
 }
 </style>

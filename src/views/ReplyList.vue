@@ -3,7 +3,7 @@
     <!-- 使用 SideBar 元件 -->
     <SideBar />
 
-    <div class="main-wrapper">
+    <div class="comments-wrapper">
       <!-- 使用 Posting 元件 -->
       <Posting />
 
@@ -38,7 +38,7 @@ export default {
   grid-template-columns: 1fr 600px 1fr;
 }
 
-.main-wrapper {
+.comments-wrapper {
   height: 100vh;
 }
 </style>

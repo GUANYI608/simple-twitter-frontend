@@ -56,9 +56,11 @@
 
 <script>
 import RepliedModal from "./RepliedModal";
+// import userAPI from "./../apis/user";
+import tweetsAPI from "./../apis/tweets";
 import { fromNowFilter } from "../utils/mixins";
-import userAPI from "./../apis/user";
 import { Toast } from "./../utils/helpers";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -85,6 +87,9 @@ export default {
       };
     },
   },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   methods: {
     toggleReplyModal() {
       this.isReplyModalToggle = true;
@@ -94,15 +99,13 @@ export default {
     },
     async addLike(tweetId) {
       try {
-        const { data } = await userAPI.addLike({ tweetId });
+        const { data } = await tweetsAPI.addLike({ tweetId });
         if (data.status !== "success") {
           throw new Error(data.message);
         }
-        this.tweet = {
-          ...this.tweet,
-          isLiked: true,
-        };
-        console.log(this.tweet.id);
+
+        this.tweet.isLiked = true;
+        this.tweet.likeCount = this.tweet.likeCount + 1;
       } catch (error) {
         console.log("error", error);
         Toast.fire({
@@ -113,14 +116,16 @@ export default {
     },
     async deleteLike(tweetId) {
       try {
-        const { data } = await userAPI.deleteLike({ tweetId });
+        const { data } = await tweetsAPI.deleteLike({ tweetId });
         if (data.status !== "success") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
           throw new Error(data.message);
         }
-        this.tweet = {
-          ...this.tweet,
-          isLiked: false,
-        };
+        this.tweet.isLiked = false;
+        this.tweet.likeCount = this.tweet.likeCount - 1;
       } catch (error) {
         console.log("error", error);
         Toast.fire({

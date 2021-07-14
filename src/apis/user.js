@@ -18,14 +18,14 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  addLike({ tweetId }) {
-    return apiHelper.post(`/tweets/${tweetId}/like`, null, {
-      Authorization: `Bearer ${getToken()}`,
-    })
-  },
-  deleteLike({ tweetId }) {
-    return apiHelper.delete(`/tweets/${tweetId}/unlike`, {
-      Authorization: `Bearer ${getToken()}`,
-    })
-  },
+  // addLike({ tweetId }) {
+  //   return apiHelper.post(`/tweets/${tweetId}/like`, null, {
+  //     headers: { Authorization: `Bearer ${getToken()}` }
+  //   })
+  // },
+  // deleteLike({ tweetId }) {
+  //   return apiHelper.delete(`/tweets/${tweetId}/unlike`, {
+  //     headers: { Authorization: `Bearer ${getToken()}` }
+  //   })
+  // },
 }

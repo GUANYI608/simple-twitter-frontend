@@ -70,7 +70,7 @@ const routes = [
     component: AdminLogIn
   },
   {
-    path: '/admin/main',
+    path: '/admin/homepage',
     name: 'admin-main',
     component: () => import('../views/AdminMain.vue')
   },

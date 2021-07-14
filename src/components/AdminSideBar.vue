@@ -5,7 +5,9 @@
     <section class="nav-list">
       <div class="nav-item">
         <img class="nav-img" src="../assets/index.jpg" alt="index" />
-        <router-link class="nav-name" to="/admin/main"> 推文清單 </router-link>
+        <router-link class="nav-name" to="/admin/homepage">
+          推文清單
+        </router-link>
       </div>
       <div class="nav-item">
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
@@ -57,6 +59,10 @@
   font-weight: bold;
   font-size: 18px;
   margin-left: 18px;
+}
+
+.nav-name:hover {
+  color: unset;
 }
 
 .signout {

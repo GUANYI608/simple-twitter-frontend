@@ -6,7 +6,7 @@
         <img
           class="back-icon"
           src="../assets/back.jpg"
-          alt="back to main page"
+          alt="back to home page"
         />
         <h6 class="user-title">John Doe</h6>
         <span class="tweet-count">25 推文</span>

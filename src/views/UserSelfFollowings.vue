@@ -5,7 +5,7 @@
 
     <!-- 使用 UserFollowings 元件 -->
     <div>
-      <UserFollowings class="main-wrapper" />
+      <UserFollowings class="followings-wrapper" />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -33,7 +33,7 @@ export default {
   grid-template-columns: 1fr 600px 1fr;
 }
 
-.main-wrapper {
+.followings-wrapper {
   height: auto;
   outline: 1px solid #e6ecf0;
 }

@@ -3,7 +3,7 @@
     <!-- 使用 SideBar 元件 -->
     <SideBar />
 
-    <div class="main-wrapper">
+    <div class="otheruser-wrapper">
       <!-- 使用 OtherUserProfile 元件 -->
       <OtherUserProfile />
 
@@ -38,7 +38,7 @@ export default {
   grid-template-columns: 1fr 600px 1fr;
 }
 
-.main-wrapper {
+.otheruser-wrapper {
   height: auto;
   outline: 1px solid #e6ecf0;
 }

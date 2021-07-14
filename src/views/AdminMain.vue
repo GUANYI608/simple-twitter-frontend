@@ -5,7 +5,7 @@
 
     <!-- 使用 AdminTweets 元件 -->
     <div>
-      <AdminTweets class="main-wrapper" />
+      <AdminTweets class="tweets-wrapper" />
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   grid-template-columns: 1fr 1062px;
 }
 
-.main-wrapper {
+.tweets-wrapper {
   height: auto;
   outline: 1px solid #e6ecf0;
 }
