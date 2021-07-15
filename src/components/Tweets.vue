@@ -142,18 +142,13 @@ export default {
 <style scoped>
 .tweets {
   width: 600px;
-  outline: 1px solid #e6ecf0;
 }
 
 .tweet {
   padding: 10px 15px 0 75px;
   height: 146px;
   position: relative;
-  border-bottom: 1px solid #e6ecf0;
-}
-
-.tweet:last-child {
-  border-bottom: none;
+  outline: 1px solid #e6ecf0;
 }
 
 .user-avatar {

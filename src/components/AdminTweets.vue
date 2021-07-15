@@ -17,7 +17,11 @@
       </p>
 
       <!-- 刪除按鈕 -->
-      <button class="delete-button">
+      <button
+        class="delete-button"
+        @click.stop.prevent="deleteTweet(tweet.id)"
+        :disabled="isProcessing"
+      >
         <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
       </button>
     </div>
@@ -26,6 +30,8 @@
 
 <script>
 import { fromNowFilter } from "../utils/mixins";
+import { Toast } from "./../utils/helpers";
+import adminAPI from "../apis/admin";
 
 export default {
   name: "AdminTweets",
@@ -39,6 +45,7 @@ export default {
   data() {
     return {
       tweet: this.initialTweet,
+      isProcessing: false,
     };
   },
   watch: {
@@ -47,6 +54,30 @@ export default {
         ...this.tweet,
         ...newValue,
       };
+    },
+  },
+  methods: {
+    async deleteTweet(tweetId) {
+      try {
+        this.isProcessing = true;
+
+        const { data } = await adminAPI.tweets.delete({
+          tweetId,
+        });
+
+        if (data.status !== "success") {
+          throw new Error(data.message);
+        }
+
+        this.$emit("after-delete-tweet");
+        this.isProcessing = false;
+      } catch (error) {
+        console.error(error.message);
+        Toast.fire({
+          icon: "error",
+          title: "無法刪除推文，請稍後再試",
+        });
+      }
     },
   },
 };

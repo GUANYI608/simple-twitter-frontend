@@ -12,6 +12,7 @@
         v-for="tweet in tweets"
         :key="tweet.id"
         :initial-tweet="tweet"
+        @after-delete-tweet="afterDeleteTweet"
       />
     </div>
   </div>
@@ -61,26 +62,14 @@ export default {
         });
       }
     },
-    // async deleteTweet(tweetId) {
-    //   try {
-    //     const { data } = await adminAPI.tweets.delete({
-    //       tweetId,
-    //     });
-    //     if (data.status !== "success") {
-    //       throw new Error(data.message);
-    //     }
-    //     this.tweet = this.tweet.filter((t) => t.id !== tweetId);
-    //     Toast.fire({
-    //       icon: "success",
-    //       title: "刪除推文成功",
-    //     });
-    //   } catch (error) {
-    //     Toast.fire({
-    //       icon: "error",
-    //       title: "無法刪除推文，請稍後再試",
-    //     });
-    //   }
-    // },
+    // 刪除後重新渲染畫面
+    afterDeleteTweet() {
+      this.fetchTweets();
+      Toast.fire({
+        icon: "success",
+        title: "已刪除該則推文",
+      });
+    },
   },
 };
 </script>

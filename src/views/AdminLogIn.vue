@@ -70,8 +70,6 @@ export default {
         .then((response) => {
           // 取得 API 請求後的資料
           const { data } = response;
-          console.log(data);
-          console.log(response);
 
           // 判斷 data.status
           if (data.status !== "success") {
