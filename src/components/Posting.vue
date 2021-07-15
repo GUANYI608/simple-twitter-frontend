@@ -13,7 +13,7 @@
     </div>
     <!-- ------ 推文 ------ -->
     <div class="tweet">
-      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+      <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
@@ -151,6 +151,8 @@ export default {
   /* 以 tweet 為定位 */
   position: absolute;
   left: 15px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-info {
