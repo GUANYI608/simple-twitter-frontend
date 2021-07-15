@@ -17,25 +17,23 @@
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
-        <h6 class="user-name">Apple</h6>
-        <h6 class="user-account">@apple</h6>
+        <h6 class="user-name">{{ tweet.name }}</h6>
+        <h6 class="user-account">{{ tweet.account }}</h6>
       </div>
 
       <!-- 推文內容 -->
       <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-        ullam alias explicabo placeat quis officiis adipisci nulla minus beatae
-        sapiente cupiditate.
+        {{ tweet.description }}
       </p>
 
       <!-- 推文時間 -->
-      <p class="detail-info">上午 10:00・2021年7月9日</p>
+      <p class="detail-info">{{ tweet.createdAt }}</p>
 
       <!-- 累積數量： 留言與按讚 -->
       <div class="number-followers">
-        <span class="number">34</span>
+        <span class="number">{{ tweet.replyCount }}</span>
         <span class="followers">回覆</span>
-        <span class="number">808</span>
+        <span class="number">{{ tweet.likeCount }}</span>
         <span class="followers">喜歡次數</span>
       </div>
 
@@ -47,7 +45,20 @@
           alt=""
           @click.stop.prevent="toggleReplyModal()"
         />
-        <img class="icon" src="../assets/like.jpg" alt="" />
+        <img
+          v-if="tweet.isLiked"
+          class="icon"
+          src="../assets/liked.jpg"
+          alt=""
+          @click.stop.prevent="deleteLike(tweet.id)"
+        />
+        <img
+          v-else
+          class="icon"
+          src="../assets/like.jpg"
+          alt=""
+          @click.stop.prevent="addLike(tweet.id)"
+        />
       </div>
     </div>
 
@@ -66,10 +77,25 @@ export default {
   components: {
     RepliedModal,
   },
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       isReplyModalToggle: false,
+      tweet: this.initialTweet,
     };
+  },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
   },
   methods: {
     toggleReplyModal() {

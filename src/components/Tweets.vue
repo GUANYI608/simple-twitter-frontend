@@ -13,7 +13,7 @@
           @{{ tweet.account }}・{{ tweet.createdAt | fromNow }}
         </span>
       </div>
-      <router-link to="/replylist">
+      <router-link :to="{ name: 'reply-list', params: { id: tweet.id } }">
         <!-- 推文內容 -->
         <p class="tweet-content">
           {{ tweet.description }}

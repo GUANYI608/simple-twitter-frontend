@@ -60,7 +60,7 @@ const routes = [
     component: () => import('../views/UserOther.vue')
   },
   {
-    path: '/replylist',
+    path: '/replylist/:id',
     name: 'reply-list',
     component: () => import('../views/ReplyList.vue')
   },
