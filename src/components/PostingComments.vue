@@ -1,53 +1,61 @@
 <template>
   <section class="postingcomments">
-    <div class="comment">
-      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+    <div v-for="reply in replies" :key="reply.id">
+      <div class="comment">
+        <img class="user-avatar" :src="reply.avatar" alt="avatar" />
 
-      <!-- 使用者名稱、帳號與留言時間 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
+        <!-- 使用者名稱、帳號與留言時間 -->
+        <div class="user-info">
+          <span class="user-name"> {{ reply.name }} </span>
+          <span class="detail-info">
+            @{{ reply.account }}・{{ reply.createdAt | fromNow }}
+          </span>
+        </div>
+
+        <!-- 留言對象 -->
+        <p class="reply-to">
+          回覆<span class="tweet-account">@{{ tweet.account }}</span>
+        </p>
+
+        <!-- 留言內容 -->
+        <p class="comment-content">{{ reply.comment }}</p>
       </div>
-
-      <!-- 留言對象 -->
-      <p class="reply-to">回覆<span class="tweet-account">@apple</span></p>
-
-      <!-- 留言內容 -->
-      <p class="comment-content">Gooood job!</p>
-    </div>
-    <!-- 以下 comment 先複製兩個看樣式，之後用 v-for 迴圈顯示內容 -->
-    <div class="comment">
-      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-
-      <!-- 使用者名稱、帳號與留言時間 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 留言對象 -->
-      <p class="reply-to">回覆<span class="tweet-account">@apple</span></p>
-
-      <!-- 留言內容 -->
-      <p class="comment-content">Gooood job!</p>
-    </div>
-    <div class="comment">
-      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-
-      <!-- 使用者名稱、帳號與留言時間 -->
-      <div class="user-info">
-        <span class="user-name"> Apple </span>
-        <span class="detail-info"> @apple・3 小時 </span>
-      </div>
-
-      <!-- 留言對象 -->
-      <p class="reply-to">回覆<span class="tweet-account">@apple</span></p>
-
-      <!-- 留言內容 -->
-      <p class="comment-content">Gooood job!</p>
     </div>
   </section>
 </template>
+
+<script>
+import { fromNowFilter } from "../utils/mixins";
+
+export default {
+  name: "PostingComments",
+  mixins: [fromNowFilter],
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+    replies: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      tweet: this.initialTweet,
+    };
+  },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
+  },
+};
+</script>
+
 
 <style scoped>
 .postingcomments {

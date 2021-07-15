@@ -24,4 +24,10 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` },
     })
   },
+  // 取得單一貼文回覆
+  getTweetReplies({ tweetId }) {
+    return apiHelper.get(`/tweets/${tweetId}/replies`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    })
+  },
 }

@@ -8,7 +8,7 @@
       <Posting :initial-tweet="tweet" />
 
       <!-- 使用 PostingComments 元件 -->
-      <PostingComments />
+      <PostingComments :initial-tweet="tweet" :replies="replies" />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
@@ -36,10 +36,12 @@ export default {
   data() {
     return {
       tweet: {},
+      replies: [],
     };
   },
   created() {
     this.fetchTweet();
+    this.fetchReplies();
   },
   methods: {
     async fetchTweet() {
@@ -73,6 +75,27 @@ export default {
         Toast.fire({
           icon: "error",
           title: "無法取得推文，請稍後再試",
+        });
+      }
+    },
+    async fetchReplies() {
+      try {
+        const tweetId = this.$route.params.id;
+        const { data } = await tweetsAPI.getTweetReplies({ tweetId });
+        this.replies = data.map((reply) => ({
+          id: reply.id,
+          userId: reply.UserId,
+          name: reply.User.name,
+          account: reply.User.account,
+          avatar: reply.User.avatar,
+          comment: reply.comment,
+          createdAt: reply.createdAt,
+        }));
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得回覆資訊，請稍後再試",
         });
       }
     },
