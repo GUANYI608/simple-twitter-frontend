@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'root',
-    redirect: '/homapage'  // 根目錄設定：直接轉址到首頁
+    redirect: '/signin'  // 根目錄設定：直接轉址到首頁
   },
   {
     path: '/signin',

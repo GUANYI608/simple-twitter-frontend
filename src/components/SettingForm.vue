@@ -166,6 +166,7 @@ export default {
         email: this.userData.email,
         password: this.userData.password,
         checkPassword: this.userData.checkPassword,
+        setting: this.setting,
       });
     },
   },

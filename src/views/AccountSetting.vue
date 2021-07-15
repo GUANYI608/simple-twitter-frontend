@@ -57,7 +57,14 @@ export default {
         console.log(error);
       }
     },
-    async handleAfterSubmit({ account, name, email, password, checkPassword }) {
+    async handleAfterSubmit({
+      setting,
+      account,
+      name,
+      email,
+      password,
+      checkPassword,
+    }) {
       try {
         const { data } = await userAPI.editUser({
           userId: this.$route.params.id,
@@ -66,6 +73,7 @@ export default {
           email,
           password,
           checkPassword,
+          setting,
         });
 
         if (data.status !== "success") {
