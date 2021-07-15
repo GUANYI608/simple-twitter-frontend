@@ -56,13 +56,13 @@
 
 <script>
 import RepliedModal from "./RepliedModal";
-// import userAPI from "./../apis/user";
 import tweetsAPI from "./../apis/tweets";
 import { fromNowFilter } from "../utils/mixins";
 import { Toast } from "./../utils/helpers";
 import { mapState } from "vuex";
 
 export default {
+  name: "Tweets",
   components: {
     RepliedModal,
   },

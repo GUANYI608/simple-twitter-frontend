@@ -63,7 +63,7 @@ export default {
       this.isProcessing = true;
 
       authorizationAPI
-        .AdminLogIn({
+        .adminLogIn({
           account: this.account,
           password: this.password,
         })

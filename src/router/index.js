@@ -71,8 +71,8 @@ const routes = [
   },
   {
     path: '/admin/homepage',
-    name: 'admin-main',
-    component: () => import('../views/AdminMain.vue')
+    name: 'admin-homepage',
+    component: () => import('../views/AdminHomePage.vue')
   },
   {
     path: '/admin/users',

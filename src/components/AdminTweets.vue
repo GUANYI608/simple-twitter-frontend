@@ -1,57 +1,19 @@
 <template>
   <section class="admintweets">
-    <h6 class="page-title">推文清單</h6>
-
-    <!-- ----- 後台推文清單 ----- -->
-    <!-- 推文（第一則） -->
+    <!-- 推文 -->
     <div class="tweet">
-      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
+      <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
 
       <!-- 使用者名稱與帳號、推文時間 -->
       <div class="user-info">
-        <span class="user-name"> Mary Jane </span>
-        <span class="detail-info"> @mjjane・3 小時 </span>
+        <span class="user-name"> {{ tweet.name }} </span>
+        <span class="detail-info">
+          @{{ tweet.account }}・{{ tweet.createdAt | fromNow }}
+        </span>
       </div>
       <!-- 推文內容 -->
       <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipi elit.
-      </p>
-
-      <!-- 刪除按鈕 -->
-      <button class="delete-button">
-        <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
-      </button>
-    </div>
-    <!-- 以下之後用 v-for 跑 -->
-    <div class="tweet">
-      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-
-      <!-- 使用者名稱與帳號、推文時間 -->
-      <div class="user-info">
-        <span class="user-name"> Mary Jane </span>
-        <span class="detail-info"> @mjjane・3 小時 </span>
-      </div>
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipi elit.
-      </p>
-
-      <!-- 刪除按鈕 -->
-      <button class="delete-button">
-        <img class="delete-icon" src="../assets/delete.jpg" alt="delete" />
-      </button>
-    </div>
-    <div class="tweet">
-      <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-
-      <!-- 使用者名稱與帳號、推文時間 -->
-      <div class="user-info">
-        <span class="user-name"> Mary Jane </span>
-        <span class="detail-info"> @mjjane・3 小時 </span>
-      </div>
-      <!-- 推文內容 -->
-      <p class="tweet-content">
-        Lorem ipsum dolor sit amet consectetur adipi elit.
+        {{ tweet.description }}
       </p>
 
       <!-- 刪除按鈕 -->
@@ -62,18 +24,35 @@
   </section>
 </template>
 
-<style scoped>
-/* 頁首 */
-.page-title {
-  height: 55px;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 55px;
-  padding-left: 26px;
-  outline: 1px solid #e6ecf0;
-  margin-bottom: 5px;
-}
+<script>
+import { fromNowFilter } from "../utils/mixins";
 
+export default {
+  name: "AdminTweets",
+  mixins: [fromNowFilter],
+  props: {
+    initialTweet: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      tweet: this.initialTweet,
+    };
+  },
+  watch: {
+    initialTweet(newValue) {
+      this.tweet = {
+        ...this.tweet,
+        ...newValue,
+      };
+    },
+  },
+};
+</script>
+
+<style scoped>
 /* 推文 */
 .tweet {
   margin-top: 10px;
@@ -81,10 +60,6 @@
   height: 110px;
   position: relative;
   border-bottom: 1px solid #e6ecf0;
-}
-
-.tweet:last-child {
-  border-bottom: none;
 }
 
 .user-avatar {
