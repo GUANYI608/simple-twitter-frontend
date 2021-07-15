@@ -3,133 +3,65 @@
     <h6 class="page-title">使用者列表</h6>
 
     <div class="profiles">
-      <!-- ----- 使用者卡片（第一張）----- -->
-      <div class="profile">
+      <!-- ----- 使用者卡片 ----- -->
+      <div class="profile" v-for="user in users" :key="user.id">
         <!-- 封面 -->
-        <img src="../assets/cover.jpg" alt="cover" class="cover" />
+        <img :src="user.cover" alt="cover" class="cover" />
         <!-- 詳細資料 -->
         <div class="profile-detail">
-          <img src="../assets/avatar.jpg" alt="" class="avatar" />
-          <h6 class="user-name">John Doe</h6>
-          <span class="user-account">@heyjohn</span>
+          <img :src="user.avatar" alt="" class="avatar" />
+          <h6 class="user-name">{{ user.name }}</h6>
+          <span class="user-account">@{{ user.account }}</span>
         </div>
         <!-- 統計數量：留言與按讚 -->
         <div class="icons">
           <img class="icon" src="../assets/replynb.png" alt="" />
-          <span class="count">13</span>
+          <span class="count">{{ user.tweetCount }}</span>
           <img class="icon" src="../assets/likenb.png" alt="" />
-          <span class="count">76</span>
+          <span class="count">{{ user.likeCount }}</span>
         </div>
         <!-- 統計數量：跟隨人數 -->
         <div class="numbers">
-          <span class="number"> 34個</span>
+          <span class="number"> {{ user.followingCount }}個</span>
           <span class="role"> 跟隨中 </span>
-          <span class="number"> 808位</span>
+          <span class="number"> {{ user.followerCount }}位</span>
           <span class="role"> 跟隨者 </span>
         </div>
       </div>
-
-      <!-- 以下之後用 v-for 跑 -->
-      <div class="profile">
-        <!-- 封面 -->
-        <img src="../assets/cover.jpg" alt="cover" class="cover" />
-        <!-- 詳細資料 -->
-        <div class="profile-detail">
-          <img src="../assets/avatar.jpg" alt="" class="avatar" />
-          <h6 class="user-name">John Doe</h6>
-          <span class="user-account">@heyjohn</span>
-        </div>
-        <!-- 統計數量：留言與按讚 -->
-        <div class="icons">
-          <img class="icon" src="../assets/replynb.png" alt="" />
-          <span class="count">13</span>
-          <img class="icon" src="../assets/likenb.png" alt="" />
-          <span class="count">76</span>
-        </div>
-        <!-- 統計數量：跟隨人數 -->
-        <div class="numbers">
-          <span class="number"> 34個</span>
-          <span class="role"> 跟隨中 </span>
-          <span class="number"> 808位</span>
-          <span class="role"> 跟隨者 </span>
-        </div>
-      </div>
-      <div class="profile">
-        <!-- 封面 -->
-        <img src="../assets/cover.jpg" alt="cover" class="cover" />
-        <!-- 詳細資料 -->
-        <div class="profile-detail">
-          <img src="../assets/avatar.jpg" alt="" class="avatar" />
-          <h6 class="user-name">John Doe</h6>
-          <span class="user-account">@heyjohn</span>
-        </div>
-        <!-- 統計數量：留言與按讚 -->
-        <div class="icons">
-          <img class="icon" src="../assets/replynb.png" alt="" />
-          <span class="count">13</span>
-          <img class="icon" src="../assets/likenb.png" alt="" />
-          <span class="count">76</span>
-        </div>
-        <!-- 統計數量：跟隨人數 -->
-        <div class="numbers">
-          <span class="number"> 34個</span>
-          <span class="role"> 跟隨中 </span>
-          <span class="number"> 808位</span>
-          <span class="role"> 跟隨者 </span>
-        </div>
-      </div>
-      <div class="profile">
-        <!-- 封面 -->
-        <img src="../assets/cover.jpg" alt="cover" class="cover" />
-        <!-- 詳細資料 -->
-        <div class="profile-detail">
-          <img src="../assets/avatar.jpg" alt="" class="avatar" />
-          <h6 class="user-name">John Doe</h6>
-          <span class="user-account">@heyjohn</span>
-        </div>
-        <!-- 統計數量：留言與按讚 -->
-        <div class="icons">
-          <img class="icon" src="../assets/replynb.png" alt="" />
-          <span class="count">13</span>
-          <img class="icon" src="../assets/likenb.png" alt="" />
-          <span class="count">76</span>
-        </div>
-        <!-- 統計數量：跟隨人數 -->
-        <div class="numbers">
-          <span class="number"> 34個</span>
-          <span class="role"> 跟隨中 </span>
-          <span class="number"> 808位</span>
-          <span class="role"> 跟隨者 </span>
-        </div>
-      </div>
-      <div class="profile">
-        <!-- 封面 -->
-        <img src="../assets/cover.jpg" alt="cover" class="cover" />
-        <!-- 詳細資料 -->
-        <div class="profile-detail">
-          <img src="../assets/avatar.jpg" alt="" class="avatar" />
-          <h6 class="user-name">John Doe</h6>
-          <span class="user-account">@heyjohn</span>
-        </div>
-        <!-- 統計數量：留言與按讚 -->
-        <div class="icons">
-          <img class="icon" src="../assets/replynb.png" alt="" />
-          <span class="count">13</span>
-          <img class="icon" src="../assets/likenb.png" alt="" />
-          <span class="count">76</span>
-        </div>
-        <!-- 統計數量：跟隨人數 -->
-        <div class="numbers">
-          <span class="number"> 34個</span>
-          <span class="role"> 跟隨中 </span>
-          <span class="number"> 808位</span>
-          <span class="role"> 跟隨者 </span>
-        </div>
-      </div>
-      <!-- 以上之後用 v-for 跑 -->
     </div>
   </section>
 </template>
+
+<script>
+import adminAPI from "./../apis/admin";
+import { Toast } from "./../utils/helpers";
+
+export default {
+  name: "AdminUsersCard",
+  data() {
+    return {
+      users: [],
+    };
+  },
+  created() {
+    this.fetchUsers();
+  },
+  methods: {
+    async fetchUsers() {
+      try {
+        const { data } = await adminAPI.getUsers();
+        this.users = data;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "warning",
+          title: "無法取得使用者資料，請稍後再試",
+        });
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 /* ------ 頁首 ------ */
