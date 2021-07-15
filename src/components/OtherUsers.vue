@@ -2,63 +2,76 @@
   <div class="otherusers">
     <h6 class="sub-title">跟隨誰</h6>
     <section class="user-list">
-      <!-- 之後用 v-for 跑資料 -->
-      <div class="user">
-        <!-- 圖片用灰圖先製作 -->
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+      <!---------- 推薦使用者清單 --------->
+      <div class="user" v-for="user of topUsers" :key="user.id">
+        <!-- 使用者資訊 -->
+        <img class="user-avatar" :src="user.avatar" alt="avatar" />
         <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
+          <p class="user-name">{{ user.name }}</p>
+          <p class="user-account">@{{ user.account }}</p>
         </div>
-        <!-- <button type="button" class="tofollow-button">跟隨</button> -->
-        <button type="button" class="following-button">正在跟隨</button>
+        <!-- 按鈕 -->
+        <button v-if="user.isFollowing" type="button" class="following-button">
+          正在跟隨
+        </button>
+        <button v-else type="button" class="tofollow-button">跟隨</button>
       </div>
-      <div class="user">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
-        </div>
-        <button type="button" class="tofollow-button">跟隨</button>
-      </div>
-      <div class="user">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
-        </div>
-        <button type="button" class="tofollow-button">跟隨</button>
-      </div>
-      <div class="user">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
-        </div>
-        <button type="button" class="tofollow-button">跟隨</button>
-      </div>
-      <div class="user">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
-        </div>
-        <button type="button" class="tofollow-button">跟隨</button>
-      </div>
-      <div class="user">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">Pizza Hut</p>
-          <p class="user-account">@pizzahut</p>
-        </div>
-        <button type="button" class="tofollow-button">跟隨</button>
-      </div>
+
       <p class="list-footer">
         <router-link to="" class="more-user"> 顯示更多 </router-link>
       </p>
     </section>
   </div>
 </template>
+
+<script>
+import userAPI from "../apis/user";
+import { Toast } from "../utils/helpers";
+
+export default {
+  name: "OtherUsers",
+  data() {
+    return {
+      topUsers: [],
+    };
+  },
+  created() {
+    this.fetchTopUsers();
+  },
+  methods: {
+    async fetchTopUsers() {
+      try {
+        const { data } = await userAPI.getTopUsers();
+        console.log(data);
+
+        this.topUsers = data;
+        this.topUsers.if;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得'推薦追蹤者'，請稍後再試！",
+        });
+      }
+    },
+    // async followUser(userId) {
+    //   try {
+    //     const { data } = await userAPI.followUser({ id: userId });
+    //     if (data.status !== "success") {
+    //       throw new Error(data.message);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //     Toast.fire({
+    //       icon: "error",
+    //       title: "無法追蹤該使用者，請稍後再試！",
+    //     });
+    //   }
+    // },
+  },
+};
+</script>
+
 
 <style scoped>
 .otherusers {
