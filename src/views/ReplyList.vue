@@ -24,6 +24,7 @@ import PostingComments from "../components/PostingComments";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
 import moment from "moment";
+moment.locale("zh-tw");
 
 export default {
   name: "ReplyList",
@@ -65,7 +66,7 @@ export default {
           name,
           account,
           description,
-          createdAt: moment(createdAt).format("A hh:mm・YYYY.MM.DD"),
+          createdAt: moment(createdAt).format("a h:mm ⋅ YYYY年M月Do"),
           likeCount,
           replyCount,
           isLiked,
