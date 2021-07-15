@@ -88,7 +88,7 @@ export default {
           // 顯示錯誤提示
           Toast.fire({
             icon: "warning",
-            title: "請確認您輸入了正確的帳號密碼",
+            title: error.message,
           });
           this.isProcessing = false;
           console.log("error", error);
@@ -145,6 +145,7 @@ export default {
   font-weight: 500;
   font-size: 19px;
   line-height: 28px;
+  color: #657786;
 }
 
 .form-submit {

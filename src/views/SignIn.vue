@@ -103,7 +103,7 @@ export default {
         // 顯示錯誤提示
         Toast.fire({
           icon: "warning",
-          title: "請確認您輸入了正確的帳號密碼",
+          title: error.message,
         });
         this.isProcessing = false;
         console.log("error", error);
