@@ -3,23 +3,37 @@
     <h6 class="sub-title">跟隨誰</h6>
     <section class="user-list">
       <!---------- 推薦使用者清單 --------->
-      <div class="user" v-for="user of topUsers" :key="user.id">
-        <!-- 使用者資訊 -->
-        <img class="user-avatar" :src="user.avatar" alt="avatar" />
-        <div class="user-info">
-          <p class="user-name">{{ user.name }}</p>
-          <p class="user-account">@{{ user.account }}</p>
+      <div class="showTopSix">
+        <div class="user" v-for="user of topUsers" :key="user.id">
+          <!-- 使用者資訊 -->
+          <img class="user-avatar" :src="user.avatar" alt="avatar" />
+          <div class="user-info">
+            <p class="user-name">{{ user.name }}</p>
+            <p class="user-account">@{{ user.account }}</p>
+          </div>
+          <!-- 按鈕 -->
+          <button
+            v-if="user.isFollowing"
+            type="button"
+            class="following-button"
+            @click.prevent.stop="unfollowUser(user.id)"
+          >
+            正在跟隨
+          </button>
+          <button
+            v-else
+            type="button"
+            class="tofollow-button"
+            @click.prevent.stop="followUser(user.id)"
+          >
+            跟隨
+          </button>
         </div>
-        <!-- 按鈕 -->
-        <button v-if="user.isFollowing" type="button" class="following-button">
-          正在跟隨
-        </button>
-        <button v-else type="button" class="tofollow-button">跟隨</button>
+        <!-- 清單 footer -->
+        <p class="list-footer" @click.prevent.stop="showMoreUser">
+          <span class="more-user"> 顯示更多 </span>
+        </p>
       </div>
-
-      <p class="list-footer">
-        <router-link to="" class="more-user"> 顯示更多 </router-link>
-      </p>
     </section>
   </div>
 </template>
@@ -42,10 +56,8 @@ export default {
     async fetchTopUsers() {
       try {
         const { data } = await userAPI.getTopUsers();
-        console.log(data);
 
         this.topUsers = data;
-        this.topUsers.if;
       } catch (error) {
         console.log(error);
         Toast.fire({
@@ -54,20 +66,42 @@ export default {
         });
       }
     },
-    // async followUser(userId) {
-    //   try {
-    //     const { data } = await userAPI.followUser({ id: userId });
-    //     if (data.status !== "success") {
-    //       throw new Error(data.message);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     Toast.fire({
-    //       icon: "error",
-    //       title: "無法追蹤該使用者，請稍後再試！",
-    //     });
-    //   }
-    // },
+    async followUser(userId) {
+      try {
+        const { data } = await userAPI.followUser(userId);
+        if (data.status !== "success") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+        this.fetchTopUsers();
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法追蹤使用者，請稍後再試",
+        });
+      }
+    },
+    async unfollowUser(followingId) {
+      try {
+        const { data } = await userAPI.unfollowUser({ followingId });
+        if (data.status !== "success") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+        this.fetchTopUsers();
+      } catch (error) {
+        console.log("error", error);
+        Toast.fire({
+          icon: "error",
+          title: "無法移除追蹤，請稍後再試",
+        });
+      }
+    },
   },
 };
 </script>

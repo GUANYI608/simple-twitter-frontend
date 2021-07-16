@@ -26,14 +26,17 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  // followUser({ userId }) {
-  //   return apiHelper.post('/followships', { userId }, {
-  //     headers: { Authorization: `Bearer ${getToken()}` }
-  //   })
-  // },
-  // unfollowUser({ followingId }) {
-  //   return apiHelper.delete(`/followships/${followingId}`, {
-  //     headers: { Authorization: `Bearer ${getToken()}` }
-  //   })
-  // },
+  followUser(id) {
+    return apiHelper.post(`/followships`,
+      { id },
+      {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      })
+  },
+  unfollowUser({ followingId }) {
+    return apiHelper.delete(`/followships/${followingId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  }
+
 }
