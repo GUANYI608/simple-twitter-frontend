@@ -2,22 +2,91 @@
   <div class="userpost">
     <h6 class="page-title">首頁</h6>
     <div class="post-tweet">
-      <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+      <img class="user-avatar" :src="currentUser.avatar" alt="avatar" />
       <div class="form-group">
         <label class="form-input" for="NewTweet"></label>
         <textarea
           id="NewTweet"
+          v-model="newTweet"
           class="tweet-content"
           name="NewTweet"
           rows="4"
           cols="50"
           placeholder="有什麼新鮮事？"
         ></textarea>
-        <button type="submit" class="post-button">推文</button>
+        <button
+          type="submit"
+          class="post-button"
+          @click.stop.prevent="postTweet(newTweet)"
+          :disabled="isProcessing"
+        >
+          推文
+        </button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "../utils/helpers";
+import { mapState } from "vuex";
+
+export default {
+  name: "UserPost",
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  data() {
+    return {
+      newTweet: "",
+      isProcessing: false,
+    };
+  },
+  watch: {
+    newTweet(newValue) {
+      if (newValue.length === 140) {
+        Toast.fire({
+          icon: "warning",
+          title: "已達字數上限",
+        });
+      }
+    },
+  },
+  methods: {
+    async postTweet(newTweet) {
+      if (this.newTweet.trim() === "") {
+        Toast.fire({
+          icon: "error",
+          title: "尚未輸入內容",
+        });
+        return;
+      }
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.postTweet({ newTweet });
+
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+
+        this.$emit("after-post-tweet");
+
+        this.newTweet = "";
+        this.isProcessing = false;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法新增推文，請稍後再試",
+        });
+        this.isProcessing = false;
+      }
+    },
+  },
+};
+</script>
+
 
 <style scoped>
 .userpost {

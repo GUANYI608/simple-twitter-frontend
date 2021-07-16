@@ -8,6 +8,12 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 新增一則推文
+  postTweet({ newTweet }) {
+    return apiHelper.post(`/tweets`, { description: newTweet }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   addLike({ tweetId }) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null, {
       headers: { Authorization: `Bearer ${getToken()}` }

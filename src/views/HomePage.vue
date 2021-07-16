@@ -5,7 +5,7 @@
 
     <div class="tweets-wrapper">
       <!-- 使用 UserPost 元件 -->
-      <UserPost />
+      <UserPost @after-post-tweet="afterPostTweet" />
 
       <!-- 使用 Tweets 元件 -->
       <Tweets v-for="tweet in tweets" :key="tweet.id" :initial-tweet="tweet" />
@@ -64,6 +64,13 @@ export default {
           title: "無法取得推文，請稍後再試",
         });
       }
+    },
+    afterPostTweet() {
+      this.fetchTweets();
+      Toast.fire({
+        icon: "success",
+        title: "已新增該則貼文",
+      });
     },
   },
 };
