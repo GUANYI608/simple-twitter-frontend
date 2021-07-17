@@ -1,18 +1,5 @@
 <template>
   <div class="usertweets">
-    <!-- 項目區塊 -->
-    <div class="item-list">
-      <router-link to="/user/self" class="item-link">
-        <button class="item">推文</button>
-      </router-link>
-      <router-link to="#" class="item-link">
-        <button class="item">推文與回覆</button>
-      </router-link>
-      <router-link to="/user/self/like" class="item-link">
-        <button class="item item-current">喜歡的內容</button>
-      </router-link>
-    </div>
-
     <!-- 推文區塊 -->
     <div class="tweet">
       <router-link to="/user/other">
@@ -99,42 +86,6 @@
 <style scoped>
 .usertweets {
   width: 600px;
-}
-
-/* ----- 項目區塊 ----- */
-.item-list {
-  border-bottom: 1px solid #e6ecf0;
-}
-
-.item {
-  width: 130px;
-  height: 54px;
-
-  background: unset;
-  color: #657786;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 0;
-}
-
-/* 當前頁面樣式：橘字加底線 */
-.item-current {
-  position: relative;
-}
-
-.item-current::after {
-  content: "";
-  background: #ff6600;
-  position: absolute;
-  top: 53px;
-  left: 0;
-  height: 2px;
-  width: 130px;
-  z-index: 1;
-}
-
-.item-current {
-  color: #ff6600;
 }
 
 /* ----- 推文區塊 ----- */

@@ -2,7 +2,7 @@ import { apiHelper } from '../utils/helpers'
 const getToken = () => localStorage.getItem('token')
 
 export default {
-  // 取得所有貼文
+  // 取得所有使用者的所有貼文
   getTweets() {
     return apiHelper.get(`/tweets`, {
       headers: { Authorization: `Bearer ${getToken()}` }
@@ -14,11 +14,13 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // like 一則貼文
   addLike({ tweetId }) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // unlike 一則貼文
   deleteLike({ tweetId }) {
     return apiHelper.post(`/tweets/${tweetId}/unlike`, null, {
       headers: { Authorization: `Bearer ${getToken()}` }

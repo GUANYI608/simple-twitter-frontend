@@ -30,12 +30,14 @@ const routes = [
     component: HomePage
   },
   {
+    // 需要帶入使用者id
     path: '/account/setting/:id',
     name: 'account-setting',
     component: () => import('../views/AccountSetting.vue')
   },
   {
-    path: '/user/self',
+    // 需要帶入使用者id
+    path: '/user/self/:id',
     name: 'user-self',
     component: () => import('../views/UserSelf.vue')
   },

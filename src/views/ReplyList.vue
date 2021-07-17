@@ -23,6 +23,7 @@ import Posting from "../components/Posting";
 import PostingComments from "../components/PostingComments";
 import tweetsAPI from "./../apis/tweets";
 import { Toast } from "./../utils/helpers";
+// 改變格式：時間顯示
 import moment from "moment";
 moment.locale("zh-tw");
 

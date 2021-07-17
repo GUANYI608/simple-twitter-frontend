@@ -8,34 +8,33 @@
           src="../assets/back.jpg"
           alt="back to home page"
         />
-        <h6 class="user-title">John Doe</h6>
-        <span class="tweet-count">25 推文</span>
+        <h6 class="user-title">{{ user.name }}</h6>
+        <span class="tweet-count"> {{ user.tweetCount }} 推文</span>
       </router-link>
     </div>
 
     <!-- ------ 個人資料 ------ -->
     <div class="profile">
       <!-- 封面 -->
-      <img src="../assets/cover.jpg" alt="cover" class="cover" />
+      <img :src="user.cover" alt="cover" class="cover" />
       <!-- 詳細資料 -->
       <div class="profile-detail">
-        <img src="../assets/avatar.jpg" alt="" class="avatar" />
+        <img :src="user.avatar" alt="" class="avatar" />
         <button type="button" class="edit-profile">編輯個人資料</button>
-        <h6 class="user-name">John Doe</h6>
-        <span class="user-account">@heyjohn</span>
+        <h6 class="user-name">{{ user.name }}</h6>
+        <span class="user-account">@{{ user.account }}</span>
         <p class="person-intro">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-          sint.
+          {{ user.introduction }}
         </p>
         <!-- 統計數量：跟隨人數 -->
         <div class="count">
           <router-link class="number" to="/user/self/followings">
-            34個
+            {{ user.followingCount }}
             <span class="role"> 跟隨中 </span>
           </router-link>
 
           <router-link class="number" to="/user/self/followers">
-            808位
+            {{ user.followerCount }}
             <span class="role"> 跟隨者 </span>
           </router-link>
         </div>
@@ -43,6 +42,32 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "UserProfile",
+  props: {
+    initialUser: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      user: this.initialUser,
+    };
+  },
+  watch: {
+    initialUser(newValue) {
+      this.user = {
+        ...this.user,
+        ...newValue,
+      };
+    },
+  },
+};
+</script>
+
 
 <style scoped>
 /* ------ 外框 ------ */

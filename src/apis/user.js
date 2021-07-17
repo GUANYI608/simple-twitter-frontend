@@ -14,6 +14,12 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 取得單一使用者所有推文
+  getUserTweets({ userId }) {
+    return apiHelper.get(`/users/${userId}/tweets`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 設定頁面：編輯
   editUser({ userId, setting, name, account, email, password, checkPassword }) {
     return apiHelper.put(`/users/${userId}`, { setting, name, account, email, password, checkPassword }, {
@@ -26,6 +32,7 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 跟隨使用者
   followUser(id) {
     return apiHelper.post(`/followships`,
       { id },
@@ -33,6 +40,7 @@ export default {
         headers: { Authorization: `Bearer ${getToken()}` },
       })
   },
+  // 取消跟隨使用者
   unfollowUser({ followingId }) {
     return apiHelper.delete(`/followships/${followingId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }

@@ -18,7 +18,7 @@
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
         <h6 class="user-name">{{ tweet.name }}</h6>
-        <h6 class="user-account">{{ tweet.account }}</h6>
+        <h6 class="user-account">@{{ tweet.account }}</h6>
       </div>
 
       <!-- 推文內容 -->
@@ -174,6 +174,7 @@ export default {
 }
 
 .tweet-content {
+  min-height: 153px;
   padding: 18px 60px 0 0;
   font-weight: 500;
   font-size: 15px;
