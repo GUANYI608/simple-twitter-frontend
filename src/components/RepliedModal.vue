@@ -17,26 +17,29 @@
       <!-- 顯示區塊：推文內容 -->
       <div class="tweet-area">
         <!-- 推文作者 -->
-        <img class="tweet-avatar" src="../assets/avatar.jpg" alt="avatar" />
+        <img class="tweet-avatar" :src="modalTweet.avatar" alt="avatar" />
         <span class="tweet-line"></span>
         <!-- 使用者名稱與帳號 -->
         <div class="user-info">
-          <span class="user-name"> Apple </span>
-          <span class="detail-info"> @apple・3 小時 </span>
+          <span class="user-name"> {{ modalTweet.name }} </span>
+          <span class="detail-info">
+            @{{ modalTweet.account }}・{{ modalTweet.createdAt | fromNow }}
+          </span>
         </div>
         <!-- 推文內容 -->
         <p class="tweet-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quam
-          ullam alias explicabo placeat quis officiis adipisci nulla minus
-          beatae sapiente cupiditate, voluptate ipsa quo id possimus et.
+          {{ modalTweet.description }}
         </p>
         <!-- 回覆作者 -->
-        <p class="reply-to"><span class="reply">回覆給</span>＠apple</p>
+        <p class="reply-to">
+          <span class="reply">回覆給</span>
+          @{{ modalTweet.account }}
+        </p>
       </div>
 
       <!-- 輸入區塊：回覆推文 -->
-      <div class="modal-text">
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+      <form class="modal-text">
+        <img class="user-avatar" :src="currentUser.avatar" alt="avatar" />
         <div class="form-group">
           <label class="form-input" for="NewTweet"></label>
           <textarea
@@ -49,13 +52,18 @@
           ></textarea>
           <button type="submit" class="post-button">回覆</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
+import { fromNowFilter } from "../utils/mixins";
+import { mapState } from "vuex";
+
 export default {
+  name: "RepliedModal",
+  mixins: [fromNowFilter],
   // 取得 /components/tweets 的資料
   props: {
     initialIsReplyModalToggle: {
@@ -63,11 +71,18 @@ export default {
       required: true,
       default: false,
     },
+    modalTweet: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       isReplyModalToggle: false,
     };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   created() {
     this.isReplyModalToggle = this.initialIsReplyModalToggle;
@@ -141,6 +156,8 @@ export default {
   left: 15px;
   width: 50px;
   height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .tweet-line {

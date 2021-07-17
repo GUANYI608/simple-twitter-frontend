@@ -135,6 +135,7 @@ export default {
         this.newTweet = "";
         this.isShowTweetModal = false;
         this.$emit("after-post-tweet");
+        this.isProcessing = false;
       } catch (error) {
         console.log(error);
         this.isProcessing = false;

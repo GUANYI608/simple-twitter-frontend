@@ -14,6 +14,13 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 回覆推文
+  replyTweet({ tweetId, comment }) {
+    return apiHelper.post(`/tweets/${tweetId}/replies`, { comment }, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+
+  },
   // like 一則貼文
   addLike({ tweetId }) {
     return apiHelper.post(`/tweets/${tweetId}/like`, null, {

@@ -52,6 +52,7 @@
     <RepliedModal
       :initial-is-reply-modal-toggle="isReplyModalToggle"
       @after-close-modal="closeReplyModal"
+      :modal-tweet="modalTweet"
     />
   </section>
 </template>
@@ -79,6 +80,7 @@ export default {
     return {
       tweet: this.initialTweet,
       isReplyModalToggle: false,
+      modalTweet: {},
     };
   },
   watch: {
@@ -95,6 +97,7 @@ export default {
   methods: {
     toggleReplyModal() {
       this.isReplyModalToggle = true;
+      this.modalTweet = this.tweet;
     },
     closeReplyModal(isReplyModalToggle) {
       this.isReplyModalToggle = isReplyModalToggle;
