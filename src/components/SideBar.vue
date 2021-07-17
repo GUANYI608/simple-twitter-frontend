@@ -11,7 +11,7 @@
         <img class="nav-img" src="../assets/user.jpg" alt="user" />
         <router-link
           class="nav-name"
-          :to="{ name: 'user-self', params: { id: currentUser.id } }"
+          :to="{ name: 'user', params: { id: currentUser.id } }"
         >
           個人資料
         </router-link>

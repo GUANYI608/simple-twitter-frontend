@@ -38,7 +38,7 @@ const routes = [
   {
     // 需要帶入使用者id
     path: '/user/self/:id',
-    name: 'user-self',
+    name: 'user',
     component: () => import('../views/UserSelf.vue')
   },
   {

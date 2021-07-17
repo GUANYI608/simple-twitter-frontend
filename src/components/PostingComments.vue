@@ -2,11 +2,15 @@
   <section class="postingcomments">
     <div v-for="reply in replies" :key="reply.id">
       <div class="comment">
-        <img class="user-avatar" :src="reply.avatar" alt="avatar" />
+        <router-link :to="{ name: 'user', params: { id: reply.userId } }">
+          <img class="user-avatar" :src="reply.avatar" alt="avatar" />
+        </router-link>
 
         <!-- 使用者名稱、帳號與留言時間 -->
         <div class="user-info">
-          <span class="user-name"> {{ reply.name }} </span>
+          <router-link :to="{ name: 'user', params: { id: reply.userId } }">
+            <span class="user-name"> {{ reply.name }} </span>
+          </router-link>
           <span class="detail-info">
             @{{ reply.account }}・{{ reply.createdAt | fromNow }}
           </span>
@@ -80,6 +84,8 @@ export default {
   /* 以 comment 為定位 */
   position: absolute;
   left: 15px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-name {

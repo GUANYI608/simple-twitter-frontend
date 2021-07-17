@@ -2,13 +2,15 @@
   <section class="tweets">
     <!-- 推文 -->
     <div class="tweet">
-      <router-link to="/user/other">
+      <router-link :to="{ name: 'user', params: { id: tweet.userId } }">
         <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
       </router-link>
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
-        <span class="user-name"> {{ tweet.name }} </span>
+        <router-link :to="{ name: 'user', params: { id: tweet.userId } }">
+          <span class="user-name"> {{ tweet.name }} </span>
+        </router-link>
         <span class="detail-info">
           @{{ tweet.account }}・{{ tweet.createdAt | fromNow }}
         </span>

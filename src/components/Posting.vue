@@ -13,11 +13,15 @@
     </div>
     <!-- ------ 推文 ------ -->
     <div class="tweet">
-      <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
+      <router-link :to="{ name: 'user', params: { id: tweet.userId } }">
+        <img class="user-avatar" :src="tweet.avatar" alt="avatar" />
+      </router-link>
 
       <!-- 使用者名稱與帳號 -->
       <div class="user-info">
-        <h6 class="user-name">{{ tweet.name }}</h6>
+        <router-link :to="{ name: 'user', params: { id: tweet.userId } }">
+          <h6 class="user-name">{{ tweet.name }}</h6>
+        </router-link>
         <h6 class="user-account">@{{ tweet.account }}</h6>
       </div>
 

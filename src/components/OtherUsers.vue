@@ -6,9 +6,13 @@
       <div class="showTopSix">
         <div class="user" v-for="user of topUsers" :key="user.id">
           <!-- 使用者資訊 -->
-          <img class="user-avatar" :src="user.avatar" alt="avatar" />
+          <router-link :to="{ name: 'user', params: { id: user.id } }">
+            <img class="user-avatar" :src="user.avatar" alt="avatar" />
+          </router-link>
           <div class="user-info">
-            <p class="user-name">{{ user.name }}</p>
+            <router-link :to="{ name: 'user', params: { id: user.id } }">
+              <p class="user-name">{{ user.name }}</p>
+            </router-link>
             <p class="user-account">@{{ user.account }}</p>
           </div>
           <!-- 按鈕 -->

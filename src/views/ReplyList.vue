@@ -52,6 +52,7 @@ export default {
         const { data } = await tweetsAPI.getTweet({ tweetId });
 
         const {
+          userId,
           avatar,
           name,
           account,
@@ -61,7 +62,9 @@ export default {
           replyCount,
           isLiked,
         } = data;
+
         this.tweet = {
+          userId,
           id: tweetId,
           avatar,
           name,
