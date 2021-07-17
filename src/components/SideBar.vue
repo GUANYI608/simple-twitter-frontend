@@ -34,7 +34,7 @@
       >
         推文
       </button>
-      <div class="nav-item signout">
+      <div class="nav-item signout" @click.stop.prevent="logout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
         <router-link to="/signin" class="nav-name">登出</router-link>
       </div>
@@ -144,6 +144,10 @@ export default {
           title: error.message,
         });
       }
+    },
+    logout() {
+      this.$store.commit("revokeCurrentUser");
+      this.$router.push("/signin");
     },
   },
 };

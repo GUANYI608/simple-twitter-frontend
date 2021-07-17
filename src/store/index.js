@@ -42,7 +42,7 @@ export default new Vuex.Store({
         })
       } catch (error) {
         console.log('error', error)
-        console.error('can not fetch user information')
+        console.error('請先登入使用者')
       }
     }
   },
