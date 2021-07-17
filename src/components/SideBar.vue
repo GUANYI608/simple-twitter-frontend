@@ -58,13 +58,21 @@
             <label class="form-input" for="NewTweet"></label>
             <textarea
               id="NewTweet"
+              v-model="newTweet"
               class="tweet-content"
               name="NewTweet"
               rows="4"
               cols="50"
               placeholder="有什麼新鮮事？"
             ></textarea>
-            <button type="submit" class="post-button">推文</button>
+            <button
+              type="submit"
+              class="post-button"
+              @click.stop.prevent="postTweet(newTweet)"
+              :disabled="isProcessing"
+            >
+              推文
+            </button>
           </div>
         </div>
       </div>
@@ -74,12 +82,16 @@
 
 <script>
 import { mapState } from "vuex";
+import tweetsAPI from "../apis/tweets";
+import { Toast } from "../utils/helpers";
 
 export default {
   data() {
     return {
       isShowTweetModal: false,
       userId: -1,
+      newTweet: "",
+      isProcessing: false,
     };
   },
   computed: {
@@ -89,6 +101,14 @@ export default {
     $route(to) {
       this.userId = to.params.id;
     },
+    newTweet(newValue) {
+      if (newValue.length === 140) {
+        Toast.fire({
+          icon: "warning",
+          title: "已達字數上限",
+        });
+      }
+    },
   },
   methods: {
     showModal() {
@@ -96,6 +116,34 @@ export default {
     },
     cancelModal() {
       this.isShowTweetModal = false;
+    },
+    async postTweet(newTweet) {
+      if (this.newTweet.trim() === "") {
+        Toast.fire({
+          icon: "warning",
+          title: "尚未輸入內容",
+        });
+        return;
+      }
+      try {
+        this.isProcessing = true;
+
+        const { data } = await tweetsAPI.postTweet({ newTweet });
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.newTweet = "";
+        this.isShowTweetModal = false;
+        this.$emit("after-post-tweet");
+      } catch (error) {
+        console.log(error);
+        this.isProcessing = false;
+
+        Toast.fire({
+          icon: "error",
+          title: error.message,
+        });
+      }
     },
   },
 };

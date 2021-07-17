@@ -78,7 +78,7 @@ export default {
         console.log(error);
         Toast.fire({
           icon: "error",
-          title: "無法新增推文，請稍後再試",
+          title: error.message,
         });
         this.isProcessing = false;
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 使用 SideBar 元件 -->
-    <SideBar />
+    <SideBar @after-post-tweet="afterPostTweet" />
 
     <div class="tweets-wrapper">
       <!-- 使用 UserPost 元件 -->
