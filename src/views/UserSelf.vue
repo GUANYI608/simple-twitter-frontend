@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 使用 SideBar 元件 -->
-    <SideBar />
+    <SideBar @after-post-tweet="afterPostTweet" />
 
     <div class="user-wrapper">
       <!-- 使用 UserProfile 元件 -->
@@ -147,6 +147,12 @@ export default {
           title: "無法取得推文，請稍後再試",
         });
       }
+    },
+    // 於 SideBar 新增推文後，更新推文內容與數量於個人頁面
+    afterPostTweet() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
+      this.fetchUserTweets(userId);
     },
   },
 };
