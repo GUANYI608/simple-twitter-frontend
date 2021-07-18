@@ -38,7 +38,7 @@
       </div>
 
       <!-- 輸入區塊：回覆推文 -->
-      <form class="modal-text">
+      <form class="modal-text" @submit.stop.prevent="handleSubmit">
         <img class="user-avatar" :src="currentUser.avatar" alt="avatar" />
         <div class="form-group">
           <label class="form-input" for="NewTweet"></label>
@@ -46,11 +46,14 @@
             id="NewTweet"
             class="input-reply"
             name="NewTweet"
+            v-model="comment"
             rows="4"
             cols="50"
             placeholder="推你的回覆"
           ></textarea>
-          <button type="submit" class="post-button">回覆</button>
+          <button type="submit" class="post-button" :disabled="isProcessing">
+            回覆
+          </button>
         </div>
       </form>
     </div>
@@ -60,6 +63,8 @@
 <script>
 import { fromNowFilter } from "../utils/mixins";
 import { mapState } from "vuex";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 
 export default {
   name: "RepliedModal",
@@ -79,6 +84,8 @@ export default {
   data() {
     return {
       isReplyModalToggle: false,
+      comment: "",
+      isProcessing: false,
     };
   },
   computed: {
@@ -97,6 +104,38 @@ export default {
       this.isReplyModalToggle = false;
 
       this.$emit("after-close-modal", this.replyModalToggle);
+    },
+    async handleSubmit() {
+      if (this.comment.trim() === "") {
+        Toast.fire({
+          icon: "warning",
+          title: "回覆內容不可為空白",
+        });
+        // 清除空白回覆
+        this.comment = "";
+        return;
+      }
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.replyTweet({
+          tweetId: this.modalTweet.id,
+          comment: this.comment,
+        });
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.comment = "";
+        this.closeReplyModal();
+        // 回報給Posting與Tweets
+        this.$emit("after-submit");
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法新增回覆，請稍後再試",
+        });
+      }
+      this.isProcessing = false;
     },
   },
 };

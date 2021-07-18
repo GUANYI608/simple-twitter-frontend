@@ -57,9 +57,11 @@ export default {
     async postTweet(newTweet) {
       if (this.newTweet.trim() === "") {
         Toast.fire({
-          icon: "error",
-          title: "尚未輸入內容",
+          icon: "warning",
+          title: "推文內容不可空白",
         });
+        // 清除空白推文
+        this.newTweet = "";
         return;
       }
       try {

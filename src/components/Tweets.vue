@@ -53,6 +53,7 @@
       :initial-is-reply-modal-toggle="isReplyModalToggle"
       @after-close-modal="closeReplyModal"
       :modal-tweet="modalTweet"
+      @after-submit="afterSubmit"
     />
   </section>
 </template>
@@ -136,6 +137,32 @@ export default {
         Toast.fire({
           icon: "error",
           title: "無法移除Like，請稍後再試",
+        });
+      }
+    },
+    async afterSubmit() {
+      const { userId, account, avatar, name } = this.tweet;
+
+      try {
+        const { data } = await tweetsAPI.getTweet({ tweetId: this.tweet.id });
+        this.tweet = {
+          ...data,
+          userId,
+          account,
+          avatar,
+          name,
+        };
+        Toast.fire({
+          icon: "success",
+          title: "成功新增一則回覆",
+        });
+        this.tweet = this.initialTweet;
+        this.tweet.replyCount++;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得推文資訊，請稍後再試",
         });
       }
     },

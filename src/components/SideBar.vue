@@ -121,8 +121,10 @@ export default {
       if (this.newTweet.trim() === "") {
         Toast.fire({
           icon: "warning",
-          title: "尚未輸入內容",
+          title: "推文內容不可空白",
         });
+        // 清空空白推文
+        this.newTweet = "";
         return;
       }
       try {

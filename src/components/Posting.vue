@@ -29,7 +29,7 @@
       </p>
 
       <!-- 推文時間 -->
-      <p class="detail-info">{{ tweet.createdAt }}</p>
+      <p class="detail-info">{{ tweet.createdAtInCN }}</p>
 
       <!-- 累積數量： 留言與按讚 -->
       <div class="number-followers">
@@ -68,6 +68,8 @@
     <RepliedModal
       :initial-is-reply-modal-toggle="isReplyModalToggle"
       @after-close-modal="closeReplyModal"
+      :modal-tweet="modalTweet"
+      @after-submit="afterSubmit"
     />
   </div>
 </template>
@@ -89,6 +91,7 @@ export default {
     return {
       isReplyModalToggle: false,
       tweet: this.initialTweet,
+      modalTweet: {},
     };
   },
   watch: {
@@ -102,6 +105,11 @@ export default {
   methods: {
     toggleReplyModal() {
       this.isReplyModalToggle = true;
+      this.modalTweet = this.tweet;
+    },
+    afterSubmit() {
+      // 回報給ReplyList
+      this.$emit("after-submit");
     },
     closeReplyModal(isReplyModalToggle) {
       this.isReplyModalToggle = isReplyModalToggle;

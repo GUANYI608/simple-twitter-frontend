@@ -19,7 +19,6 @@ export default {
     return apiHelper.post(`/tweets/${tweetId}/replies`, { comment }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
-
   },
   // like 一則貼文
   addLike({ tweetId }) {

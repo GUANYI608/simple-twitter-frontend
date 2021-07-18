@@ -5,7 +5,7 @@
 
     <div class="comments-wrapper">
       <!-- 使用 Posting 元件 -->
-      <Posting :initial-tweet="tweet" />
+      <Posting :initial-tweet="tweet" @after-submit="afterSubmit" />
 
       <!-- 使用 PostingComments 元件 -->
       <PostingComments :initial-tweet="tweet" :replies="replies" />
@@ -70,11 +70,15 @@ export default {
           name,
           account,
           description,
-          createdAt: moment(createdAt).format("a h:mm ⋅ YYYY年M月Do"),
+          createdAt,
           likeCount,
           replyCount,
           isLiked,
         };
+        // 單一推文頁面：發文時間顯示為中文
+        this.tweet.createdAtInCN = moment(this.tweet.createdAt).format(
+          "a h:mm ⋅ YYYY年M月Do"
+        );
       } catch (error) {
         console.log(error);
         Toast.fire({
@@ -103,6 +107,10 @@ export default {
           title: "無法取得回覆資訊，請稍後再試",
         });
       }
+    },
+    afterSubmit() {
+      this.fetchTweet();
+      this.fetchReplies();
     },
   },
 };
