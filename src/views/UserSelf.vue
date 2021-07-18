@@ -42,9 +42,9 @@ import OtherUsers from "../components/OtherUsers";
 import UserProfile from "../components/UserProfile";
 // import UserTweets from "../components/UserTweets";
 import Tweets from "../components/Tweets";
-
 import userAPI from "../apis/user";
 import { Toast } from "../utils/helpers";
+import { mapState } from "vuex";
 
 export default {
   name: "UserSelf",
@@ -70,6 +70,9 @@ export default {
       },
       tweets: [],
     };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   created() {
     const { id: userId } = this.$route.params;

@@ -20,7 +20,33 @@
       <!-- 詳細資料 -->
       <div class="profile-detail">
         <img :src="user.avatar" alt="" class="avatar" />
-        <button type="button" class="edit-profile">編輯個人資料</button>
+        <!-- 按鈕區塊：是本人 -->
+        <button v-if="isSelf" type="button" class="edit-profile">
+          編輯個人資料
+        </button>
+        <!-- 按鈕區塊：非本人 -->
+        <div class="button-area" v-else>
+          <!-- 訊息圖示 -->
+          <button class="icon-button">
+            <img
+              src="../assets/message.jpg"
+              alt="message"
+              class="message-icon"
+            />
+          </button>
+          <!-- 開啟通知 -->
+          <button class="icon-button">
+            <img src="../assets/noti.jpg" alt="notify" class="noti-icon" />
+          </button>
+          <!-- 關閉通知 -->
+          <!-- <button class="icon-button">
+            <img src="../assets/notied.jpg" alt="notied" class="noti-icon" />
+          </button> -->
+          <!-- 跟隨狀態 -->
+          <!-- <button type="button" class="tofollow-button">跟隨</button> -->
+          <button type="button" class="following-button">正在跟隨</button>
+        </div>
+
         <h6 class="user-name">{{ user.name }}</h6>
         <span class="user-account">@{{ user.account }}</span>
         <p class="person-intro">
@@ -44,6 +70,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "UserProfile",
   props: {
@@ -55,7 +83,11 @@ export default {
   data() {
     return {
       user: this.initialUser,
+      isSelf: false,
     };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   watch: {
     initialUser(newValue) {
@@ -63,6 +95,17 @@ export default {
         ...this.user,
         ...newValue,
       };
+
+      this.checkIsSelf();
+    },
+  },
+  methods: {
+    checkIsSelf() {
+      if (this.user.id === this.currentUser.id) {
+        this.isSelf = true;
+      } else {
+        this.isSelf = false;
+      }
     },
   },
 };
@@ -141,6 +184,55 @@ export default {
   font-weight: bold;
   font-size: 15px;
   line-height: 28px;
+  border: 1px solid #ff6600;
+  border-radius: 100px;
+}
+
+/* ----- 按鈕區塊 ----- */
+.button-area {
+  /* 以 profile-detail 作為定位 */
+  position: absolute;
+  right: 15px;
+  top: -59px;
+  /* 按鈕水平排列 */
+  display: flex;
+}
+
+/* 按鈕：傳訊息 */
+.icon-button {
+  margin-right: 10px;
+}
+
+.message-icon,
+.noti-icon,
+.notied-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* 按鈕：跟隨中 */
+.following-button {
+  width: 92px;
+  height: 40px;
+
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 15px;
+
+  border-radius: 100px;
+}
+
+/* 按鈕：想要跟隨 */
+.tofollow-button {
+  width: 62px;
+  height: 40px;
+
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 15px;
+
+  color: #ff6600;
+  background: unset;
   border: 1px solid #ff6600;
   border-radius: 100px;
 }
