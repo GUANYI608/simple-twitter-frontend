@@ -53,6 +53,7 @@
           src="../assets/liked.jpg"
           alt=""
           @click.stop.prevent="deleteLike(tweet.id)"
+          :disabled="isProcessing"
         />
         <img
           v-else
@@ -60,6 +61,7 @@
           src="../assets/like.jpg"
           alt=""
           @click.stop.prevent="addLike(tweet.id)"
+          :disabled="isProcessing"
         />
       </div>
     </div>
@@ -76,6 +78,8 @@
 
 <script>
 import RepliedModal from "./RepliedModal";
+import tweetsAPI from "./../apis/tweets";
+import { Toast } from "./../utils/helpers";
 
 export default {
   components: {
@@ -92,6 +96,7 @@ export default {
       isReplyModalToggle: false,
       tweet: this.initialTweet,
       modalTweet: {},
+      isProcessing: false,
     };
   },
   watch: {
@@ -113,6 +118,44 @@ export default {
     },
     closeReplyModal(isReplyModalToggle) {
       this.isReplyModalToggle = isReplyModalToggle;
+    },
+    async addLike(tweetId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.addLike({ tweetId });
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.tweet.isLiked = true;
+        this.tweet.likeCount++;
+        this.isProcessing = false;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法按讚，請稍後再試",
+        });
+        this.isProcessing = false;
+      }
+    },
+    async deleteLike(tweetId) {
+      try {
+        this.isProcessing = true;
+        const { data } = await tweetsAPI.deleteLike({ tweetId });
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.tweet.isLiked = false;
+        this.tweet.likeCount--;
+        this.isProcessing = false;
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取消按讚，請稍後再試",
+        });
+        this.isProcessing = false;
+      }
     },
   },
 };
