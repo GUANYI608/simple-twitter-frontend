@@ -76,6 +76,13 @@ export default {
     this.fetchUser(userId);
     this.fetchUserTweets(userId);
   },
+  // 監聽路由事件
+  beforeRouteUpdate(to, from, next) {
+    const { id: userId } = to.params;
+    this.fetchUser(userId);
+    this.fetchUserTweets(userId);
+    next();
+  },
   methods: {
     // 取得單一使用者個人資料
     async fetchUser(userId) {

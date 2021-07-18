@@ -1,15 +1,13 @@
 <template>
   <div class="posting">
     <!-- ------ 頁首 ------ -->
-    <div class="page-head">
-      <router-link to="/homepage">
-        <img
-          class="back-icon"
-          src="../assets/back.jpg"
-          alt="back to homepage page"
-        />
-        <h6 class="page-name">推文</h6>
-      </router-link>
+    <div class="page-head" @click="$router.back()">
+      <img
+        class="back-icon"
+        src="../assets/back.jpg"
+        alt="back to homepage page"
+      />
+      <h6 class="page-name">推文</h6>
     </div>
     <!-- ------ 推文 ------ -->
     <div class="tweet">

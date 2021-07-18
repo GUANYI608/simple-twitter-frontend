@@ -41,7 +41,6 @@ export default new Vuex.Store({
           id, name, account, email, avatar
         })
       } catch (error) {
-        console.log('error', error)
         console.error('請先登入使用者')
       }
     }
