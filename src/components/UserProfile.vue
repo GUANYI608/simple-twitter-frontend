@@ -43,8 +43,14 @@
             <img src="../assets/notied.jpg" alt="notied" class="noti-icon" />
           </button> -->
           <!-- 跟隨狀態 -->
-          <!-- <button type="button" class="tofollow-button">跟隨</button> -->
-          <button type="button" class="following-button">正在跟隨</button>
+          <button
+            v-if="user.isFollowing"
+            type="button"
+            class="following-button"
+          >
+            正在跟隨
+          </button>
+          <button v-else type="button" class="tofollow-button">跟隨</button>
         </div>
 
         <h6 class="user-name">{{ user.name }}</h6>
@@ -54,12 +60,20 @@
         </p>
         <!-- 統計數量：跟隨人數 -->
         <div class="count">
-          <router-link class="number" to="/user/self/followings">
+          <router-link
+            v-show="!isLoading"
+            class="number"
+            to="/user/self/followings"
+          >
             {{ user.followingCount }}
             <span class="role"> 跟隨中 </span>
           </router-link>
 
-          <router-link class="number" to="/user/self/followers">
+          <router-link
+            v-show="!isLoading"
+            class="number"
+            to="/user/self/followers"
+          >
             {{ user.followerCount }}
             <span class="role"> 跟隨者 </span>
           </router-link>
@@ -71,6 +85,8 @@
 
 <script>
 import { mapState } from "vuex";
+// import userAPI from "../apis/user";
+// import { Toast } from "../utils/helpers";
 
 export default {
   name: "UserProfile",
@@ -84,6 +100,7 @@ export default {
     return {
       user: this.initialUser,
       isSelf: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -97,6 +114,7 @@ export default {
       };
 
       this.checkIsSelf();
+      this.isLoading = false;
     },
   },
   methods: {

@@ -32,7 +32,7 @@
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
-    <OtherUsers />
+    <OtherUsers @after-follow-action="afterFollowAction" />
   </div>
 </template>
 
@@ -102,6 +102,7 @@ export default {
           tweetCount,
           followingCount,
           followerCount,
+          isFollowing,
         } = data;
 
         this.user = {
@@ -114,6 +115,7 @@ export default {
           tweetCount,
           followingCount,
           followerCount,
+          isFollowing,
         };
       } catch (error) {
         console.error(error);
@@ -156,6 +158,10 @@ export default {
       const { id: userId } = this.$route.params;
       this.fetchUser(userId);
       this.fetchUserTweets(userId);
+    },
+    afterFollowAction() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
     },
   },
 };

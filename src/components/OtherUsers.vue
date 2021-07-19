@@ -80,6 +80,7 @@ export default {
           });
         }
         this.fetchTopUsers();
+        this.$emit("after-follow-action");
       } catch (error) {
         console.log(error);
         Toast.fire({
@@ -98,6 +99,7 @@ export default {
           });
         }
         this.fetchTopUsers();
+        this.$emit("after-follow-action");
       } catch (error) {
         console.log("error", error);
         Toast.fire({
