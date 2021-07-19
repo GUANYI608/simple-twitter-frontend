@@ -92,6 +92,7 @@ export default {
     async unfollowUser(followingId) {
       try {
         const { data } = await userAPI.unfollowUser({ followingId });
+
         if (data.status !== "success") {
           Toast.fire({
             icon: "error",

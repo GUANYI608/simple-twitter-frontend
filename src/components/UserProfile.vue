@@ -47,10 +47,18 @@
             v-if="user.isFollowing"
             type="button"
             class="following-button"
+            @click.prevent.stop="unfollowUser(user.id)"
           >
             正在跟隨
           </button>
-          <button v-else type="button" class="tofollow-button">跟隨</button>
+          <button
+            v-else
+            type="button"
+            class="tofollow-button"
+            @click.prevent.stop="followUser(user.id)"
+          >
+            跟隨
+          </button>
         </div>
 
         <h6 class="user-name">{{ user.name }}</h6>
@@ -85,8 +93,8 @@
 
 <script>
 import { mapState } from "vuex";
-// import userAPI from "../apis/user";
-// import { Toast } from "../utils/helpers";
+import userAPI from "../apis/user";
+import { Toast } from "../utils/helpers";
 
 export default {
   name: "UserProfile",
@@ -123,6 +131,46 @@ export default {
         this.isSelf = true;
       } else {
         this.isSelf = false;
+      }
+    },
+    async followUser(userId) {
+      try {
+        const { data } = await userAPI.followUser(userId);
+
+        if (data.status === "error") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+        this.user.isFollowing = true;
+        this.user.followerCount++;
+        this.$emit("after-change-follow");
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法追蹤使用者，請稍候再試",
+        });
+      }
+    },
+    async unfollowUser(followingId) {
+      try {
+        const { data } = await userAPI.unfollowUser({ followingId });
+
+        if (data.status === "error") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+        this.user.isFollowing = false;
+        this.user.followerCount--;
+        this.$emit("after-change-follow");
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法取消追蹤，請稍候再試",
+        });
       }
     },
   },
