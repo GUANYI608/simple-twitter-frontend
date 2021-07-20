@@ -36,31 +36,34 @@ const routes = [
     component: () => import('../views/AccountSetting.vue')
   },
   {
+    path: '/user/self/like',
+    name: 'user-self-like',
+    component: () => import('../views/UserSelfLike.vue')
+  },
+  {
+    // 動態路由要擺在最後
     // 需要帶入使用者id
     path: '/user/self/:id',
     name: 'user',
     component: () => import('../views/UserSelf.vue')
   },
   {
-    path: '/user/self/like',
-    name: 'user-self-like',
-    component: () => import('../views/UserSelfLike.vue')
-  },
-  {
-    path: '/user/self/followers',
-    name: 'user-self-followers',
-    component: () => import('../views/UserSelfFollowers.vue')
-  },
-  {
-    path: '/user/self/followings',
-    name: 'user-self-followings',
-    component: () => import('../views/UserSelfFollowings.vue')
-  },
-  {
     path: '/user/other',
     name: 'user-other',
     component: () => import('../views/UserOther.vue')
   },
+  // 以下：兩條路由不同名稱，共用一個 vue 檔案
+  {
+    path: '/user/:id/followers',
+    name: 'user-followers',
+    component: () => import('../views/UserFollowList.vue')
+  },
+  {
+    path: '/user/:id/followings',
+    name: 'user-followings',
+    component: () => import('../views/UserFollowList.vue')
+  },
+  // 以上：兩條路由不同名稱，共用一個 vue 檔案
   {
     path: '/replylist/:id',
     name: 'reply-list',

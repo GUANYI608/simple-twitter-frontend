@@ -45,6 +45,17 @@ export default {
     return apiHelper.delete(`/followships/${followingId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
-  }
-
+  },
+  // 取得”跟隨者“資料
+  getFollowers({ userId }) {
+    return apiHelper.get(`/users/${userId}/followers`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  // 取得”正在跟隨的使用者“資料
+  getFollowings({ userId }) {
+    return apiHelper.get(`/users/${userId}/followings`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
 }

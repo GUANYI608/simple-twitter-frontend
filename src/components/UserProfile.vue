@@ -60,6 +60,7 @@
             跟隨
           </button>
         </div>
+        <!-- 按鈕區塊：結束 -->
 
         <h6 class="user-name">{{ user.name }}</h6>
         <span class="user-account">@{{ user.account }}</span>
@@ -71,7 +72,10 @@
           <router-link
             v-show="!isLoading"
             class="number"
-            to="/user/self/followings"
+            :to="{
+              name: 'user-followings',
+              params: { id: user.id, tab: 'followings' },
+            }"
           >
             {{ user.followingCount }}
             <span class="role"> 跟隨中 </span>
@@ -80,7 +84,10 @@
           <router-link
             v-show="!isLoading"
             class="number"
-            to="/user/self/followers"
+            :to="{
+              name: 'user-followers',
+              params: { id: user.id, tab: 'followers' },
+            }"
           >
             {{ user.followerCount }}
             <span class="role"> 跟隨者 </span>
