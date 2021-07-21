@@ -36,11 +36,6 @@ const routes = [
     component: () => import('../views/AccountSetting.vue')
   },
   {
-    path: '/user/like/:id',
-    name: 'user-like',
-    component: () => import('../views/UserLikedTweets.vue')
-  },
-  {
     // 動態路由要擺在最後
     // 需要帶入使用者id
     path: '/user/self/:id',
@@ -51,6 +46,11 @@ const routes = [
     path: '/user/reply/:id',
     name: 'user-reply',
     component: () => import('../views/UserReply.vue')
+  },
+  {
+    path: '/user/like/:id',
+    name: 'user-like',
+    component: () => import('../views/UserLikedTweets.vue')
   },
   {
     path: '/user/other',

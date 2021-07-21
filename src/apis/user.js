@@ -26,6 +26,12 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // 取得單一使用者所有回覆
+  getUserLikes({ userId }) {
+    return apiHelper.get(`/users/${userId}/likes`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   // 設定頁面：編輯
   editUser({ userId, setting, name, account, email, password, checkPassword }) {
     return apiHelper.put(`/users/${userId}`, { setting, name, account, email, password, checkPassword }, {

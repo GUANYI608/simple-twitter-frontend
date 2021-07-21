@@ -1,31 +1,37 @@
 <template>
   <div class="container">
     <!-- 使用 SideBar 元件 -->
-    <SideBar />
+    <SideBar @after-post-tweet="afterPostTweet" />
 
     <div class="user-wrapper">
       <!-- 使用 UserProfile 元件 -->
-      <UserProfile />
+      <UserProfile :initial-user="user" />
 
       <!-- 項目區塊 -->
       <div class="item-list">
-        <router-link to="/user/self" class="item-link">
-          <button class="item item-current">推文</button>
+        <router-link
+          :to="{ name: 'user', params: { id: user.id } }"
+          class="item-link"
+        >
+          <button class="item">推文</button>
         </router-link>
-        <router-link to="#" class="item-link">
+        <router-link
+          :to="{ name: 'user-reply', params: { id: user.id } }"
+          class="item-link"
+        >
           <button class="item">推文與回覆</button>
         </router-link>
-        <router-link to="/user/self/like" class="item-link">
-          <button class="item">喜歡的內容</button>
+        <router-link to="#" class="item-link">
+          <button class="item item-current">喜歡的內容</button>
         </router-link>
       </div>
 
-      <!-- 使用 UserLikedTweets 元件 -->
-      <UserLikedTweets />
+      <!-- 使用 Tweets 元件 -->
+      <Tweets v-for="tweet in tweets" :key="tweet.id" :initial-tweet="tweet" />
     </div>
 
     <!-- 使用 OtherUsers 元件 -->
-    <OtherUsers />
+    <OtherUsers @after-follow-action="afterFollowAction" />
   </div>
 </template>
 
@@ -33,15 +39,127 @@
 import SideBar from "../components/SideBar";
 import OtherUsers from "../components/OtherUsers";
 import UserProfile from "../components/UserProfile";
-import UserLikedTweets from "../components/UserLikedTweets";
+import Tweets from "../components/Tweets";
+import userAPI from "../apis/user";
+import { Toast } from "../utils/helpers";
+import { mapState } from "vuex";
 
 export default {
-  name: "UserLikedTweets",
+  name: "UserSelf",
   components: {
     SideBar,
     OtherUsers,
     UserProfile,
-    UserLikedTweets,
+    Tweets,
+  },
+  data() {
+    return {
+      user: {
+        id: -1,
+        account: "",
+        name: "",
+        cover: "",
+        avatar: "",
+        introduction: "",
+        tweetCount: -1,
+        followingCount: -1,
+        followerCOunt: -1,
+      },
+      tweets: [],
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  created() {
+    const { id: userId } = this.$route.params;
+    this.fetchUser(userId);
+    this.fetchUserLikedTweets(userId);
+  },
+  // 監聽路由事件
+  beforeRouteUpdate(to, from, next) {
+    const { id: userId } = to.params;
+    this.fetchUser(userId);
+    this.fetchUserLikedTweets(userId);
+    next();
+  },
+  methods: {
+    // 取得單一使用者個人資料
+    async fetchUser(userId) {
+      try {
+        const { data } = await userAPI.getUser({ userId });
+
+        const {
+          id,
+          account,
+          name,
+          cover,
+          avatar,
+          introduction,
+          tweetCount,
+          followingCount,
+          followerCount,
+          isFollowing,
+        } = data;
+
+        this.user = {
+          id,
+          account,
+          name,
+          cover,
+          avatar,
+          introduction,
+          tweetCount,
+          followingCount,
+          followerCount,
+          isFollowing,
+        };
+      } catch (error) {
+        console.error(error);
+
+        Toast.fire({
+          icon: "error",
+          title: "無法取得使用者資料，請稍後再試",
+        });
+      }
+    },
+    // 取得單一使用者所有推文
+    async fetchUserLikedTweets(userId) {
+      try {
+        const { data } = await userAPI.getUserLikes({ userId });
+        this.tweets = data.map((tweet) => {
+          return {
+            id: tweet.TweetId,
+            userId: tweet.userId,
+            account: tweet.userAccount,
+            name: tweet.userName,
+            avatar: tweet.userAvatar,
+            description: tweet.description,
+            createdAt: tweet.createdAt,
+            replyCount: tweet.replyCount,
+            likeCount: tweet.likeCount,
+            isLiked: tweet.isLiked,
+          };
+        });
+      } catch (error) {
+        console.log(error);
+
+        Toast.fire({
+          icon: "error",
+          title: "無法取得推文，請稍後再試",
+        });
+      }
+    },
+    // 於 SideBar 新增推文後，更新推文內容與數量於個人頁面
+    afterPostTweet() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
+      this.fetchUserLikedTweets(userId);
+    },
+    afterFollowAction() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
+    },
   },
 };
 </script>

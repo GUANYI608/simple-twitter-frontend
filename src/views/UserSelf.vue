@@ -18,7 +18,10 @@
         >
           <button class="item">推文與回覆</button>
         </router-link>
-        <router-link to="/user/self/like" class="item-link">
+        <router-link
+          :to="{ name: 'user-like', params: { id: user.id } }"
+          class="item-link"
+        >
           <button class="item">喜歡的內容</button>
         </router-link>
       </div>

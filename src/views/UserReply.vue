@@ -18,7 +18,10 @@
         <router-link to="#" class="item-link">
           <button class="item item-current">推文與回覆</button>
         </router-link>
-        <router-link to="/user/self/like" class="item-link">
+        <router-link
+          :to="{ name: 'user-like', params: { id: user.id } }"
+          class="item-link"
+        >
           <button class="item">喜歡的內容</button>
         </router-link>
       </div>
@@ -117,7 +120,7 @@ export default {
     async fetchUserReplies(userId) {
       try {
         const { data } = await userAPI.getUserReplies({ userId });
-        console.log(data);
+
         this.replies = data.map((reply) => {
           return {
             userId: reply.UserId,
