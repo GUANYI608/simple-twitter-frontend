@@ -21,7 +21,12 @@
       <div class="profile-detail">
         <img :src="user.avatar" alt="" class="avatar" />
         <!-- 按鈕區塊：是本人 -->
-        <button v-if="isSelf" type="button" class="edit-profile">
+        <button
+          v-if="isSelf"
+          type="button"
+          class="edit-profile"
+          @click.stop.prevent="toggleReplyModal()"
+        >
           編輯個人資料
         </button>
         <!-- 按鈕區塊：非本人 -->
@@ -95,16 +100,26 @@
         </div>
       </div>
     </div>
+
+    <!-- 彈出視窗：修改個人資料 -->
+    <EditProfileModal
+      :initial-is-edit-modal-toggle="isEditModalToggle"
+      @after-close-modal="closeReplyModal"
+    />
   </div>
 </template>
 
 <script>
+import EditProfileModal from "./EditProfileModal";
 import { mapState } from "vuex";
 import userAPI from "../apis/user";
 import { Toast } from "../utils/helpers";
 
 export default {
   name: "UserProfile",
+  components: {
+    EditProfileModal,
+  },
   props: {
     initialUser: {
       type: Object,
@@ -116,6 +131,7 @@ export default {
       user: this.initialUser,
       isSelf: false,
       isLoading: true,
+      isEditModalToggle: false,
     };
   },
   computed: {
@@ -139,6 +155,12 @@ export default {
       } else {
         this.isSelf = false;
       }
+    },
+    toggleReplyModal() {
+      this.isEditModalToggle = true;
+    },
+    closeReplyModal(isEditModalToggle) {
+      this.isEditModalToggle = isEditModalToggle;
     },
     async followUser(userId) {
       try {
