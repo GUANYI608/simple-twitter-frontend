@@ -46,6 +46,7 @@
         v-for="follow in followShipData"
         :key="follow.id"
         :initial-follow="follow"
+        @after-change-follow="afterChangeFollow"
       />
     </div>
 
@@ -112,6 +113,7 @@ export default {
     async fetchFollowData(userId, tab) {
       try {
         let data = {};
+
         if (tab === "followings") {
           data = await userAPI.getFollowings({ userId });
         } else if (tab === "followers") {
@@ -150,6 +152,13 @@ export default {
       // 重新撈取跟隨清單
       this.followShipData = [];
       this.fetchFollowData(this.user.id, this.tab);
+    },
+    afterChangeFollow() {
+      // 重新撈取跟隨清單
+      this.followShipData = [];
+      const { id: userId } = this.$route.params;
+      this.fetchFollowData(userId, this.tab);
+      console.log("已更新畫面");
     },
   },
 };

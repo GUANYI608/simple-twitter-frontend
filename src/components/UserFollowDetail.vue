@@ -15,10 +15,18 @@
           v-if="follow.isFollowing"
           type="button"
           class="following-button"
+          @click.prevent.stop="unfollowUser(id)"
         >
           正在跟隨
         </button>
-        <button v-else type="button" class="tofollow-button">跟隨</button>
+        <button
+          v-else
+          type="button"
+          class="tofollow-button"
+          @click.prevent.stop="followUser(id)"
+        >
+          跟隨
+        </button>
         <!-- 推文內容 -->
         <p v-if="follow.introduction" class="tweet-content">
           {{ follow.introduction }}
@@ -30,6 +38,10 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import userAPI from "../apis/user";
+import { Toast } from "../utils/helpers";
+
 export default {
   name: "UserFollowDetail",
   props: {
@@ -40,13 +52,16 @@ export default {
   },
   data() {
     return {
-      follow: {
-        id: -1,
-      },
+      follow: {},
+      id: -1,
     };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
   created() {
     this.fetchFollow();
+    this.fetchId();
   },
   watch: {
     initalFollow(newValue) {
@@ -57,8 +72,57 @@ export default {
     },
   },
   methods: {
+    fetchId() {
+      if (this.follow.followerId) {
+        this.id = this.follow.followerId;
+      } else {
+        this.id = this.follow.followingId;
+      }
+    },
     fetchFollow() {
       this.follow = this.initialFollow;
+    },
+    async followUser(userId) {
+      try {
+        const { data } = await userAPI.followUser(userId);
+        console.log("跟隨！", data);
+        console.log(this.id);
+
+        if (data.status === "error") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+
+        this.$emit("after-change-follow");
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法追蹤使用者，請稍候再試",
+        });
+      }
+    },
+    async unfollowUser(followingId) {
+      try {
+        const { data } = await userAPI.unfollowUser({ followingId });
+        console.log("取消跟隨！", data);
+        console.log(this.id);
+
+        if (data.status === "error") {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+
+        this.$emit("after-change-follow");
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法取消追蹤，請稍候再試",
+        });
+      }
     },
   },
 };
