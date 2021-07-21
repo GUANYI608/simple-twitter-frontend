@@ -36,6 +36,7 @@ import UserProfile from "../components/UserProfile";
 import UserLikedTweets from "../components/UserLikedTweets";
 
 export default {
+  name: "UserLikedTweets",
   components: {
     SideBar,
     OtherUsers,

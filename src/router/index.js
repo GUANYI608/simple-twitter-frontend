@@ -36,9 +36,9 @@ const routes = [
     component: () => import('../views/AccountSetting.vue')
   },
   {
-    path: '/user/self/like',
-    name: 'user-self-like',
-    component: () => import('../views/UserSelfLike.vue')
+    path: '/user/like/:id',
+    name: 'user-like',
+    component: () => import('../views/UserLikedTweets.vue')
   },
   {
     // 動態路由要擺在最後
