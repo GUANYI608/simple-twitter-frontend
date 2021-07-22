@@ -33,11 +33,16 @@ export default {
     })
   },
   // 設定頁面：編輯
-  editUser({ userId, setting, name, account, email, password, checkPassword }) {
-    return apiHelper.put(`/users/${userId}`, { setting, name, account, email, password, checkPassword }, {
+  editUser({ userId, setting, name, account, email, password, checkPassword, cover, avatar, introduction }) {
+    return apiHelper.put(`/users/${userId}`, { setting, name, account, email, password, checkPassword, cover, avatar, introduction }, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
+  // editUser({ userId, setting, name, account, email, password, checkPassword }) {
+  //   return apiHelper.put(`/users/${userId}`, { setting, name, account, email, password, checkPassword }, {
+  //     headers: { Authorization: `Bearer ${getToken()}` }
+  //   })
+  // },
   // 取得 top users
   getTopUsers() {
     return apiHelper.get(`/users`, {

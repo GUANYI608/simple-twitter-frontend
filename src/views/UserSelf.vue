@@ -5,7 +5,10 @@
 
     <div class="user-wrapper">
       <!-- 使用 UserProfile 元件 -->
-      <UserProfile :initial-user="user" />
+      <UserProfile
+        :initial-user="user"
+        @after-profile-submit="afterProfileSubmit"
+      />
 
       <!-- 項目區塊 -->
       <div class="item-list">
@@ -159,6 +162,11 @@ export default {
     afterFollowAction() {
       const { id: userId } = this.$route.params;
       this.fetchUser(userId);
+    },
+    afterProfileSubmit() {
+      const { id: userId } = this.$route.params;
+      this.fetchUser(userId);
+      this.fetchUserTweets(userId);
     },
   },
 };

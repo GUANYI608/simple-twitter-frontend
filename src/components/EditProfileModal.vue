@@ -3,7 +3,8 @@
     <!-- 彈出視窗：背景 -->
     <div class="background-wrapper"></div>
     <!-- 彈出視窗：編輯個人資料 -->
-    <div class="edit-modal">
+    <form class="edit-modal" @submit.prevent.stop="handleProfileSubmit">
+      <!-- 表頭 -->
       <div class="header">
         <img
           class="cancel-icon"
@@ -12,56 +13,90 @@
           @click.stop.prevent="closeReplyModal"
         />
         <h3 class="title">編輯個人資料</h3>
-        <button class="save-btn" type="submit">儲存</button>
+        <button
+          class="save-btn"
+          type="submit"
+          @submit.prevent.stop="handleSubmit"
+          :disabled="isProcessing"
+        >
+          儲存
+        </button>
+      </div>
+      <!-- 封面區塊 -->
+      <div class="cover-area">
+        <!-- 封面照片 -->
+        <img class="cover" :src="user.cover" alt="cover" />
+        <img
+          v-if="user.newCover"
+          :src="user.newCover"
+          class="d-block img-thumbnail mb-3"
+          width="200"
+          height="200"
+        />
+        <div class="icon-area">
+          <!-- 上傳 -->
+          <label for="cover">
+            <img class="upload-icon" src="../assets/upload.jpg" alt="upload" />
+          </label>
+          <input
+            type="file"
+            id="cover"
+            class="input-img"
+            accept="image/*"
+            @change="handleFileChange"
+          />
+          <!-- 移除 -->
+          <img class="remove-icon" src="../assets/remove.jpg" alt="remove" />
+        </div>
+      </div>
+      <!-- 大頭照區塊 -->
+      <div class="avatar-area">
+        <!-- 大頭照片 -->
+        <img :src="user.avatar" class="avatar" />
+        <!-- 上傳 -->
+        <label for="avatar">
+          <img class="upload-avatar" src="../assets/upload.jpg" alt="upload" />
+        </label>
+        <input type="file" id="avatar" class="input-img" accept="image/*" />
       </div>
 
-      <div class="image-wrapper">
-        <label class="cover-label">
-          <input type="file" />
-          <figure class="cover-figure">
-            <img class="cover" src="https://imgur.com/LmlMgWk.jpg" alt="" />
-            <figcaption class="cover-figcaption">
-              <img
-                src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png"
-              />
-            </figcaption>
-          </figure>
-        </label>
-        <label class="avatar-label">
-          <input type="file" />
-          <figure class="avatar-figure">
-            <img
-              class="avatar"
-              src="https://images.dog.ceo/breeds/saluki/n02091831_3846.jpg"
-              alt=""
-            />
-            <figcaption class="avatar-figcaption">
-              <img
-                src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png"
-              />
-            </figcaption>
-          </figure>
-        </label>
+      <!-- 編輯區塊 -->
+      <div class="name-form">
+        <label class="form-label" for="name">名稱</label>
+        <!-- 設定必填與自動focus -->
+        <input
+          id="name"
+          v-model="user.name"
+          name="name"
+          type="text"
+          class="name-input"
+          required
+        />
       </div>
-      <div class="name">
-        <input type="text" />
-        <span class="name-placeholder">名稱</span>
-        <small class="name-text-counter">0/50</small>
+      <p class="word-count">{{ user.name.length }}/50</p>
+      <div class="intro-form">
+        <label class="form-label" for="introduction">自我介紹</label>
+        <!-- 設定必填 -->
+        <textarea
+          id="introduction"
+          v-model="user.introduction"
+          class="intro-input"
+          name="introduction"
+          rows="4"
+          cols="52"
+        >
+        </textarea>
       </div>
-      <div class="introduction">
-        <input type="text" />
-        <span class="intro-placeholder">自我介紹</span>
-        <small class="intro-text-counter">0/160</small>
-      </div>
-    </div>
+      <p class="word-count">{{ user.introduction.length }}/160</p>
+    </form>
   </div>
 </template>
 
 <script>
 import { fromNowFilter } from "../utils/mixins";
 import { mapState } from "vuex";
-// import tweetsAPI from "./../apis/tweets";
-// import { Toast } from "./../utils/helpers";
+import userAPI from "../apis/user";
+import { Toast } from "../utils/helpers";
 
 export default {
   name: "EditProfileModal",
@@ -73,11 +108,17 @@ export default {
       required: true,
       default: false,
     },
+    initialUser: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       isEditModalToggle: false,
-      // comment: "",
+      user: {
+        ...this.intialUser,
+      },
       isProcessing: false,
     };
   },
@@ -91,6 +132,12 @@ export default {
     initialIsEditModalToggle(newVale) {
       this.isEditModalToggle = newVale;
     },
+    initialUser(newValue) {
+      this.user = {
+        ...this.user,
+        ...newValue,
+      };
+    },
   },
   methods: {
     closeReplyModal() {
@@ -98,38 +145,75 @@ export default {
 
       this.$emit("after-close-modal", this.editModalToggle);
     },
-    // async handleSubmit() {
-    //   if (this.comment.trim() === "") {
-    //     Toast.fire({
-    //       icon: "warning",
-    //       title: "回覆內容不可為空白",
-    //     });
-    //     // 清除空白回覆
-    //     this.comment = "";
-    //     return;
-    //   }
-    //   try {
-    //     this.isProcessing = true;
-    //     const { data } = await tweetsAPI.replyTweet({
-    //       tweetId: this.modalTweet.id,
-    //       comment: this.comment,
-    //     });
-    //     if (data.status === "error") {
-    //       throw new Error(data.message);
-    //     }
-    //     this.comment = "";
-    //     this.closeReplyModal();
-    //     // 回報給Posting與Tweets
-    //     this.$emit("after-submit");
-    //   } catch (error) {
-    //     console.log(error);
-    //     Toast.fire({
-    //       icon: "error",
-    //       title: "無法新增回覆，請稍後再試",
-    //     });
-    //   }
-    //   this.isProcessing = false;
-    // },
+    handleFileChange(e) {
+      const { files } = e.target;
+
+      if (files.length === 0) {
+        // 使用者沒有選擇上傳的檔案
+        this.user.newCover = "";
+      } else {
+        // 否則產生預覽圖
+        const imageURL = window.URL.createObjectURL(files[0]);
+        this.user.newCover = imageURL;
+      }
+    },
+    async handleProfileSubmit() {
+      if (!this.user.name.trim()) {
+        Toast.fire({
+          icon: "warning",
+          title: "請填寫名稱",
+        });
+        return;
+      }
+
+      if (this.user.name.trim().length > 15) {
+        Toast.fire({
+          icon: "warning",
+          title: "名字長度最多 15 個字",
+        });
+        return;
+      }
+
+      if (this.user.introduction.trim().length > 140) {
+        Toast.fire({
+          icon: "warning",
+          title: "自我介紹內容最多 140 個字",
+        });
+        return;
+      }
+
+      try {
+        this.isProcessing = true;
+
+        const { data } = await userAPI.editUser({
+          userId: this.$route.params.id,
+          cover: this.user.cover,
+          avatar: this.user.avatar,
+          name: this.user.name,
+          introduction: this.user.introduction,
+        });
+
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+
+        Toast.fire({
+          icon: "success",
+          title: "已完成帳戶資料更新",
+        });
+
+        console.log("測試編輯成功");
+        this.isEditModalToggle = false;
+        this.$emit("after-profile-submit");
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法更新用戶資訊，請稍後再試",
+        });
+      }
+      this.isProcessing = false;
+    },
   },
 };
 </script>
@@ -163,7 +247,7 @@ export default {
   border-radius: 14px;
 }
 
-/* 視窗表頭 */
+/* --- 視窗表頭 --- */
 .header {
   height: 55px;
   padding: 0 15px;
@@ -201,164 +285,142 @@ export default {
   display: flex-end;
 }
 
-/* 圖片區塊：封面、大頭照 */
-.image-wrapper {
-  height: 260px;
-}
-
-.image-wrapper input[type="file"] {
-  display: none;
-}
-
-.image-wrapper .cover-figure {
-  position: relative;
-  width: 100%;
+/* --- 封面區塊 --- */
+.cover-area {
+  width: 600px;
   height: 200px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.cover-figcaption {
-  cursor: pointer;
-  max-width: 100px;
-  max-height: 100px;
-  position: absolute;
-  top: 50px;
-  left: 250px;
-  width: inherit;
-  height: inherit;
-  border-radius: 100%;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0);
-  transition: all ease-in-out 0.3s;
-}
-.cover-figcaption:hover {
-  opacity: 1;
-  /*   background-color: rgba(0, 0, 0, .5); */
-}
-.cover-figcaption > img {
-  margin-top: 32.5px;
-  width: 50px;
-  height: 50px;
+  position: relative;
 }
 
 .cover {
-  width: 100%;
+  padding: 0 1px;
+  width: 600px;
   height: 200px;
+  object-fit: cover;
+  opacity: 0.8;
 }
 
-.cover:hover {
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+.icon-area {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  /* 以 image area 作為定位 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.image-wrapper .avatar-figure {
-  position: relative;
-  display: block;
-  border-radius: 50%;
-  top: -70px;
-  left: 20px;
-  border: 3px solid #fff;
-}
-
-.avatar-figure img {
-  display: block;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  top: -70px;
-  left: 20px;
-}
-
-.avatar-figcaption {
+.upload-icon,
+.remove-icon {
   cursor: pointer;
-  max-width: 100px;
-  max-height: 100px;
-  position: absolute;
-  top: 0px;
-  left: 30px;
-  width: inherit;
-  height: inherit;
-  border-radius: 100%;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0);
-  transition: all ease-in-out 0.3s;
-}
-.avatar-figcaption:hover {
-  opacity: 1;
-  /*   background-color: rgba(0, 0, 0, .5); */
-}
-.avatar-figcaption > img {
-  margin-top: 32.5px;
-  width: 50px;
-  height: 50px;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 
-.edit-modal .name {
+.input-img {
+  /* 隱藏 input 樣式 */
+  display: none;
+}
+
+/* --- 大頭照 --- */
+.avatar-area {
   position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 70px;
-  background-color: #f2f3f5;
-  border: 1px solid #ccd0d5;
-  flex: 1 1 auto;
-  line-height: 16px;
-  padding: 7px 12px;
-  margin: 30px 13px 0 13px;
+  height: 80px;
 }
 
-.name-placeholder {
+.avatar {
+  width: 122px;
+  height: 122px;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+
+  /* 以 avatar-area 作為定位 */
   position: absolute;
-  left: 10px;
-  top: 8px;
+  top: -60px;
+  left: 15px;
 }
 
-.name-text-counter {
+.upload-avatar {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  /* 以 avatar-area 作為定位 */
   position: absolute;
-  left: 530px;
-  top: 50px;
+  top: -15px;
+  left: 60px;
 }
 
-.edit-modal .name input[type="text"] {
-  width: 100%;
-  outline: none;
-  border: 0px solid transparent;
-  background: transparent;
-  font-size: 14px;
-  border-bottom: 0.35px solid;
-}
-
-.edit-modal .introduction {
+/* --- 編輯區塊 --- */
+.name-form,
+.intro-form {
+  width: 570px;
+  margin: 0 15px;
+  background: #f5f8fa;
+  border-radius: 4px;
+  border-bottom: 2px solid #657786;
   position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 150px;
-  margin-top: 20px;
-  background-color: #f2f3f5;
-  border: 1px solid #ccd0d5;
-  flex: 1 1 auto;
-  line-height: 16px;
-  padding: 7px 12px;
-  margin: 35px 13px 0 13px;
 }
 
-.edit-modal .introduction input[type="text"] {
-  width: 410px;
+.name-form {
+  height: 54px;
+}
+
+.intro-form {
+  height: 150px;
+}
+
+.form-label {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  color: #657786;
+}
+
+.name-input,
+.intro-input {
+  position: absolute;
+  top: 24px;
+  left: 15px;
+
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
+}
+
+.name-input:focus {
   outline: none;
-  border: 0px solid transparent;
-  background: transparent;
-  font-size: 14px;
 }
 
-.intro-placeholder {
-  position: absolute;
-  left: 10px;
-  top: 8px;
+.name-input {
+  margin-top: 4px;
+  height: 24px;
 }
 
-.intro-text-counter {
-  position: absolute;
-  left: 530px;
-  top: 130px;
+.intro-input {
+  margin-top: 4px;
+  background: #f5f8fa;
+  /* 去除邊框與右下角與輸入時的提示框線 */
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.word-count {
+  margin: 0 15px 21px 15px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: right;
+  color: #657786;
 }
 </style>

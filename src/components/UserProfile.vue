@@ -105,6 +105,8 @@
     <EditProfileModal
       :initial-is-edit-modal-toggle="isEditModalToggle"
       @after-close-modal="closeReplyModal"
+      :initial-user="initialUser"
+      @after-profile-submit="afterProfileSubmit"
     />
   </div>
 </template>
@@ -161,6 +163,9 @@ export default {
     },
     closeReplyModal(isEditModalToggle) {
       this.isEditModalToggle = isEditModalToggle;
+    },
+    afterProfileSubmit() {
+      this.$emit("after-profile-submit");
     },
     async followUser(userId) {
       try {
