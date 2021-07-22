@@ -158,7 +158,11 @@ export default {
       this.followShipData = [];
       const { id: userId } = this.$route.params;
       this.fetchFollowData(userId, this.tab);
-      console.log("已更新畫面");
+
+      Toast.fire({
+        icon: "success",
+        title: "已將使用者加入跟隨清單",
+      });
     },
   },
 };

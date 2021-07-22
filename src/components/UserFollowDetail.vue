@@ -85,8 +85,6 @@ export default {
     async followUser(userId) {
       try {
         const { data } = await userAPI.followUser(userId);
-        console.log("跟隨！", data);
-        console.log(this.id);
 
         if (data.status === "error") {
           Toast.fire({
@@ -106,8 +104,6 @@ export default {
     async unfollowUser(followingId) {
       try {
         const { data } = await userAPI.unfollowUser({ followingId });
-        console.log("取消跟隨！", data);
-        console.log(this.id);
 
         if (data.status === "error") {
           Toast.fire({
