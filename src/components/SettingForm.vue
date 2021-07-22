@@ -7,6 +7,7 @@
         <input
           id="InputAccount"
           v-model="userData.account"
+          name="account"
           type="text"
           class="form-control"
         />
@@ -16,6 +17,7 @@
         <input
           id="InputName"
           v-model="userData.name"
+          name="name"
           type="text"
           class="form-control"
         />
@@ -25,6 +27,7 @@
         <input
           id="InputEmail"
           v-model="userData.email"
+          name="email"
           type="email"
           class="form-control"
         />
@@ -34,6 +37,7 @@
         <input
           id="InputPassword"
           v-model="userData.password"
+          name="password"
           type="password"
           class="form-control"
         />
@@ -43,10 +47,17 @@
         <input
           id="InputPasswordConfirm"
           v-model="userData.checkPassword"
+          name="checkPassword"
           type="password"
           class="form-control"
         />
       </div>
+      <input
+        v-model="setting"
+        type="text"
+        class="setting-input"
+        name="setting"
+      />
       <div class="save">
         <button type="submit" class="form-submit">儲存</button>
       </div>
@@ -110,7 +121,7 @@ export default {
         console.log(error);
       }
     },
-    handleSubmit() {
+    handleSubmit(e) {
       if (
         !this.userData.account ||
         !this.userData.name ||
@@ -160,14 +171,9 @@ export default {
         return;
       }
 
-      this.$emit("after-submit", {
-        account: this.userData.account,
-        name: this.userData.name,
-        email: this.userData.email,
-        password: this.userData.password,
-        checkPassword: this.userData.checkPassword,
-        setting: this.setting,
-      });
+      const form = e.target; // 指 <form></form>
+      const formData = new FormData(form);
+      this.$emit("after-submit", formData);
     },
   },
 };
@@ -221,6 +227,10 @@ export default {
   font-weight: 500;
   font-size: 19px;
   line-height: 28px;
+}
+
+.setting-input {
+  display: none;
 }
 
 .save {

@@ -166,6 +166,7 @@ export default {
     },
     afterProfileSubmit() {
       this.$emit("after-profile-submit");
+      this.isEditModalToggle = false;
     },
     async followUser(userId) {
       try {

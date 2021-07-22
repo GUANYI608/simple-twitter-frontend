@@ -13,26 +13,14 @@
           @click.stop.prevent="closeReplyModal"
         />
         <h3 class="title">編輯個人資料</h3>
-        <button
-          class="save-btn"
-          type="submit"
-          @submit.prevent.stop="handleSubmit"
-          :disabled="isProcessing"
-        >
-          儲存
+        <button class="save-btn" type="submit" :disabled="isProcessing">
+          {{ isProcessing ? "處理中" : "儲存" }}
         </button>
       </div>
       <!-- 封面區塊 -->
       <div class="cover-area">
         <!-- 封面照片 -->
         <img class="cover" :src="user.cover" alt="cover" />
-        <img
-          v-if="user.newCover"
-          :src="user.newCover"
-          class="d-block img-thumbnail mb-3"
-          width="200"
-          height="200"
-        />
         <div class="icon-area">
           <!-- 上傳 -->
           <label for="cover">
@@ -41,9 +29,10 @@
           <input
             type="file"
             id="cover"
+            name="cover"
             class="input-img"
             accept="image/*"
-            @change="handleFileChange"
+            @change="handleCoverChange"
           />
           <!-- 移除 -->
           <img class="remove-icon" src="../assets/remove.jpg" alt="remove" />
@@ -57,7 +46,14 @@
         <label for="avatar">
           <img class="upload-avatar" src="../assets/upload.jpg" alt="upload" />
         </label>
-        <input type="file" id="avatar" class="input-img" accept="image/*" />
+        <input
+          type="file"
+          id="avatar"
+          name="avatar"
+          class="input-img"
+          accept="image/*"
+          @change="handleAvatarChange"
+        />
       </div>
 
       <!-- 編輯區塊 -->
@@ -73,7 +69,9 @@
           required
         />
       </div>
-      <p class="word-count">{{ user.name.length }}/50</p>
+      <p v-show="isEditModalToggle" class="word-count">
+        {{ user.name.length }}/50
+      </p>
       <div class="intro-form">
         <label class="form-label" for="introduction">自我介紹</label>
         <!-- 設定必填 -->
@@ -87,7 +85,9 @@
         >
         </textarea>
       </div>
-      <p class="word-count">{{ user.introduction.length }}/160</p>
+      <p v-show="isEditModalToggle" class="word-count">
+        {{ user.introduction.length }}/160
+      </p>
     </form>
   </div>
 </template>
@@ -145,36 +145,38 @@ export default {
 
       this.$emit("after-close-modal", this.editModalToggle);
     },
-    handleFileChange(e) {
+    handleCoverChange(e) {
       const { files } = e.target;
 
-      if (files.length === 0) {
-        // 使用者沒有選擇上傳的檔案
-        this.user.newCover = "";
-      } else {
-        // 否則產生預覽圖
+      if (files.length !== 0) {
+        // 產生預覽圖
         const imageURL = window.URL.createObjectURL(files[0]);
-        this.user.newCover = imageURL;
+        this.user.cover = imageURL;
       }
     },
-    async handleProfileSubmit() {
+    handleAvatarChange(e) {
+      const { files } = e.target;
+
+      if (files.length !== 0) {
+        // 產生預覽圖
+        const imageURL = window.URL.createObjectURL(files[0]);
+        this.user.avatar = imageURL;
+      }
+    },
+    async handleProfileSubmit(e) {
       if (!this.user.name.trim()) {
         Toast.fire({
           icon: "warning",
           title: "請填寫名稱",
         });
         return;
-      }
-
-      if (this.user.name.trim().length > 15) {
+      } else if (this.user.name.trim().length > 15) {
         Toast.fire({
           icon: "warning",
           title: "名字長度最多 15 個字",
         });
         return;
-      }
-
-      if (this.user.introduction.trim().length > 140) {
+      } else if (this.user.introduction.trim().length > 140) {
         Toast.fire({
           icon: "warning",
           title: "自我介紹內容最多 140 個字",
@@ -185,12 +187,12 @@ export default {
       try {
         this.isProcessing = true;
 
+        const form = e.target; // <form></form>
+        const formData = new FormData(form);
+
         const { data } = await userAPI.editUser({
           userId: this.$route.params.id,
-          cover: this.user.cover,
-          avatar: this.user.avatar,
-          name: this.user.name,
-          introduction: this.user.introduction,
+          formData,
         });
 
         if (data.status === "error") {
@@ -199,11 +201,9 @@ export default {
 
         Toast.fire({
           icon: "success",
-          title: "已完成帳戶資料更新",
+          title: "個人資料已更新完成",
         });
 
-        console.log("測試編輯成功");
-        this.isEditModalToggle = false;
         this.$emit("after-profile-submit");
       } catch (error) {
         console.log(error);
@@ -212,6 +212,7 @@ export default {
           title: "無法更新用戶資訊，請稍後再試",
         });
       }
+      this.isEditModalToggle = false;
       this.isProcessing = false;
     },
   },
