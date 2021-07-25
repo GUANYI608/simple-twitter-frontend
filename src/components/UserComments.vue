@@ -17,10 +17,16 @@
         </div>
 
         <!-- 留言對象 -->
-        <p class="reply-to">回覆<span class="tweet-account">@尚無資料</span></p>
+        <p class="reply-to">
+          回覆<span class="tweet-account">@ {{ reply.account }} </span>
+        </p>
 
         <!-- 留言內容 -->
-        <p class="comment-content">{{ reply.comment }}</p>
+        <router-link
+          :to="{ name: 'reply-list', params: { id: reply.tweetId } }"
+        >
+          <p class="comment-content">{{ reply.comment }}</p>
+        </router-link>
       </div>
     </div>
   </section>
