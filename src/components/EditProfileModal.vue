@@ -59,7 +59,7 @@
       <!-- 編輯區塊 -->
       <div class="name-form">
         <label class="form-label" for="name">名稱</label>
-        <!-- 設定必填與自動focus -->
+        <!-- 設定必填 -->
         <input
           id="name"
           v-model="user.name"
@@ -74,7 +74,6 @@
       </p>
       <div class="intro-form">
         <label class="form-label" for="introduction">自我介紹</label>
-        <!-- 設定必填 -->
         <textarea
           id="introduction"
           v-model="user.introduction"

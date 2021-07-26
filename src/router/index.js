@@ -5,6 +5,8 @@ import SignUp from '../views/SignUp.vue'
 import HomePage from '../views/HomePage.vue'
 import AdminLogIn from '../views/AdminLogIn.vue'
 import store from './../store'
+import { Toast } from "./../utils/helpers";
+
 
 Vue.use(VueRouter)
 
@@ -100,8 +102,41 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  store.dispatch('fetchCurrentUser')
+router.beforeEach(async (to, from, next) => {
+  const tokenInLocalStorage = localStorage.getItem('token')
+  const tokenInStore = store.state.token
+  let isAuthenticated = store.state.isAuthenticated
+
+  if (from.name === 'sign-in') {
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
+  }
+
+  // 比較 localStorage 和 store 中的 token 是否一樣
+  if (tokenInLocalStorage && tokenInLocalStorage !== tokenInStore) {
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
+  }
+
+  // 對於不需要驗證 token 的頁面
+  const pathsWithoutAuthentication = ['sign-up', 'sign-in', 'admin-login']
+
+
+  // 如果 token 無效則轉址到登入頁
+  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+    Toast.fire({
+      icon: "warning",
+      title: "請先登入使用者帳號",
+    });
+
+    next('/signin')
+    return
+  }
+
+  // 網址為登入頁面時如果 token 有效，則自動轉址到首頁
+  if (isAuthenticated && to.name === 'sign-in') {
+    next('/homepage')
+    return
+  }
+
   next()
 })
 

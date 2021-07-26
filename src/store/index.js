@@ -22,12 +22,14 @@ export default new Vuex.Store({
         ...state.currentUser,
         ...currentUser,
       }
-      state.isAuthenticated = true
+
       state.token = localStorage.getItem('token')
+      state.isAuthenticated = true
     },
     revokeCurrentUser(state) {
       state.currentUser = {}
       state.isAuthenticated = false
+      // 登出時一併將 state 內的 token 移除
       state.token = ''
       localStorage.removeItem('token')
     },
@@ -37,11 +39,15 @@ export default new Vuex.Store({
       try {
         const { data } = await userAPI.getCurrentUser()
         const { id, name, account, email, avatar } = data
+
         commit('setCurrentUser', {
           id, name, account, email, avatar
         })
+        return true
       } catch (error) {
-        console.error('請先登入使用者')
+        // 驗證失敗的話一併觸發登出的行為，以清除 state 中的 token
+        commit('revokeCurrentUser')
+        return false
       }
     }
   },

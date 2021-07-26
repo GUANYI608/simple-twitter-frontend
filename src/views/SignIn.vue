@@ -5,28 +5,28 @@
 
     <!-- 填寫區塊 -->
     <form class="signin-form" @submit.prevent.stop="handleSubmit">
-      <div class="form-group">
-        <label class="form-input" for="account">帳號</label>
+      <div class="account-form">
+        <label class="form-label" for="account">帳號</label>
         <!-- 設定必填與自動focus -->
         <input
           id="account"
           v-model="account"
           name="account"
           type="text"
-          class="form-control"
+          class="form-input"
           required
           autofocus
         />
       </div>
-      <div class="form-group">
-        <label class="form-input" for="password">密碼</label>
+      <div class="password-form">
+        <label class="form-label" for="password">密碼</label>
         <!-- 設定必填 -->
         <input
           id="password"
           v-model="password"
           name="password"
           type="password"
-          class="form-control"
+          class="form-input"
           required
         />
       </div>
@@ -69,7 +69,7 @@ export default {
         if (!this.account || !this.password) {
           Toast.fire({
             icon: "warning",
-            title: "請填入 account 和 password",
+            title: "請輸入使用者帳號與密碼",
           });
           return;
         }
@@ -133,15 +133,15 @@ export default {
   line-height: 33px;
 }
 
-.form-group {
+.account-form,
+.password-form {
   margin-top: 20px;
   height: 50px;
+  width: 540px;
   position: relative;
-  background: #657786;
-  border-radius: 50% 50% 4px 4px;
 }
 
-.form-input {
+.form-label {
   position: absolute;
   top: 5px;
   left: 10px;
@@ -151,15 +151,20 @@ export default {
   font-weight: 500;
 }
 
-.form-control {
+.form-input {
+  padding: 20px 10px 5px 10px;
+  width: 540px;
   border: none;
   height: 48px;
   background: #f5f8fa;
   border-radius: 4px;
   font-weight: 500;
   font-size: 19px;
-  line-height: 28px;
-  color: #657786;
+  border-bottom: 2px solid #657786;
+}
+
+.form-input:focus {
+  outline: none;
 }
 
 .form-submit {
