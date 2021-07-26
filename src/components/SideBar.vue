@@ -53,7 +53,7 @@
           />
         </div>
         <div class="modal-text">
-          <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+          <img class="user-avatar" :src="currentUser.avatar" alt="avatar" />
           <div class="form-group">
             <label class="form-input" for="NewTweet"></label>
             <textarea

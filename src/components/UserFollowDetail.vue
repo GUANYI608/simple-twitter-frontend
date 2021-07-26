@@ -5,7 +5,7 @@
       <!-- 推文（第一則） -->
       <div class="tweet">
         <!-- 推文者資料 -->
-        <img class="user-avatar" src="../assets/avatar.jpg" alt="avatar" />
+        <img class="user-avatar" :src="follow.avatar" alt="avatar" />
         <div class="user-info">
           <p class="user-name">{{ follow.name }}</p>
           <p class="user-account">@{{ follow.account }}</p>
