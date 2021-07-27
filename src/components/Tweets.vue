@@ -208,6 +208,7 @@ export default {
 .tweet-content {
   font-weight: 500;
   font-size: 15px;
+  height: 66px;
 }
 
 .icons {

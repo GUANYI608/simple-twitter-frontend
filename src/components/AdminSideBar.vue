@@ -15,13 +15,31 @@
           使用者列表
         </router-link>
       </div>
-      <div class="nav-item signout">
+      <div class="nav-item signout" @click="logout">
         <img class="nav-img" src="../assets/signout.jpg" alt="signout" />
         <router-link class="nav-name" to="/admin/login">登出</router-link>
       </div>
     </section>
   </div>
 </template>
+
+<script>
+import { Toast } from "../utils/helpers";
+
+export default {
+  methods: {
+    logout() {
+      this.$store.commit("revokeCurrentUser");
+      this.$router.push("/signin");
+      Toast.fire({
+        icon: "success",
+        title: "已成功登出管理者帳號",
+      });
+    },
+  },
+};
+</script>
+
 
 <style scoped>
 .sidebar {
