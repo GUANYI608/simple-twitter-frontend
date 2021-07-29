@@ -17,6 +17,24 @@
         </router-link>
       </div>
       <div class="nav-item">
+        <img
+          class="nav-img"
+          src="../assets/public_message.jpg"
+          alt="chat-public"
+        />
+        <router-link class="nav-name" to="/chat/public">
+          公開聊天室
+        </router-link>
+      </div>
+      <div class="nav-item">
+        <img
+          class="nav-img"
+          src="../assets/private_message.jpg"
+          alt="chat-private"
+        />
+        <router-link class="nav-name" to="#"> 私人訊息 </router-link>
+      </div>
+      <div class="nav-item">
         <img class="nav-img" src="../assets/setting.jpg" alt="setting" />
         <router-link
           class="nav-name"
@@ -195,6 +213,7 @@ export default {
   font-weight: bold;
   font-size: 18px;
   margin-left: 18px;
+  color: #1c1c1c;
 }
 
 .nav-name:hover {

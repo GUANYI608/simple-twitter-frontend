@@ -77,6 +77,11 @@ const routes = [
     component: () => import('../views/ReplyList.vue')
   },
   {
+    path: '/chat/public',
+    name: 'chat-public',
+    component: () => import('../views/PublicChat.vue')
+  },
+  {
     path: '/admin/login',
     name: 'admin-login',
     component: AdminLogIn
