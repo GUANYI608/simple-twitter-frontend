@@ -75,8 +75,8 @@
           <span class="chat-time">下午 8:50</span>
         </div>
         <div class="chat-self">
-          <div class="chat-content-self">上工囉～</div>
-          <span class="chat-time">下午 8:15</span>
+          <div class="chat-content-self">{{ getMessage }}</div>
+          <span class="chat-time">下午 9:00</span>
         </div>
       </div>
       <!-- 訊息：輸入區塊 -->
@@ -88,8 +88,16 @@
           id="new-chat"
           name="new-chat"
           placeholder="輸入訊息 ..."
+          v-model="message"
         />
-        <img src="../assets/send_message.jpg" alt="" class="send-icon" />
+        <button class="send-button">
+          <img
+            src="../assets/send_message.jpg"
+            alt=""
+            class="send-icon"
+            @click.stop.prevent="sendMessage"
+          />
+        </button>
       </form>
     </section>
   </div>
@@ -97,11 +105,50 @@
 
 <script>
 import SideBar from "../components/SideBar.vue";
+import { io } from "socket.io-client";
+
+const getToken = () => localStorage.getItem("token");
+const token = getToken();
+
+const socket = io("http://bbc73aec4209.ngrok.io", {
+  transports: ["websocket"],
+  auth: { token: token },
+});
 
 export default {
   name: "PublicChat",
   components: {
     SideBar,
+  },
+  data() {
+    return {
+      message: "",
+      getMessage: "",
+      socket: null,
+    };
+  },
+  mounted() {
+    this.socket = socket;
+    this.socket.on("connect", () => {
+      console.log("socket 連線狀態：", socket.connected); // true
+      console.log("token: ", token);
+    });
+
+    this.socket.on("disconnect", () => {
+      console.log("socket 連線狀態：", socket.connected); // false
+    });
+
+    this.socket.on("public_chat_message", (msg) => {
+      console.log(msg);
+      this.getMessage = msg;
+    });
+  },
+  methods: {
+    sendMessage() {
+      socket.emit("public_chat_message", this.message);
+      console.log(this.message);
+      this.message = "";
+    },
   },
 };
 </script>
@@ -233,6 +280,7 @@ export default {
 .chat-content-self {
   color: #ffffff;
   background: #ff6600;
+  /* width: fit-content; */
   margin: 0px 0px 0px 165px;
   padding: 15px;
   border-radius: 30px 30px 0 30px;
@@ -272,6 +320,10 @@ export default {
 
 .chat-input:focus {
   outline: none;
+}
+
+.send-button {
+  background: none;
 }
 
 .send-icon {
