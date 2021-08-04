@@ -2,152 +2,151 @@
   <div class="container">
     <SideBar />
 
-    <!------- 區塊：上線使用者 ------->
-    <section class="online-user">
-      <h6 class="sub-title">上線使用者 (5)</h6>
+    <!------- 元件：上線使用者 ------->
+    <ChatOnlineUser :online-users="onlineUsers" />
 
-      <!-- 上線使用者 -->
-      <div class="user">
-        <!-- 大頭照：連接到個人頁面 -->
-        <router-link to="#">
-          <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-        </router-link>
-        <!-- 名稱與帳號：連接到私人聊天室 -->
-        <router-link class="user-info" to="#">
-          <span class="user-name">Nintendo</span>
-          <span class="user-account">@nintendo</span>
-        </router-link>
-      </div>
-      <div class="user">
-        <!-- 大頭照：連接到個人頁面 -->
-        <router-link to="#">
-          <img class="user-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-        </router-link>
-        <!-- 名稱與帳號：連接到私人聊天室 -->
-        <router-link class="user-info" to="#">
-          <span class="user-name">Apple</span>
-          <span class="user-account">@apple</span>
-        </router-link>
-      </div>
-    </section>
-
-    <!------- 區塊：公開聊天室 ------->
-    <section class="chat-room">
-      <h6 class="sub-title">公開聊天室</h6>
-
-      <!-- 訊息：顯示區塊 -->
-      <div class="chatting-area">
-        <!-- noti -->
-        <p class="user-status">
-          <span class="chat-user">Nintendo 上線</span>
-        </p>
-        <p class="user-status">
-          <span class="chat-user">Apple 上線</span>
-        </p>
-
-        <!-- chats -->
-        <div class="chat">
-          <router-link to="#">
-            <img class="chat-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-          </router-link>
-          <div class="chat-content">
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit.
-          </div>
-          <span class="chat-time">下午 7:00</span>
-        </div>
-        <div class="chat-self">
-          <div class="chat-content-self">
-            Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco
-            cillum dolor. Voluptate exercitation incididunt aliquip deserunt
-            reprehenderit elit laborum.
-          </div>
-          <span class="chat-time">下午 8:15</span>
-        </div>
-        <div class="chat">
-          <router-link to="#">
-            <img class="chat-avatar" src="../assets/avatar2.jpg" alt="avatar" />
-          </router-link>
-          <div class="chat-content">
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit.
-          </div>
-          <span class="chat-time">下午 8:50</span>
-        </div>
-        <div class="chat-self">
-          <div class="chat-content-self">{{ getMessage }}</div>
-          <span class="chat-time">下午 9:00</span>
-        </div>
-      </div>
-      <!-- 訊息：輸入區塊 -->
-      <form class="input-area">
-        <label for="new-chat"> </label>
-        <input
-          class="chat-input"
-          type="text"
-          id="new-chat"
-          name="new-chat"
-          placeholder="輸入訊息 ..."
-          v-model="message"
-        />
-        <button class="send-button">
-          <img
-            src="../assets/send_message.jpg"
-            alt=""
-            class="send-icon"
-            @click.stop.prevent="sendMessage"
-          />
-        </button>
-      </form>
-    </section>
+    <!------- 元件：公開聊天室 ------->
+    <ChatPublicRoom :initial-messages="messages" />
   </div>
 </template>
 
 <script>
 import SideBar from "../components/SideBar.vue";
-import { io } from "socket.io-client";
+import ChatOnlineUser from "../components/ChatOnlineUser.vue";
+import ChatPublicRoom from "../components/ChatPublicRoom.vue";
+import Vue from "vue";
+import VueSocketIO from "vue-socket.io";
+import SocketIO from "socket.io-client";
+import { mapState } from "vuex";
+import { v4 as uuidv4 } from "uuid";
+import chatsAPI from "./../apis/chats";
+import { Toast } from "../utils/helpers";
 
 const getToken = () => localStorage.getItem("token");
 const token = getToken();
 
-const socket = io("http://bbc73aec4209.ngrok.io", {
-  transports: ["websocket"],
-  auth: { token: token },
-});
+Vue.use(
+  new VueSocketIO({
+    debug: true,
+    connection: SocketIO("http://1526770fd77e.ngrok.io", {
+      transports: ["websocket"],
+      auth: { token: token },
+    }),
+  })
+);
 
 export default {
   name: "PublicChat",
   components: {
     SideBar,
+    ChatOnlineUser,
+    ChatPublicRoom,
   },
   data() {
     return {
-      message: "",
-      getMessage: "",
-      socket: null,
+      newMessage: "",
+      messages: [],
+      onlineUsers: [],
     };
   },
-  mounted() {
-    this.socket = socket;
-    this.socket.on("connect", () => {
-      console.log("socket 連線狀態：", socket.connected); // true
-      console.log("token: ", token);
-    });
-
-    this.socket.on("disconnect", () => {
-      console.log("socket 連線狀態：", socket.connected); // false
-    });
-
-    this.socket.on("public_chat_message", (msg) => {
-      console.log(msg);
-      this.getMessage = msg;
-    });
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  created() {
+    this.fetchMessages();
+    this.login();
+  },
+  destroyed() {
+    this.logout();
   },
   methods: {
-    sendMessage() {
-      socket.emit("public_chat_message", this.message);
-      console.log(this.message);
-      this.message = "";
+    login() {
+      this.$socket.connect();
+      this.$socket.emit("joinPublic", this.currentUser);
+    },
+    logout() {
+      this.$socket.emit("leavePublic", this.currentUser);
+      this.$socket.disconnect();
+    },
+    async fetchMessages() {
+      try {
+        const { data } = await chatsAPI.getChats();
+        console.log("API.GET:", data);
+
+        data.map((receiveMessage) => {
+          const { userId, name, avatar, account, message, createdAt } =
+            receiveMessage;
+
+          if (!receiveMessage.userId) {
+            return;
+          }
+
+          this.messages.push({
+            id: uuidv4(),
+            userId,
+            name,
+            avatar,
+            account,
+            content: message,
+            createdAt,
+            type: "chat",
+          });
+        });
+
+        console.log("排序前messages: ", this.messages);
+
+        // 排序訊息：由舊到新
+        this.messages.sort((a, b) => {
+          const aDate = new Date(a.createdAt);
+          const bDate = new Date(b.createdAt);
+          return aDate.getTime() - bDate.getTime();
+        });
+
+        console.log("排序後messages: ", this.messages);
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得歷史聊天訊息，請稍後再試",
+        });
+      }
+    },
+  },
+  sockets: {
+    joinRoom(msg) {
+      this.messages.push({
+        id: uuidv4(),
+        content: msg,
+        type: "noti",
+      });
+      console.log("vue: joinRoom"); // 測試呼叫socket
+      console.log(this.messages); // 輸出所有訊息
+    },
+    leaveRoom(msg) {
+      this.messages.push({
+        id: uuidv4(),
+        content: msg,
+        type: "noti",
+      });
+      console.log("vue: leaveRoom"); // 測試呼叫socket
+      console.log(this.messages); // 輸出所有訊息
+    },
+    publicChat(msg) {
+      // 發送訊息;
+      console.log(msg);
+      this.messages.push({
+        id: uuidv4(),
+        userId: this.currentUser.id,
+        account: this.currentUser.account,
+        name: this.currentUser.name,
+        avatar: this.currentUser.avatar,
+        content: msg,
+        createdAt: new Date(),
+        type: "chat",
+      });
+    },
+    totalUser(users) {
+      this.onlineUsers = users;
     },
   },
 };
@@ -156,181 +155,6 @@ export default {
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 550px;
-}
-
-/* ----- 區塊：上線使用者 ----- */
-.online-user {
-  border-left: 1px solid #e6ecf0;
-  border-right: 1px solid #e6ecf0;
-}
-
-/* 標題 */
-.sub-title {
-  height: 55px;
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-
-  font-weight: 900;
-  font-size: 19px;
-  border-bottom: 1px solid #e6ecf0;
-}
-
-/* 上線使用者 */
-.user {
-  height: 70px;
-  padding: 10px 15px;
-  border-bottom: 1px solid #e6ecf0;
-}
-
-.user-avatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-info {
-  padding: 0 15px;
-}
-
-.user-name {
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 15px;
-  padding-right: 6px;
-}
-
-.user-account {
-  margin-top: 3px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 15px;
-  color: #657786;
-}
-
-/* ----- 區塊：公開聊天室 ----- */
-.chat-room {
-  border-right: 1px solid #e6ecf0;
-  height: 100vh;
-  position: relative;
-}
-
-/* 訊息：顯示區塊 */
-.chatting-area {
-  /* 以 chat-room 為定位 */
-  position: absolute;
-  bottom: 55px;
-  border-bottom: 1px solid #e6ecf0;
-}
-
-/* 使用者狀態通知 */
-.user-status {
-  display: flex;
-  justify-content: center;
-  margin: 15px 0;
-}
-
-.chat-user {
-  background: #f3ece8;
-  padding: 6px 16px;
-  color: #f99663;
-  font-weight: 500;
-  font-size: 15px;
-  border-radius: 16px;
-}
-
-/* 訊息：其他使用者 */
-.chat {
-  margin: 15px;
-  position: relative;
-}
-
-.chat-avatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  /* 以 chat 為定位 */
-  position: absolute;
-  bottom: 21px;
-  left: 0px;
-}
-
-.chat-content {
-  background: #e8eff3;
-  margin: 0px 130px 0px 60px;
-  padding: 15px;
-  border-radius: 30px 30px 30px 0;
-}
-
-.chat-time {
-  margin-left: 60px;
-  font-size: 15px;
-  color: #657786;
-}
-
-/* 訊息：使用者本人 */
-.chat-self {
-  margin: 15px;
-  text-align: right;
-}
-
-.chat-content-self {
-  color: #ffffff;
-  background: #ff6600;
-  /* width: fit-content; */
-  margin: 0px 0px 0px 165px;
-  padding: 15px;
-  border-radius: 30px 30px 0 30px;
-  text-align: left;
-}
-
-/* 訊息：輸入區塊 */
-.input-area {
-  height: 35px;
-  /* 以 chat-room 為定位 */
-  position: absolute;
-  bottom: 0px;
-
-  margin: 10px 15px;
-  width: 520px;
-  display: flex;
-  align-items: center;
-}
-
-.chat-input {
-  width: 480px;
-  background: #e8eff3;
-  border-radius: 15px;
-  font-size: 15px;
-  font-weight: 400;
-  color: #1c1c1c;
-  padding: 5px 15px;
-  display: flex;
-  align-items: center;
-}
-
-.chat-input::placeholder {
-  font-size: 15px;
-  font-weight: 400;
-  color: #657786;
-}
-
-.chat-input:focus {
-  outline: none;
-}
-
-.send-button {
-  background: none;
-}
-
-.send-icon {
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
+  grid-template-columns: 1fr minmax(390px, 1fr) 550px;
 }
 </style>
