@@ -28,7 +28,7 @@ const token = getToken();
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: SocketIO("http://1526770fd77e.ngrok.io", {
+    connection: SocketIO("https://ac-twitter-api-2021.herokuapp.com", {
       transports: ["websocket"],
       auth: { token: token },
     }),
@@ -96,11 +96,11 @@ export default {
         console.log("排序前messages: ", this.messages);
 
         // 排序訊息：由舊到新
-        this.messages.sort((a, b) => {
-          const aDate = new Date(a.createdAt);
-          const bDate = new Date(b.createdAt);
-          return aDate.getTime() - bDate.getTime();
-        });
+        // this.messages.sort((a, b) => {
+        //   const aDate = new Date(a.createdAt);
+        //   const bDate = new Date(b.createdAt);
+        //   return aDate.getTime() - bDate.getTime();
+        // });
 
         console.log("排序後messages: ", this.messages);
       } catch (error) {

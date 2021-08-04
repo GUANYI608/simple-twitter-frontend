@@ -1,6 +1,6 @@
 <template>
   <section class="chat-room">
-    <h6 class="sub-title">公開聊天室, {{ currentUser.account }}</h6>
+    <h6 class="sub-title">公開聊天室, 嗨 {{ currentUser.account }}</h6>
 
     <!-- 訊息：顯示區塊 -->
     <div class="chatting-area" id="chatting-area">
