@@ -6,8 +6,12 @@
     <div class="chatting-area" id="chatting-area">
       <div class="chat-box" v-for="message in messages" :key="message.id">
         <!-- noti -->
-        <p class="user-status" v-if="message.type === 'noti'">
-          <span class="chat-user">{{ message.content }}</span>
+        <p class="user-status" v-if="message.type === 'notiOnline'">
+          <span class="chat-user">{{ message.content }} 上線中</span>
+        </p>
+
+        <p class="user-status" v-if="message.type === 'notiOffline'">
+          <span class="chat-user">{{ message.content }} 已離線</span>
         </p>
 
         <!-- chats -->
@@ -106,7 +110,6 @@ export default {
       // 聊天內容置底
       let chattingArea = document.querySelector("#chatting-area");
       chattingArea.scrollTop = chattingArea.scrollHeight;
-      console.log("聊天內容置底");
     },
   },
 };

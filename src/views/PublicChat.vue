@@ -54,20 +54,14 @@ export default {
   },
   created() {
     this.fetchMessages();
-    this.login();
+    this.$socket.connect();
+    this.$socket.emit("joinPublic", this.currentUser);
   },
   destroyed() {
-    this.logout();
+    this.$socket.emit("leavePublic", this.currentUser);
+    this.$socket.disconnect();
   },
   methods: {
-    login() {
-      this.$socket.connect();
-      this.$socket.emit("joinPublic", this.currentUser);
-    },
-    logout() {
-      this.$socket.emit("leavePublic", this.currentUser);
-      this.$socket.disconnect();
-    },
     async fetchMessages() {
       try {
         const { data } = await chatsAPI.getChats();
@@ -92,17 +86,6 @@ export default {
             type: "chat",
           });
         });
-
-        console.log("排序前messages: ", this.messages);
-
-        // 排序訊息：由舊到新
-        // this.messages.sort((a, b) => {
-        //   const aDate = new Date(a.createdAt);
-        //   const bDate = new Date(b.createdAt);
-        //   return aDate.getTime() - bDate.getTime();
-        // });
-
-        console.log("排序後messages: ", this.messages);
       } catch (error) {
         console.log(error);
         Toast.fire({
@@ -117,7 +100,7 @@ export default {
       this.messages.push({
         id: uuidv4(),
         content: msg,
-        type: "noti",
+        type: "notiOnline",
       });
       console.log("vue: joinRoom"); // 測試呼叫socket
       console.log(this.messages); // 輸出所有訊息
@@ -126,21 +109,24 @@ export default {
       this.messages.push({
         id: uuidv4(),
         content: msg,
-        type: "noti",
+        type: "notiOffline",
       });
       console.log("vue: leaveRoom"); // 測試呼叫socket
       console.log(this.messages); // 輸出所有訊息
     },
     publicChat(msg) {
-      // 發送訊息;
+      // 發送訊息
       console.log(msg);
+      const message = msg[0];
+      const user = msg[1];
+
       this.messages.push({
         id: uuidv4(),
-        userId: this.currentUser.id,
-        account: this.currentUser.account,
-        name: this.currentUser.name,
-        avatar: this.currentUser.avatar,
-        content: msg,
+        userId: user.id,
+        account: user.account,
+        name: user.name,
+        avatar: user.avatar,
+        content: message,
         createdAt: new Date(),
         type: "chat",
       });
