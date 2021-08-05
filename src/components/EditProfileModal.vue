@@ -395,6 +395,7 @@ export default {
   font-weight: 500;
   font-size: 19px;
   line-height: 28px;
+  width: 570px;
 }
 
 .name-input:focus {
