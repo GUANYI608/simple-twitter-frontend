@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <img class="logo-img" src="../assets/AClogo.jpg" alt="LOGO" />
-    <h6 class="form-title">登入 Alphitter</h6>
+    <h6 class="form-title">登入 LAKer</h6>
 
     <!-- 填寫區塊 -->
     <form class="signin-form" @submit.prevent.stop="handleSubmit">
