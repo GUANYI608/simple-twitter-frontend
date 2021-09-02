@@ -37,9 +37,7 @@
 
     <!-- 前往連結：註冊與後台 -->
     <p class="route-link">
-      <router-link to="/signup" class="route-signup">
-        註冊 Alphitter
-      </router-link>
+      <router-link to="/signup" class="route-signup"> 註冊 LAKer </router-link>
       ・
       <router-link to="/admin/login" class="route-admin">
         後台登入
