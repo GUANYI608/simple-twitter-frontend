@@ -27,14 +27,6 @@
         </router-link>
       </div>
       <div class="nav-item">
-        <img
-          class="nav-img"
-          src="../assets/private_message.jpg"
-          alt="chat-private"
-        />
-        <router-link class="nav-name" to="#"> 私人訊息 </router-link>
-      </div>
-      <div class="nav-item">
         <img class="nav-img" src="../assets/setting.jpg" alt="setting" />
         <router-link
           class="nav-name"

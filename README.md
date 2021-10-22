@@ -1,24 +1,38 @@
-# simple-twitter-frontend
+# LAKer (simple twitter frontend)
+一個簡易的社群網站，功能類似於Twitter，有兩種使用角色：
+* 一般使用者 (user)
+* 管理員 (admin)
 
-## Project setup
-```
-npm install
-```
+## Permission of role
+* user 活動的地方稱為「前台」，而 admin 活動的地方稱為「後台」，前台與後台有不同的登入入口
+* admin 帳號不能登入前台、不能使用前台的功能，而 user 帳號也不能登入後台、不能使用後台的功能。
+* 訪客可以自行註冊成為 user，但 admin 帳號無法自行註冊
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Features
+**註冊/登入/登出**
+* 除了註冊和登入頁，使用者一定要登入才能使用網站
+* 註冊時，使用者可以設定 account、name、email 和 password
+* 註冊時，account 和 email 不能與其他人重覆，若有重覆會跳出錯誤提示
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**貼文留言**
+* 使用者能在首頁瀏覽所有的推文 (tweet)
+* 使用者點擊貼文方塊時，能查看該則貼文的詳情與回覆串
+* 使用者點擊貼文中的留言 icon 時，能回覆別人的推文
+* 點擊貼文中使用者頭像時，能瀏覽該使用者的個人資料及推文
+* 使用者能新增推文
 
-### Lints and fixes files
-```
-npm run lint
-```
+**使用者互動**
+* 使用者可以追蹤/取消追蹤其他使用者 (不能追蹤自己)
+* 使用者能對別人的推文按 Like/Unlike
+* 使用者能編輯自己的 account、name、email 和 password
+* 使用者能編輯自己的名稱、介紹、大頭照和個人頁面的封面照
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+**後台**
+* 管理者可從專門的後台登入頁面進入網站後台
+* 管理者可以瀏覽全站的 Tweet 清單
+* 管理者可以瀏覽站內所有的使用者清單
+
+## Tools
+* 前端框架：Vue.js
+* API測試工具：Postman
+* 開發環境：Visual Studio Code
